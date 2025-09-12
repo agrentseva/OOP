@@ -3,7 +3,7 @@ plugins {
     id 'jacoco'
 }
 
-group = 'ru.nsu.ga.grentseva.Task_1_1_1'
+group = 'ru.nsu.ga.grentseva.sort'
 version = '1.0-SNAPSHOT'
 
 repositories {
