@@ -1,12 +1,12 @@
 package ru.nsu.ga.grentseva.sort;
 
 /**
- * Class for sorting array with heapsort
+ * Class for sorting array with heapsort.
  */
 public class Sort {
 
     /**
-     * Swap the elements
+     * Swap the elements.
      *
      * @param i,j indexes of elements in array
      */
@@ -17,7 +17,7 @@ public class Sort {
     }
 
     /**
-     * Build a binary heap by sifting
+     * Build a binary heap by sifting.
      *
      * @param n number of elements in the array
      * @param i root index

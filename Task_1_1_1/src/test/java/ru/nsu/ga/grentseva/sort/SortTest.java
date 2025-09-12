@@ -1,12 +1,12 @@
 package ru.nsu.ga.grentseva.sort;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
+import org.junit.jupiter.api.Test;
 
 
 /**
- * Tests for heapsort
+ * Tests for heapsort.
  */
 class SortTest {
 
