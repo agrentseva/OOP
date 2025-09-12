@@ -8,7 +8,8 @@ public class Sort {
     /**
      * Swap the elements.
      *
-     * @param i,j indexes of elements in array
+     * @param i index of first element in array
+     * @param j index of second element in array
      */
     private static void swap(int[] array, int i, int j) {
         int temp = array[i];
