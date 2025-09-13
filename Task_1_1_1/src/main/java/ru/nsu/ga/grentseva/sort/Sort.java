@@ -7,9 +7,6 @@ public class Sort {
 
     /**
      * Swap the elements.
-     *
-     * @param i index of first element in array
-     * @param j index of second element in array
      */
     private static void swap(int[] array, int i, int j) {
         int temp = array[i];
@@ -19,8 +16,6 @@ public class Sort {
 
     /**
      * Build a binary heap by sifting.
-     *
-     * @param n number of elements in the array
      * @param i root index
      */
     private static void heapify(int[] array, int n, int i) {
@@ -42,8 +37,6 @@ public class Sort {
 
     /**
      * Sorts an array using heapsort.
-     *
-     * @param array initial array
      * @return sort array
      */
 
