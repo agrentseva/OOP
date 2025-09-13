@@ -16,6 +16,7 @@ public class Sort {
 
     /**
      * Build a binary heap by sifting.
+     *
      * @param i root index
      */
     private static void heapify(int[] array, int n, int i) {
@@ -37,6 +38,7 @@ public class Sort {
 
     /**
      * Sorts an array using heapsort.
+     *
      * @return sort array
      */
 
