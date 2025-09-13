@@ -4,7 +4,7 @@ mkdir -p my_build documentation
 
 #compile
 javac -d my_build src/main/java/ru/nsu/ga/grentseva/sort/Sort.java
-javac -d my_build -cp build src/test/java/ru/nsu/ga/grentseva/sort/SortTest.java
+javac -d my_build -cp my_build src/test/java/ru/nsu/ga/grentseva/sort/SortTest.java
 
 #documentation
 javadoc -d documentation -sourcepath src/main/java ru.nsu.ga.grentseva.sort
