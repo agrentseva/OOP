@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"ru.nsu.ga.grentseva.sort","l":"Sort"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"ru.nsu.ga.grentseva.sort","l":"Main"},{"p":"ru.nsu.ga.grentseva.sort","l":"Sort"}];updateSearchResults();
