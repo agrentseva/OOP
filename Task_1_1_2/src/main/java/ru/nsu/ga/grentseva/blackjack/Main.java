@@ -88,8 +88,7 @@ public class Main {
                 System.out.println("\nХотите сыграть ещё один раунд?");
                 System.out.println("Введите 1 ~ да, 0 ~ нет:");
                 boolean enter = true;
-                while (enter)
-                {
+                while (enter) {
                     int choice = in.nextInt();
                     if (choice == 1) {
                         game = true;
