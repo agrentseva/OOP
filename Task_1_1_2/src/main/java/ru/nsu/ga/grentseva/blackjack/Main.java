@@ -91,18 +91,13 @@ public class Main {
                 while (enter)
                 {
                     int choice = in.nextInt();
-                    if (choice == 1)
-                    {
+                    if (choice == 1) {
                         game = true;
                         enter = false;
-                    }
-                    else if (choice == 0)
-                    {
+                    } else if (choice == 0) {
                         game = false;
                         enter = false;
-                    }
-                    else
-                    {
+                    } else {
                         System.out.println("Неверный ввод");
                     }
                 }
