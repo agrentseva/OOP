@@ -1,8 +1,8 @@
 package ru.nsu.ga.grentseva.blackjack;
 
 import java.util.List;
-import java.util.Scanner;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -24,7 +24,7 @@ public class Main {
             roundCounter++;
             System.out.println("\nРаунд " + roundCounter);
 
-            int randomNumber= random.nextInt(5) + 1;
+            int randomNumber = random.nextInt(5) + 1;
             Deck deck = new Deck(randomNumber); // создаём колоду
             deck.shuffle();
 
@@ -39,8 +39,10 @@ public class Main {
             List<Card> dealerCards = dealer.getHandCards();
 
             System.out.println("Дилер раздал карты: ");
-            System.out.println("    Ваши карты: " + player.getHandCards() + " => " + player.getHandValue());
-            System.out.println("    Карты дилера: [" + dealerCards.get(0) + ", <закрытая карта>]");
+            System.out.println("    Ваши карты: " + player.getHandCards() +
+                    " => " + player.getHandValue());
+            System.out.println("    Карты дилера: [" + dealerCards.get(0) +
+                    ", <закрытая карта>]");
 
             if (player.hasBlackjack()) {
                 System.out.println("Блэкджек! Вы выиграли раунд.");
@@ -55,15 +57,18 @@ public class Main {
             boolean playerBust = false;
 
             while (playerTurn) {
-                System.out.println("Введите \"1\", чтобы взять карту, и \"0\", чтобы остановиться");
+                System.out.println("Введите \"1\", чтобы взять карту, " +
+                        "и \"0\", чтобы остановиться");
                 int playerChoice = in.nextInt();
 
                 if (playerChoice == 1) {
                     Card newCard = deck.take();
                     player.addCard(newCard);
                     System.out.println("Вы открыли карту: " + newCard);
-                    System.out.println("    Ваши карты: " + player.getHandCards() + " => " + player.getHandValue());
-                    System.out.println("    Карты дилера: [" + dealerCards.get(0) + ", <закрытая карта>]");
+                    System.out.println("    Ваши карты: " + player.getHandCards() +
+                            " => " + player.getHandValue());
+                    System.out.println("    Карты дилера: [" + dealerCards.get(0) +
+                            ", <закрытая карта>]");
 
                     if (player.isBust()) {
                         System.out.println("Перебор. Вы проиграли");
@@ -88,7 +93,8 @@ public class Main {
                     if (choice == 1) {
                         game = true;
                         enter = false;
-                    } else if (choice == 0) {
+                    }
+                    else if (choice == 0) {
                         game = false;
                         enter = false;
                     }
@@ -96,21 +102,25 @@ public class Main {
                         System.out.println("Неверный ввод");
                     }
                 }
-
                 continue;
             }
 
             System.out.println("\nХод дилера");
             System.out.println("-------");
-            System.out.println("Дилер открывает закрытую карту: " + dealerCards.get(1));
+            System.out.println("Дилер открывает закрытую карту: " +
+                    dealerCards.get(1));
 
-            System.out.println("    Ваши карты: " + player.getHandCards() + " => " + player.getHandValue());
-            System.out.println("    Карты дилера: " + dealer.getHandCards() + " => " + dealer.getHandValue());
+            System.out.println("    Ваши карты: " + player.getHandCards() +
+                    " => " + player.getHandValue());
+            System.out.println("    Карты дилера: " + dealer.getHandCards() +
+                    " => " + dealer.getHandValue());
 
             dealer.dealerPlay(deck);
 
-            System.out.println("    Ваши карты: " + player.getHandCards() + " => " + player.getHandValue());
-            System.out.println("    Карты дилера: " + dealer.getHandCards() + " => " + dealer.getHandValue());
+            System.out.println("    Ваши карты: " + player.getHandCards() +
+                    " => " + player.getHandValue());
+            System.out.println("    Карты дилера: " + dealer.getHandCards() +
+                    " => " + dealer.getHandValue());
 
             if (dealer.isBust()) {
                 System.out.println("Дилер перебрал. Вы выиграли!");
