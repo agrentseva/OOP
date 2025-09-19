@@ -1,4 +1,4 @@
-package ru.nsu.ga.grentseva.Task_1_1_2;
+package ru.nsu.ga.grentseva.task_1_1_2;
 
 public class Card {
     private final CardRank rank;
@@ -13,18 +13,22 @@ public class Card {
         switch (rank) {
             case JACK:
             case KING:
-                return suit.getAdjMale() + " " + rank.getNoun() + " (" + rank.getValue() + ")" ;
+                return suit.getAdjMale() + " " + rank.getNoun() + " (" + rank.getValue() + ")";
             case QUEEN:
-                return suit.getAdjFemale() + " " + rank.getNoun() + " (" + rank.getValue() + ")" ;
+                return suit.getAdjFemale() + " " + rank.getNoun() + " (" + rank.getValue() + ")";
             default:
-                return rank.getNoun() + " " + suit.getNoun() + " (" + rank.getValue() + ")" ;
+                return rank.getNoun() + " " + suit.getNoun() + " (" + rank.getValue() + ")";
         }
     }
 
     @Override
-    public String toString() { return getCardName(); }
+    public String toString() {
+        return getCardName();
+    }
 
-    public int getCardValue() { return rank.getValue(); }
+    public int getCardValue() {
+        return rank.getValue();
+    }
 }
 
 enum CardSuit{
