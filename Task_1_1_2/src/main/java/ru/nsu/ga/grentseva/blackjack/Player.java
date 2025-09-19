@@ -35,7 +35,7 @@ public class Player {
     }
 }
 
-class Dealer extends Player{
+class Dealer extends Player {
 
     public void dealerPlay(Deck deck) {
         while (getHandValue() < 17) {

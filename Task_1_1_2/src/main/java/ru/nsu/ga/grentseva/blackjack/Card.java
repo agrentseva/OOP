@@ -31,7 +31,7 @@ public class Card {
     }
 }
 
-enum CardSuit{
+enum CardSuit {
     HEARTS("Червы", "Червонный", "Червонная"),
     DIAMONDS("Бубен", "Бубновый", "Бубновая"),
     CLUBS("Трефы", "Трефовый", "Трефовая"),
