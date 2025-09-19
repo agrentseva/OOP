@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"ru.nsu.ga.grentseva.Task_1_1_2","l":"Card"},{"p":"ru.nsu.ga.grentseva.Task_1_1_2","l":"Deck"},{"p":"ru.nsu.ga.grentseva.Task_1_1_2","l":"Hand"},{"p":"ru.nsu.ga.grentseva.Task_1_1_2","l":"Main"},{"p":"ru.nsu.ga.grentseva.Task_1_1_2","l":"Player"}];updateSearchResults();
