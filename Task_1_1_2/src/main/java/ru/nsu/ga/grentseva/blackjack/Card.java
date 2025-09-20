@@ -1,5 +1,9 @@
 package ru.nsu.ga.grentseva.blackjack;
 
+/**
+ * Класс карты.
+ * Содержит ранг и масть карты.
+ */
 public class Card {
     private final CardRank rank;
     private final CardSuit suit;

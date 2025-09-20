@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Класс руки игрока или дилера.
+ * Хранит карты и считает сумму очков.
+ */
 public class Hand {
     private List<Card> cards;
 
