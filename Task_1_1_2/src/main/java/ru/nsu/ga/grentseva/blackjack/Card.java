@@ -4,12 +4,6 @@ public class Card {
     private final CardRank rank;
     private final CardSuit suit;
 
-    /**
-     * Создаёт карту с заданным рангом и мастью.
-     *
-     * @param rank ранг карты (двойка, туз, король и т. д.)
-     * @param suit масть карты (черви, пики и т. д.)
-     */
     public Card(CardRank rank, CardSuit suit) {
         this.rank = rank;
         this.suit = suit;

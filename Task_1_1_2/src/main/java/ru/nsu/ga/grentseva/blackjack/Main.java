@@ -4,8 +4,12 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Основной метод запуска игры в Блэкджек.
+ * Создаёт игроков, колоду и управляет игровым циклом.
+ */
 public class Main {
-    public static void main(String[] args) {
+    public static void main() {
         Scanner in = new Scanner(System.in);
         Random random = new Random();
 
