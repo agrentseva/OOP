@@ -11,7 +11,7 @@ public class Player {
     private Hand hand;
 
     public Player() {
-        hand = new Hand(); // инициализируем руку
+        hand = new Hand();
     }
 
     public void addCard(Card card) {

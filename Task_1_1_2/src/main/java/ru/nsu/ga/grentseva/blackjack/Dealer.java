@@ -6,12 +6,18 @@ package ru.nsu.ga.grentseva.blackjack;
  */
 public class Dealer extends Player {
 
-    public void dealerPlay(Deck deck) {
+    private final ConsoleOutput output;
+
+    public Dealer(ConsoleOutput output) {
+        this.output = output;
+    }
+
+    public void dealerTurn(Deck deck, Player player) {
+        output.printDealerTurn(this, player);
         while (getHandValue() < 17) {
             Card newCard = deck.take();
             addCard(newCard);
-
-            System.out.println("Дилер открывает карту: " + newCard);
+            output.printDealerCard(this, player);
         }
     }
 }
