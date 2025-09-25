@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class RoundTest {
 
     private ConsoleOutput output = new ConsoleOutput();
-    private Random random = new Random(); // фиксируем сид для детерминизма
+    private Random random = new Random();
     private int roundCounter = 0;
     private Player player = new Player();
     private Dealer dealer = new Dealer(output);
@@ -22,26 +22,44 @@ class RoundTest {
     };
 
     @Test
-    void testPlayResult() {
+    void testPlayResultWinPlayer() {
         Round round = new Round(roundCounter, player, dealer, input, output, random);
         Round.Result result = round.play();
 
-        if (player.hasBlackjack()){
+        if (player.hasBlackjack() || dealer.isBust() || player.getHandValue() > dealer.getHandValue()) {
             assertTrue(result == Round.Result.PLAYER_WIN);
-        }
-        else if (dealer.isBust()) {
-            assertTrue(result == Round.Result.PLAYER_WIN);
-        }
-        else if (player.getHandValue() > dealer.getHandValue()) {
-            assertTrue(result == Round.Result.PLAYER_WIN);
-        }
-        else if (player.getHandValue() < dealer.getHandValue()) {
-            assertTrue(result == Round.Result.DEALER_WIN);
         }
         else{
+            assertTrue(result == Round.Result.DEALER_WIN || result == Round.Result.DRAW);
+        }
+    }
+
+    @Test
+    void testPlayResultWinDealer() {
+        Round round = new Round(roundCounter, player, dealer, input, output, random);
+        Round.Result result = round.play();
+
+        if (player.getHandValue() < dealer.getHandValue()) {
+            assertTrue(result == Round.Result.DEALER_WIN);
+        } else {
+            assertTrue(result == Round.Result.DRAW || result == Round.Result.PLAYER_WIN );
+        }
+    }
+
+    @Test
+    void testPlayResultDraw() {
+        Round round = new Round(roundCounter, player, dealer, input, output, random);
+        Round.Result result = round.play();
+
+       if (player.getHandValue() == dealer.getHandValue()) {
             assertTrue(result == Round.Result.DRAW);
+        } else {
+           assertTrue(result == Round.Result.DEALER_WIN || result == Round.Result.PLAYER_WIN );
         }
     }
 }
+
+
+
 
 
