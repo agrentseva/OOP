@@ -9,11 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ConsoleOutputTest {
 
     @Test
-    void testAllConsoleOutputMethods() {
-        ByteArrayOutputStream testingOut = new ByteArrayOutputStream();
+    void testAllConsoleOutput() {
+        ByteArrayOutputStream testOut = new ByteArrayOutputStream();
         PrintStream originalOut = System.out;
-        System.setOut(new PrintStream(testingOut));
-        
+        System.setOut(new PrintStream(testOut));
+
         ConsoleOutput output = new ConsoleOutput();
         Player player = new Player();
         Dealer dealer = new Dealer(output);
@@ -42,7 +42,7 @@ class ConsoleOutputTest {
         output.printScore(1, 0);
         output.printInvalidInput();
         
-        String text = testingOut.toString();
+        String text = testOut.toString();
         
         assertTrue(text.contains("Добро пожаловать"));
         assertTrue(text.contains("Раунд 1"));
@@ -59,7 +59,7 @@ class ConsoleOutputTest {
         assertTrue(text.contains("Ничья"));
         assertTrue(text.contains("Счёт: 1:0"));
         assertTrue(text.contains("Неверный ввод"));
-        
+
         System.setOut(originalOut);
     }
 }
