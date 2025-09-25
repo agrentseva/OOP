@@ -57,6 +57,32 @@ class RoundTest {
            assertTrue(result == Round.Result.DEALER_WIN || result == Round.Result.PLAYER_WIN );
         }
     }
+
+    @Test
+    void testReversePlayResult() {
+        Round round = new Round(roundCounter, player, dealer, input, output, random);
+        Round.Result result = round.play();
+
+        if (result == Round.Result.DRAW) {
+            assertTrue(player.getHandValue() == dealer.getHandValue());
+        } else {
+            assertTrue(player.getHandValue() < dealer.getHandValue() || player.getHandValue() > dealer.getHandValue() );
+        }
+
+        if (result == Round.Result.PLAYER_WIN) {
+            assertTrue( player.getHandValue() > dealer.getHandValue());
+        } else {
+            assertTrue(player.getHandValue() < dealer.getHandValue() || player.getHandValue() == dealer.getHandValue());
+        }
+
+        if (result == Round.Result.DEALER_WIN) {
+            assertTrue(player.getHandValue() < dealer.getHandValue());
+        } else {
+            assertTrue(player.getHandValue() > dealer.getHandValue() || player.getHandValue() == dealer.getHandValue());
+        }
+
+
+    }
 }
 
 
