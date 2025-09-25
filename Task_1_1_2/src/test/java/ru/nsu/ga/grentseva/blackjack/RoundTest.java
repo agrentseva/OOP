@@ -22,14 +22,25 @@ class RoundTest {
     };
 
     @Test
-    void testResult() {
+    void testPlayResult() {
         Round round = new Round(roundCounter, player, dealer, input, output, random);
         Round.Result result = round.play();
 
-        assertTrue(result == Round.Result.PLAYER_WIN
-                || result == Round.Result.DEALER_WIN
-                || result == Round.Result.DRAW
-        );
+        if (player.hasBlackjack()){
+            assertTrue(result == Round.Result.PLAYER_WIN);
+        }
+        else if (dealer.isBust()) {
+            assertTrue(result == Round.Result.PLAYER_WIN);
+        }
+        else if (player.getHandValue() > dealer.getHandValue()) {
+            assertTrue(result == Round.Result.PLAYER_WIN);
+        }
+        else if (player.getHandValue() < dealer.getHandValue()) {
+            assertTrue(result == Round.Result.DEALER_WIN);
+        }
+        else{
+            assertTrue(result == Round.Result.DRAW);
+        }
     }
 }
 
