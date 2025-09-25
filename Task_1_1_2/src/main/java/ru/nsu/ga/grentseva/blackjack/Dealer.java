@@ -17,7 +17,7 @@ public class Dealer extends Player {
         while (getHandValue() < 17) {
             Card newCard = deck.take();
             addCard(newCard);
-            output.printDealerCard(this, player);
+            output.printDealerCard(newCard, this, player);
         }
     }
 }

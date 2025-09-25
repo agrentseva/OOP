@@ -50,8 +50,8 @@ public class ConsoleOutput {
                 + " => " + dealer.getHandValue());
     }
 
-    public void printDealerCard(Dealer dealer, Player player) {
-        System.out.println("\nДилер открывает карту: " + dealer.getHandCards().get(1));
+    public void printDealerCard(Card card, Dealer dealer, Player player) {
+        System.out.println("\nДилер открывает карту: " + card);
         System.out.println("    Ваши карты: " + player.getHandCards()
                 + " => " + player.getHandValue());
         System.out.println("    Карты дилера: " + dealer.getHandCards()

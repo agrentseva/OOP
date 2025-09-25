@@ -18,8 +18,29 @@ class CardTest {
     }
 
     @Test
-    void testCardName() {
-        Card queenOfDiamonds = new Card(CardRank.QUEEN, CardSuit.DIAMONDS);
-        assertTrue(queenOfDiamonds.getCardName().contains("дама"));
+    void testCardNameQueen() {
+        Card card = new Card(CardRank.QUEEN, CardSuit.DIAMONDS);
+        assertTrue(card.getCardName().contains("дама"));
+        assertTrue(card.getCardName().contains("Бубновая"));
+    }
+
+    @Test
+    void testGetCardNameNumberCard() {
+        Card card = new Card(CardRank.TEN, CardSuit.DIAMONDS);
+        assertTrue(card.getCardName().contains("Десятка"));
+        assertTrue(card.getCardName().contains("Бубен"));
+    }
+
+    @Test
+    void testGetCardNameJack() {
+        Card card = new Card(CardRank.JACK, CardSuit.CLUBS);
+        assertTrue(card.getCardName().contains("валет"));
+        assertTrue(card.getCardName().contains("Трефовый"));
+    }
+
+    @Test
+    void testToString() {
+        Card card = new Card(CardRank.SEVEN, CardSuit.CLUBS);
+        assertEquals(card.getCardName(), card.toString());
     }
 }
