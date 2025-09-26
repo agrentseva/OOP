@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Класс колоды карт.
- * Поддерживает создание, тасование и взятие карт.
- */
 public class Deck {
     private final List<Card> deck = new ArrayList<>();
 

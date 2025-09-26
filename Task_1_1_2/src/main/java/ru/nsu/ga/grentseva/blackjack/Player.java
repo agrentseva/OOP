@@ -2,10 +2,6 @@ package ru.nsu.ga.grentseva.blackjack;
 
 import java.util.List;
 
-/**
- * Класс игрока.
- * Хранит руку и предоставляет методы для работы с картами.
- */
 public class Player {
 
     private Hand hand;

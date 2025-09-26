@@ -1,9 +1,5 @@
 package ru.nsu.ga.grentseva.blackjack;
 
-/**
- * Класс дилера, наследник игрока.
- * Содержит логику поведения дилера в игре.
- */
 public class Dealer extends Player {
 
     private final ConsoleOutput output;
