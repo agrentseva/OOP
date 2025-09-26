@@ -1,17 +1,17 @@
 package ru.nsu.ga.grentseva.blackjack;
-import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 class ConsoleOutputTest {
 
     @Test
     void testAllConsoleOutput() {
         ByteArrayOutputStream testOut = new ByteArrayOutputStream();
-        PrintStream originalOut = System.out;
+        final PrintStream originalOut = System.out;
         System.setOut(new PrintStream(testOut));
 
         ConsoleOutput output = new ConsoleOutput();
@@ -19,13 +19,13 @@ class ConsoleOutputTest {
         Dealer dealer = new Dealer(output);
         Deck deck = new Deck(1);
         deck.shuffle();
-        
+
         player.addCard(deck.take());
         player.addCard(deck.take());
         dealer.addCard(deck.take());
         dealer.addCard(deck.take());
         Card card = deck.take();
-        
+
         output.printWelcome();
         output.printRoundStart(1);
         output.showInitialCards(player, dealer);

@@ -14,8 +14,12 @@ public class ConsoleInput {
         System.out.println("\nХотите сыграть ещё один раунд? (1 - да, 0 - нет):");
         while (true) {
             int choice = in.nextInt();
-            if (choice == 1) return true;
-            if (choice == 0) return false;
+            if (choice == 1) {
+                return true;
+            }
+            if (choice == 0) {
+                return false;
+            }
             System.out.println("Неверный ввод.");
         }
     }

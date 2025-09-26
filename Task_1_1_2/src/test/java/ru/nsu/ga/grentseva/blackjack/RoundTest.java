@@ -1,10 +1,9 @@
 package ru.nsu.ga.grentseva.blackjack;
 
-import org.junit.jupiter.api.Test;
-
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 class RoundTest {
 
@@ -26,11 +25,12 @@ class RoundTest {
         Round round = new Round(roundCounter, player, dealer, input, output, random);
         Round.Result result = round.play();
 
-        if (player.hasBlackjack() || dealer.isBust() || player.getHandValue() > dealer.getHandValue()) {
+        if (player.hasBlackjack() || dealer.isBust()
+                || player.getHandValue() > dealer.getHandValue()) {
             assertTrue(result == Round.Result.PLAYER_WIN);
-        }
-        else{
-            assertTrue(result == Round.Result.DEALER_WIN || result == Round.Result.DRAW);
+        } else {
+            assertTrue(result == Round.Result.DEALER_WIN
+                    || result == Round.Result.DRAW);
         }
     }
 
@@ -42,7 +42,8 @@ class RoundTest {
         if (player.getHandValue() < dealer.getHandValue()) {
             assertTrue(result == Round.Result.DEALER_WIN);
         } else {
-            assertTrue(result == Round.Result.DRAW || result == Round.Result.PLAYER_WIN );
+            assertTrue(result == Round.Result.DRAW
+                    || result == Round.Result.PLAYER_WIN);
         }
     }
 
@@ -50,11 +51,11 @@ class RoundTest {
     void testPlayResultDraw() {
         Round round = new Round(roundCounter, player, dealer, input, output, random);
         Round.Result result = round.play();
-
-       if (player.getHandValue() == dealer.getHandValue()) {
+        if (player.getHandValue() == dealer.getHandValue()) {
             assertTrue(result == Round.Result.DRAW);
         } else {
-           assertTrue(result == Round.Result.DEALER_WIN || result == Round.Result.PLAYER_WIN );
+           assertTrue(result == Round.Result.DEALER_WIN
+                   || result == Round.Result.PLAYER_WIN);
         }
     }
 
@@ -66,19 +67,22 @@ class RoundTest {
         if (result == Round.Result.DRAW) {
             assertTrue(player.getHandValue() == dealer.getHandValue());
         } else {
-            assertTrue(player.getHandValue() < dealer.getHandValue() || player.getHandValue() > dealer.getHandValue() );
+            assertTrue(player.getHandValue() < dealer.getHandValue()
+                    || player.getHandValue() > dealer.getHandValue());
         }
 
         if (result == Round.Result.PLAYER_WIN) {
             assertTrue( player.getHandValue() > dealer.getHandValue());
         } else {
-            assertTrue(player.getHandValue() < dealer.getHandValue() || player.getHandValue() == dealer.getHandValue());
+            assertTrue(player.getHandValue() < dealer.getHandValue()
+                    || player.getHandValue() == dealer.getHandValue());
         }
 
         if (result == Round.Result.DEALER_WIN) {
             assertTrue(player.getHandValue() < dealer.getHandValue());
         } else {
-            assertTrue(player.getHandValue() > dealer.getHandValue() || player.getHandValue() == dealer.getHandValue());
+            assertTrue(player.getHandValue() > dealer.getHandValue()
+                    || player.getHandValue() == dealer.getHandValue());
         }
 
 

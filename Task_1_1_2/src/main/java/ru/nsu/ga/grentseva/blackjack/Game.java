@@ -37,6 +37,7 @@ public class Game {
                     playerScore++;
                     dealerScore++;
                 }
+                default -> throw new IllegalStateException("Unexpected value: " + result);
             }
 
             output.printScore(playerScore, dealerScore);
