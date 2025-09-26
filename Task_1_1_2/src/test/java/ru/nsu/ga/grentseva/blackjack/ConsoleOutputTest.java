@@ -1,9 +1,9 @@
 package ru.nsu.ga.grentseva.blackjack;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-
 import org.junit.jupiter.api.Test;
 
 class ConsoleOutputTest {
@@ -16,7 +16,7 @@ class ConsoleOutputTest {
 
         ConsoleOutput output = new ConsoleOutput();
         Player player = new Player();
-        Dealer dealer = new Dealer(output);
+        final Dealer dealer = new Dealer(output);
         Deck deck = new Deck(1);
         deck.shuffle();
 

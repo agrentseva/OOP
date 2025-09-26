@@ -2,8 +2,8 @@ package ru.nsu.ga.grentseva.blackjack;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import java.io.ByteArrayInputStream;
 
+import java.io.ByteArrayInputStream;
 import org.junit.jupiter.api.Test;
 
 class ConsoleInputTest {
