@@ -14,8 +14,4 @@ public abstract class Expression {
         Map<String,Integer> vars = temp.getVars();
         return this.eval(vars);
     }
-
-    /*public Expression simplify() {
-        return this; // по умолчанию ничего не упрощаем
-    }*/
 }

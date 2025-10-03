@@ -17,8 +17,8 @@ public class Main {
         int result = e.eval("x = 10; y = 13");
         System.out.println(result);
 
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
+        //Scanner scanner = new Scanner(System.in);
+        //String input = scanner.nextLine();
 
        /* ParseExpession parser = new ParseExpession(input);
        // Expression expr = parser.parse();
