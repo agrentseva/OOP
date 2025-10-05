@@ -5,7 +5,7 @@
 <title>Card (Task_1_1_2 1.0-SNAPSHOT API)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="declaration: package: ru.nsu.ga.grentseva.blackjack, class: Card">
+<meta name="description" content="declaration: package: ru.nsu.ga.grentseva.card, class: Card">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -31,6 +31,7 @@ loadScripts(document, 'script');</script>
 <div class="top-nav" id="navbar-top">
 <div class="skip-nav"><a href="#skip-navbar-top" title="Skip navigation links">Skip navigation links</a></div>
 <ul id="navbar-top-firstrow" class="nav-list" title="Navigation">
+<li><a href="../../../../../index.html">Overview</a></li>
 <li><a href="package-summary.html">Package</a></li>
 <li class="nav-bar-cell1-rev">Class</li>
 <li><a href="package-tree.html">Tree</a></li>
@@ -66,11 +67,11 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ru.nsu.ga.grentseva.blackjack</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ru.nsu.ga.grentseva.card</a></div>
 <h1 title="Class Card" class="title">Class Card</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">ru.nsu.ga.grentseva.blackjack.Card</div>
+<div class="inheritance">ru.nsu.ga.grentseva.card.Card</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
@@ -87,8 +88,8 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.ga.grentseva.blackjack.CardRank,ru.nsu.ga.grentseva.blackjack.CardSuit)" class="member-name-link">Card</a><wbr>(ru.nsu.ga.grentseva.blackjack.CardRank&nbsp;rank,
- ru.nsu.ga.grentseva.blackjack.CardSuit&nbsp;suit)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.ga.grentseva.card.CardRank,ru.nsu.ga.grentseva.card.CardSuit)" class="member-name-link">Card</a><wbr>(<a href="CardRank.html" title="enum class in ru.nsu.ga.grentseva.card">CardRank</a>&nbsp;rank,
+ <a href="CardSuit.html" title="enum class in ru.nsu.ga.grentseva.card">CardSuit</a>&nbsp;suit)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
@@ -105,14 +106,29 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCardName()" class="member-name-link">getCardName</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCardName(boolean)" class="member-name-link">getCardName</a><wbr>(boolean&nbsp;english)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает название карты с учётом языка.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCardValue()" class="member-name-link">getCardValue</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Получение значения карты</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="CardRank.html" title="enum class in ru.nsu.ga.grentseva.card">CardRank</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRank()" class="member-name-link">getRank</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="CardSuit.html" title="enum class in ru.nsu.ga.grentseva.card">CardSuit</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSuit()" class="member-name-link">getSuit</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString(boolean)" class="member-name-link">toString</a><wbr>(boolean&nbsp;english)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Явный вариант для английского</div>
+</div>
 </div>
 </div>
 </div>
@@ -131,10 +147,10 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(ru.nsu.ga.grentseva.blackjack.CardRank,ru.nsu.ga.grentseva.blackjack.CardSuit)">
+<section class="detail" id="&lt;init&gt;(ru.nsu.ga.grentseva.card.CardRank,ru.nsu.ga.grentseva.card.CardSuit)">
 <h3>Card</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Card</span><wbr><span class="parameters">(ru.nsu.ga.grentseva.blackjack.CardRank&nbsp;rank,
- ru.nsu.ga.grentseva.blackjack.CardSuit&nbsp;suit)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Card</span><wbr><span class="parameters">(<a href="CardRank.html" title="enum class in ru.nsu.ga.grentseva.card">CardRank</a>&nbsp;rank,
+ <a href="CardSuit.html" title="enum class in ru.nsu.ga.grentseva.card">CardSuit</a>&nbsp;suit)</span></div>
 </section>
 </li>
 </ul>
@@ -146,9 +162,23 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getCardName()">
+<section class="detail" id="getRank()">
+<h3>getRank</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="CardRank.html" title="enum class in ru.nsu.ga.grentseva.card">CardRank</a></span>&nbsp;<span class="element-name">getRank</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getSuit()">
+<h3>getSuit</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="CardSuit.html" title="enum class in ru.nsu.ga.grentseva.card">CardSuit</a></span>&nbsp;<span class="element-name">getSuit</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getCardName(boolean)">
 <h3>getCardName</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getCardName</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getCardName</span><wbr><span class="parameters">(boolean&nbsp;english)</span></div>
+<div class="block">Возвращает название карты с учётом языка.
+ Для английского формирует "Ace of Spades", для русского "Туз Пики".</div>
 </section>
 </li>
 <li>
@@ -162,9 +192,17 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="toString(boolean)">
+<h3>toString</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span><wbr><span class="parameters">(boolean&nbsp;english)</span></div>
+<div class="block">Явный вариант для английского</div>
+</section>
+</li>
+<li>
 <section class="detail" id="getCardValue()">
 <h3>getCardValue</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getCardValue</span>()</div>
+<div class="block">Получение значения карты</div>
 </section>
 </li>
 </ul>
