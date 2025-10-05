@@ -1,4 +1,4 @@
-package ru.nsu.ga.grentseva.blackjack;
+package ru.nsu.ga.grentseva.card;
 
 import java.util.ArrayList;
 import java.util.Collections;

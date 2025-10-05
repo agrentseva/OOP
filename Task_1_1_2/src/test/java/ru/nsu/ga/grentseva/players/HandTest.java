@@ -1,10 +1,13 @@
-package ru.nsu.ga.grentseva.blackjack;
+package ru.nsu.ga.grentseva.players;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.ga.grentseva.card.Card;
+import ru.nsu.ga.grentseva.card.CardRank;
+import ru.nsu.ga.grentseva.card.CardSuit;
 
 
 class HandTest {

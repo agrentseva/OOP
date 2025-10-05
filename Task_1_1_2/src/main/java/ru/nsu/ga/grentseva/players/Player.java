@@ -1,4 +1,6 @@
-package ru.nsu.ga.grentseva.blackjack;
+package ru.nsu.ga.grentseva.players;
+
+import ru.nsu.ga.grentseva.card.Card;
 
 import java.util.List;
 

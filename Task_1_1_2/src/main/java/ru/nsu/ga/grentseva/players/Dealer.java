@@ -1,4 +1,8 @@
-package ru.nsu.ga.grentseva.blackjack;
+package ru.nsu.ga.grentseva.players;
+
+import ru.nsu.ga.grentseva.console.ConsoleOutput;
+import ru.nsu.ga.grentseva.card.Deck;
+import ru.nsu.ga.grentseva.card.Card;
 
 public class Dealer extends Player {
 

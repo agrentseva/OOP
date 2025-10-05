@@ -1,9 +1,11 @@
-package ru.nsu.ga.grentseva.blackjack;
+package ru.nsu.ga.grentseva.card;
+
+import org.junit.jupiter.api.Test;
+import ru.nsu.ga.grentseva.card.Card;
+import ru.nsu.ga.grentseva.card.Deck;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import org.junit.jupiter.api.Test;
 
 
 class DeckTest {
