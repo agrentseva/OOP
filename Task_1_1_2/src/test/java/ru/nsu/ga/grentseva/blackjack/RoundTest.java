@@ -11,7 +11,7 @@ import ru.nsu.ga.grentseva.players.Player;
 
 class RoundTest {
 
-    private RussianLocalization localization;
+    private RussianLocalization localization = new RussianLocalization();
     private ConsoleOutput output = new ConsoleOutput(localization);
     private Random random = new Random();
     private int roundCounter = 0;

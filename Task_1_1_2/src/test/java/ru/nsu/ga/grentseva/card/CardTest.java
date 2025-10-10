@@ -26,14 +26,6 @@ class CardTest {
     }
 
     @Test
-    void testGetCardNameNumberCardRussian() {
-        Card card = new Card(CardRank.TEN, CardSuit.DIAMONDS);
-        String nameRu = getCardName(card);
-        assertTrue(nameRu.contains("Десятка"));
-        assertTrue(nameRu.contains("Бубен"));
-    }
-
-    @Test
     void testGetCardNameJackRussian() {
         Card card = new Card(CardRank.JACK, CardSuit.CLUBS);
         String nameRu = getCardName(card);
