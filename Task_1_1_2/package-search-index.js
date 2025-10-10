@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.ga.grentseva.blackjack"},{"l":"ru.nsu.ga.grentseva.card"},{"l":"ru.nsu.ga.grentseva.console"},{"l":"ru.nsu.ga.grentseva.players"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.ga.grentseva.blackjack"},{"l":"ru.nsu.ga.grentseva.card"},{"l":"ru.nsu.ga.grentseva.card.CardLocalization"},{"l":"ru.nsu.ga.grentseva.console"},{"l":"ru.nsu.ga.grentseva.console.localization"},{"l":"ru.nsu.ga.grentseva.players"}];updateSearchResults();
