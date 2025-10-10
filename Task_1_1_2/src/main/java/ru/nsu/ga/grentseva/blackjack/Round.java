@@ -4,7 +4,6 @@ import ru.nsu.ga.grentseva.card.Card;
 import ru.nsu.ga.grentseva.card.Deck;
 import ru.nsu.ga.grentseva.console.ConsoleInput;
 import ru.nsu.ga.grentseva.console.ConsoleOutput;
-import ru.nsu.ga.grentseva.players.Dealer;
 import ru.nsu.ga.grentseva.players.Player;
 
 import java.util.Random;
@@ -12,14 +11,14 @@ import java.util.Random;
 public class Round {
     public enum Result { PLAYER_WIN, DEALER_WIN, DRAW }
 
-    private final int roundNumber;
+    private int roundNumber;
     private final Player player;
-    private final Dealer dealer;
+    private final Player dealer;
     private final ConsoleInput input;
     private final ConsoleOutput output;
     private final Random random;
 
-    public Round(int roundNumber, Player player, Dealer dealer,
+    public Round(int roundNumber, Player player, Player dealer,
                  ConsoleInput input, ConsoleOutput output, Random random) {
         this.roundNumber = roundNumber;
         this.player = player;
@@ -30,8 +29,7 @@ public class Round {
     }
 
     public Result play() {
-        output.printRoundStart(roundNumber);
-
+        output.printRound(roundNumber);
         Deck deck = new Deck(random.nextInt(5) + 1);
         deck.shuffle();
 
@@ -43,62 +41,87 @@ public class Round {
         dealer.addCard(deck.take());
         dealer.addCard(deck.take());
 
-        output.showInitialCards(player, dealer);
+        output.printPlayerCards(player.getHandCards(), player.getHandValue());
+        output.printDealerCardsHidden(dealer.getHandCards());
 
         if (player.hasBlackjack()) {
-            output.printPlayerBlackjack();
+            output.printBlackjackPlayer();
             return Result.PLAYER_WIN;
         }
 
         if (playerTurn(deck)) {
-            return Result.DEALER_WIN;
+
+            if (dealerTurn(deck)){
+                return Result.DEALER_WIN;
+            }
         }
 
-        dealerTurn(deck);
         return determineWinner();
     }
 
     private boolean playerTurn(Deck deck) {
-        output.printPlayerTurn();
         while (true) {
             int choice = input.askPlayerChoice();
             if (choice == 1) {
-                Card card = deck.take();
-                player.addCard(card);
-                output.printPlayerCard(card, player, dealer);
-                if (player.isBust()) {
-                    output.printPlayerBust();
-                    return true;
+                Card newCard = deck.take();
+                player.addCard(newCard);
+                output.printPlayerDraws(newCard);
+                output.printPlayerCards(player.getHandCards(), player.getHandValue());
+                output.printDealerCardsHidden(dealer.getHandCards());
+
+                if (player.getHandValue() >= 21) {
+                    return false;
                 }
             } else if (choice == 0) {
-                return false;
+                return true;
             } else {
-                output.printInvalidInput();
+                output.printAskContinue();
             }
         }
     }
 
-    private void dealerTurn(Deck deck) {
-        dealer.dealerTurn(deck, player);
+    private boolean dealerTurn(Deck deck) {
+        output.printDealerReveals(dealer.getHandCards().get(1));
+        if (dealer.hasBlackjack()) {
+            output.printBlackjackDealer();
+            return true;
+        }
+        output.printPlayerCards(player.getHandCards(), player.getHandValue());
+        output.printDealerCardsOpen(dealer.getHandCards(), dealer.getHandValue());
+
+        while (dealer.getHandValue() < 17) {
+            Card newCard = deck.take();
+            dealer.addCard(newCard);
+            output.printDealerDraws(newCard);
+            output.printPlayerCards(player.getHandCards(), player.getHandValue());
+            output.printDealerCardsOpen(dealer.getHandCards(), dealer.getHandValue());
+        }
+        return false;
     }
 
     private Result determineWinner() {
-        if (dealer.isBust()) {
+        if (player.getHandValue() > 21) {
+            output.printPlayerBust();
+            return Result.DEALER_WIN;
+        }
+
+        if (dealer.getHandValue() > 21) {
             output.printDealerBust();
             return Result.PLAYER_WIN;
         }
-        if (player.getHandValue() > dealer.getHandValue()) {
+
+        int playerValue = player.getHandValue();
+        int dealerValue = dealer.getHandValue();
+
+        if (playerValue > dealerValue) {
             output.printPlayerWin();
             return Result.PLAYER_WIN;
-        }
-        if (player.getHandValue() < dealer.getHandValue()) {
+        } else if (playerValue < dealerValue) {
             output.printDealerWin();
             return Result.DEALER_WIN;
+        } else {
+            output.printDraw();
+            return Result.DRAW;
         }
-        output.printDraw();
-        return Result.DRAW;
     }
 }
-
-
-

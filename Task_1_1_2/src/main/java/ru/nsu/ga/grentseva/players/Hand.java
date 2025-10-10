@@ -40,10 +40,6 @@ public class Hand {
         return sum;
     }
 
-    public boolean isBust() {
-        return getHandValue() > 21;
-    }
-
     public boolean hasBlackjack() {
         return getHandValue() == 21 && cards.size() == 2;
     }

@@ -1,44 +1,46 @@
 package ru.nsu.ga.grentseva.console;
 
+import ru.nsu.ga.grentseva.console.localization.Localization;
 import java.util.Scanner;
 
+
 public class ConsoleInput {
+
     private final Scanner in = new Scanner(System.in);
-    private boolean useEnglish = false; // флаг языка
+    private final ConsoleOutput output;
 
-    public void setUseEnglish(boolean useEnglish) {
-        this.useEnglish = useEnglish;
-    }
-
-    private String msg(Message message) {
-        return useEnglish ? message.formatEn() : message.format();
-    }
-
-    private String msg(Message message, Object... args) {
-        return useEnglish ? message.formatEn(args) : message.format(args);
+    public ConsoleInput(ConsoleOutput output) {
+        this.output = output;
     }
 
     public int askPlayerChoice() {
-        System.out.println(msg(Message.ASK_PLAYER_CHOICE));
-        return in.nextInt();
+        output.printAskPlayer();
+        while (true) {
+            int choice = in.nextInt();
+            if (choice == 0 || choice == 1) {
+                return choice;
+            } else {
+                output.printInvalidValue();
+            }
+        }
     }
 
     public boolean askContinue() {
-        System.out.println(msg(Message.ASK_CONTINUE));
+        output.printAskContinue();
         while (true) {
             int choice = in.nextInt();
             if (choice == 1) {
                 return true;
-            }
-            if (choice == 0) {
-                in.close();
+            } else if (choice == 0) {
+                close();
                 return false;
+            } else {
+                output.printInvalidValue();
             }
-            System.out.println(msg(Message.INVALID_INPUT));
         }
     }
 
-    public int nextInt() {
-        return in.nextInt();
+    public void close() {
+        in.close();
     }
 }

@@ -20,18 +20,6 @@ class HandTest {
 
         assertEquals(21, hand.getHandValue());
         assertTrue(hand.hasBlackjack());
-        assertFalse(hand.isBust());
-    }
-
-    @Test
-    void testBustWithSingleAce() {
-        Hand hand = new Hand();
-        hand.addCard(new Card(CardRank.ACE, CardSuit.SPADES));
-        hand.addCard(new Card(CardRank.KING, CardSuit.HEARTS));
-        hand.addCard(new Card(CardRank.TEN, CardSuit.DIAMONDS));
-        hand.addCard(new Card(CardRank.TWO, CardSuit.CLUBS));
-
-        assertTrue(hand.isBust());
     }
 
     @Test
@@ -42,7 +30,6 @@ class HandTest {
         hand.addCard(new Card(CardRank.NINE, CardSuit.DIAMONDS));
 
         assertEquals(21, hand.getHandValue());
-        assertFalse(hand.isBust());
     }
 
     @Test

@@ -6,18 +6,19 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 import ru.nsu.ga.grentseva.console.ConsoleInput;
 import ru.nsu.ga.grentseva.console.ConsoleOutput;
-import ru.nsu.ga.grentseva.players.Dealer;
+import ru.nsu.ga.grentseva.console.localization.RussianLocalization;
 import ru.nsu.ga.grentseva.players.Player;
 
 class RoundTest {
 
-    private ConsoleOutput output = new ConsoleOutput();
+    private RussianLocalization localization;
+    private ConsoleOutput output = new ConsoleOutput(localization);
     private Random random = new Random();
     private int roundCounter = 0;
     private Player player = new Player();
-    private Dealer dealer = new Dealer(output);
+    private Player dealer = new Player();
 
-    private ConsoleInput input = new ConsoleInput() {
+    private ConsoleInput input = new ConsoleInput(output) {
         @Override
         public int askPlayerChoice() {
             return 0;
