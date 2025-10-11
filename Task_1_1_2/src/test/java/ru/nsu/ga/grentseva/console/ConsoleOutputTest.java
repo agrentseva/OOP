@@ -188,7 +188,7 @@ class ConsoleOutputEnglishTest {
         output.printDealerCardsHidden(cards);
         String text = getOutput();
         assertTrue(text.toLowerCase().contains("dealer"));
-        assertTrue(text.contains("<hidden card>") || text.contains("<закрытая карта>"));
+        assertTrue(text.contains("<hidden card>"));
     }
 
     @Test
@@ -226,5 +226,35 @@ class ConsoleOutputEnglishTest {
         assertTrue(text.toLowerCase().contains("dealer draws"));
         assertTrue(text.toLowerCase().contains("king"));
         assertTrue(text.toLowerCase().contains("diamonds"));
+    }
+
+    @Test
+    void testCardNameQueenEnglish() {
+        Card.setLocalization(new EnglishCardLocalization());
+        Card card = new Card(CardRank.QUEEN, CardSuit.DIAMONDS);
+        String nameEn = getCardName(card);
+        assertTrue(nameEn.toLowerCase().contains("queen"));
+        assertTrue(nameEn.toLowerCase().contains("diamonds"));
+        assertTrue(nameEn.contains("(10)"));
+    }
+
+    @Test
+    void testGetCardNameNumberCardEnglish() {
+        Card.setLocalization(new EnglishCardLocalization());
+        Card card = new Card(CardRank.TEN, CardSuit.DIAMONDS);
+        String nameEn = getCardName(card);
+        assertTrue(nameEn.toLowerCase().contains("ten"));
+        assertTrue(nameEn.toLowerCase().contains("diamonds"));
+        assertTrue(nameEn.contains("(10)"));
+    }
+
+    @Test
+    void testGetCardNameJackEnglish() {
+        Card.setLocalization(new EnglishCardLocalization());
+        Card card = new Card(CardRank.JACK, CardSuit.CLUBS);
+        String nameEn = getCardName(card);
+        assertTrue(nameEn.toLowerCase().contains("jack"));
+        assertTrue(nameEn.toLowerCase().contains("clubs"));
+        assertTrue(nameEn.contains("(10)"));
     }
 }
