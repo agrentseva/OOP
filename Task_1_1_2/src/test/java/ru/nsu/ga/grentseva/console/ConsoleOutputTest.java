@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.ga.grentseva.card.Card;
 import ru.nsu.ga.grentseva.card.CardLocalization.EnglishCardLocalization;
+import ru.nsu.ga.grentseva.card.CardLocalization.RussianCardLocalization;
 import ru.nsu.ga.grentseva.card.CardRank;
 import ru.nsu.ga.grentseva.card.CardSuit;
 import ru.nsu.ga.grentseva.console.localization.EnglishLocalization;
@@ -34,18 +35,21 @@ class ConsoleOutputRussianTest {
 
     @Test
     void testPrintWelcome() {
+        Card.setLocalization(new RussianCardLocalization());
         output.printWelcome();
         assertTrue(getOutput().contains("Добро пожаловать"));
     }
 
     @Test
     void testPrintRound() {
+        Card.setLocalization(new RussianCardLocalization());
         output.printRound(3);
         assertTrue(getOutput().contains("Раунд 3"));
     }
 
     @Test
     void testPrintPlayerCards() {
+        Card.setLocalization(new RussianCardLocalization());
         List<Card> cards = List.of(
                 new Card(CardRank.SEVEN, CardSuit.HEARTS),
                 new Card(CardRank.KING, CardSuit.SPADES)
@@ -60,6 +64,7 @@ class ConsoleOutputRussianTest {
 
     @Test
     void testPrintDealerCardsHidden() {
+        Card.setLocalization(new RussianCardLocalization());
         List<Card> cards = List.of(
                 new Card(CardRank.ACE, CardSuit.SPADES),
                 new Card(CardRank.TEN, CardSuit.DIAMONDS)
@@ -72,6 +77,7 @@ class ConsoleOutputRussianTest {
 
     @Test
     void testPrintDealerCardsOpen() {
+        Card.setLocalization(new RussianCardLocalization());
         List<Card> cards = List.of(
                 new Card(CardRank.TEN, CardSuit.HEARTS),
                 new Card(CardRank.EIGHT, CardSuit.CLUBS)
@@ -84,24 +90,28 @@ class ConsoleOutputRussianTest {
 
     @Test
     void testPrintPlayerWin() {
+        Card.setLocalization(new RussianCardLocalization());
         output.printPlayerWin();
         assertTrue(getOutput().contains("Вы выиграли"));
     }
 
     @Test
     void testPrintDealerWin() {
+        Card.setLocalization(new RussianCardLocalization());
         output.printDealerWin();
         assertTrue(getOutput().contains("Дилер выиграл"));
     }
 
     @Test
     void testPrintDraw() {
+        Card.setLocalization(new RussianCardLocalization());
         output.printDraw();
         assertTrue(getOutput().contains("Ничья"));
     }
 
     @Test
     void testPrintScore() {
+        Card.setLocalization(new RussianCardLocalization());
         output.printScore(2, 1);
         String text = getOutput();
         assertTrue(text.contains("Счёт"));
@@ -111,6 +121,7 @@ class ConsoleOutputRussianTest {
 
     @Test
     void testCardNameQueenRussian() {
+        Card.setLocalization(new RussianCardLocalization());
         Card card = new Card(CardRank.QUEEN, CardSuit.DIAMONDS);
         String nameRu = getCardName(card);
         assertTrue(nameRu.contains("Дама"));
@@ -119,6 +130,7 @@ class ConsoleOutputRussianTest {
 
     @Test
     void testGetCardNameNumberCardRussian() {
+        Card.setLocalization(new RussianCardLocalization());
         Card card = new Card(CardRank.TEN, CardSuit.DIAMONDS);
         String nameRu = getCardName(card);
         assertTrue(nameRu.contains("Десятка"));
@@ -127,6 +139,7 @@ class ConsoleOutputRussianTest {
 
     @Test
     void testGetCardNameJackRussian() {
+        Card.setLocalization(new RussianCardLocalization());
         Card card = new Card(CardRank.JACK, CardSuit.CLUBS);
         String nameRu = getCardName(card);
         assertTrue(nameRu.contains("Валет"));
