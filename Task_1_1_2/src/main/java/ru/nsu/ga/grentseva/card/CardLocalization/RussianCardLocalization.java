@@ -30,9 +30,9 @@ public class RussianCardLocalization implements CardLocalization {
     @Override
     public String suit(CardSuit suit) {
         return switch (suit) {
-            case HEARTS -> "Червы";
-            case DIAMONDS -> "Бубны";
-            case CLUBS -> "Трефы";
+            case HEARTS -> "Червей";
+            case DIAMONDS -> "Бубен";
+            case CLUBS -> "Треф";
             case SPADES -> "Пики";
         };
     }

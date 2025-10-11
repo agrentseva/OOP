@@ -13,6 +13,7 @@ import java.io.PrintStream;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static ru.nsu.ga.grentseva.card.Card.getCardName;
 
 class ConsoleOutputRussianTest {
 
@@ -27,7 +28,7 @@ class ConsoleOutputRussianTest {
     }
 
     private String getOutput() {
-        return outContent.toString().trim();
+        return outContent.toString();
     }
 
     @Test
@@ -105,6 +106,30 @@ class ConsoleOutputRussianTest {
         assertTrue(text.contains("Счёт"));
         assertTrue(text.contains("2"));
         assertTrue(text.contains("1"));
+    }
+
+    @Test
+    void testCardNameQueenRussian() {
+        Card card = new Card(CardRank.QUEEN, CardSuit.DIAMONDS);
+        String nameRu = getCardName(card);
+        assertTrue(nameRu.contains("Дама"));
+        assertTrue(nameRu.contains("Бубновая"));
+    }
+
+    @Test
+    void testGetCardNameNumberCardRussian() {
+        Card card = new Card(CardRank.TEN, CardSuit.DIAMONDS);
+        String nameRu = getCardName(card);
+        assertTrue(nameRu.contains("Десятка"));
+        assertTrue(nameRu.contains("Бубен"));
+    }
+
+    @Test
+    void testGetCardNameJackRussian() {
+        Card card = new Card(CardRank.JACK, CardSuit.CLUBS);
+        String nameRu = getCardName(card);
+        assertTrue(nameRu.contains("Валет"));
+        assertTrue(nameRu.contains("Трефовый"));
     }
 }
 
