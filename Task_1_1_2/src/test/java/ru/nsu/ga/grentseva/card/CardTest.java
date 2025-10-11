@@ -18,46 +18,42 @@ class CardTest {
     }
 
     @Test
-    void testCardNameQueenRussian() {
+    void testAllRussianCards() {
         Card.setLocalization(new RussianCardLocalization());
-        Card card = new Card(CardRank.QUEEN, CardSuit.DIAMONDS);
 
-        String nameRu = Card.getCardName(card);
-        assertTrue(nameRu.contains("Дама"), "Ожидалось слово 'Дама'");
-        assertTrue(nameRu.contains("Бубнов"), "Ожидалась масть 'Бубновая'");
-        assertTrue(nameRu.contains("(10)"));
+        for (CardSuit suit : CardSuit.values()) {
+            for (CardRank rank : CardRank.values()) {
+                Card card = new Card(rank, suit);
+                String name = Card.getCardName(card);
+
+                assertTrue(name.contains("(" + rank.getValue() + ")"));
+
+                if (rank == CardRank.QUEEN) {
+                    assertTrue(name.contains("Дама"));
+                } else if (rank == CardRank.JACK) {
+                    assertTrue(name.contains("Валет"));
+                } else if (rank == CardRank.KING) {
+                    assertTrue(name.contains("Король"));
+                }
+            }
+        }
     }
 
-    @Test
-    void testCardNameJackRussian() {
-        Card.setLocalization(new RussianCardLocalization());
-        Card card = new Card(CardRank.JACK, CardSuit.CLUBS);
-
-        String nameRu = Card.getCardName(card);
-        assertTrue(nameRu.contains("Валет"));
-        assertTrue(nameRu.contains("Треф"));
-        assertTrue(nameRu.contains("(10)"));
-    }
 
     @Test
-    void testCardNameQueenEnglish() {
+    void testAllEnglishCards() {
         Card.setLocalization(new EnglishCardLocalization());
-        Card card = new Card(CardRank.QUEEN, CardSuit.DIAMONDS);
 
-        String nameEn = Card.getCardName(card);
-        assertTrue(nameEn.toLowerCase().contains("queen"));
-        assertTrue(nameEn.toLowerCase().contains("diamonds"));
-        assertTrue(nameEn.contains("(10)"));
-    }
+        for (CardSuit suit : CardSuit.values()) {
+            for (CardRank rank : CardRank.values()) {
+                Card card = new Card(rank, suit);
+                String name = Card.getCardName(card).toLowerCase();
 
-    @Test
-    void testCardNameJackEnglish() {
-        Card.setLocalization(new EnglishCardLocalization());
-        Card card = new Card(CardRank.JACK, CardSuit.CLUBS);
+                assertTrue(name.contains(rank.name().toLowerCase()));
+                assertTrue(name.contains(suit.name().toLowerCase()));
 
-        String nameEn = Card.getCardName(card);
-        assertTrue(nameEn.toLowerCase().contains("jack"));
-        assertTrue(nameEn.toLowerCase().contains("clubs"));
-        assertTrue(nameEn.contains("(10)"));
+                assertTrue(Card.getCardName(card).contains("(" + rank.getValue() + ")"));
+            }
+        }
     }
 }

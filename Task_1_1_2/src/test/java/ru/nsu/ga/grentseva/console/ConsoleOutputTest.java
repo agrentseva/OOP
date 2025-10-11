@@ -3,6 +3,7 @@ package ru.nsu.ga.grentseva.console;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.ga.grentseva.card.Card;
+import ru.nsu.ga.grentseva.card.CardLocalization.EnglishCardLocalization;
 import ru.nsu.ga.grentseva.card.CardRank;
 import ru.nsu.ga.grentseva.card.CardSuit;
 import ru.nsu.ga.grentseva.console.localization.EnglishLocalization;
@@ -146,63 +147,71 @@ class ConsoleOutputEnglishTest {
     }
 
     private String getOutput() {
-        return outContent.toString();
+        return outContent.toString().trim();
     }
 
     @Test
     void testPrintPlayerCards() {
+        Card.setLocalization(new EnglishCardLocalization());
         List<Card> cards = List.of(
                 new Card(CardRank.TEN, CardSuit.HEARTS),
                 new Card(CardRank.SEVEN, CardSuit.CLUBS)
         );
         output.printPlayerCards(cards, 17);
         String text = getOutput();
-
         assertTrue(text.contains("Your cards"));
         assertTrue(text.contains("17"));
+        assertTrue(text.toLowerCase().contains("hearts"));
+        assertTrue(text.toLowerCase().contains("clubs"));
     }
 
     @Test
     void testPrintDealerCardsHidden() {
+        Card.setLocalization(new EnglishCardLocalization());
         List<Card> cards = List.of(
                 new Card(CardRank.ACE, CardSuit.SPADES),
                 new Card(CardRank.TEN, CardSuit.DIAMONDS)
         );
         output.printDealerCardsHidden(cards);
         String text = getOutput();
-
-        assertTrue(text.contains("cards"));
+        assertTrue(text.toLowerCase().contains("dealer"));
+        assertTrue(text.contains("<hidden card>") || text.contains("<закрытая карта>"));
     }
 
     @Test
     void testPrintDealerCardsOpen() {
+        Card.setLocalization(new EnglishCardLocalization());
         List<Card> cards = List.of(
                 new Card(CardRank.KING, CardSuit.HEARTS),
                 new Card(CardRank.EIGHT, CardSuit.CLUBS)
         );
         output.printDealerCardsOpen(cards, 18);
         String text = getOutput();
-
         assertTrue(text.toLowerCase().contains("dealer"));
         assertTrue(text.contains("18"));
+        assertTrue(text.toLowerCase().contains("hearts"));
+        assertTrue(text.toLowerCase().contains("clubs"));
     }
 
     @Test
     void testPrintPlayerDraws() {
+        Card.setLocalization(new EnglishCardLocalization());
         Card card = new Card(CardRank.FOUR, CardSuit.HEARTS);
         output.printPlayerDraws(card);
         String text = getOutput();
-
         assertTrue(text.toLowerCase().contains("you draw") || text.toLowerCase().contains("player draws"));
         assertTrue(text.toLowerCase().contains("4") || text.toLowerCase().contains("four"));
+        assertTrue(text.toLowerCase().contains("hearts"));
     }
 
     @Test
     void testPrintDealerDraws() {
+        Card.setLocalization(new EnglishCardLocalization());
         Card card = new Card(CardRank.KING, CardSuit.DIAMONDS);
         output.printDealerDraws(card);
         String text = getOutput();
-
         assertTrue(text.toLowerCase().contains("dealer draws"));
+        assertTrue(text.toLowerCase().contains("king"));
+        assertTrue(text.toLowerCase().contains("diamonds"));
     }
 }
