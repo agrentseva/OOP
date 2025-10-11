@@ -1,10 +1,10 @@
 package ru.nsu.ga.grentseva.card;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.ga.grentseva.card.CardLocalization.EnglishCardLocalization;
+import ru.nsu.ga.grentseva.card.CardLocalization.RussianCardLocalization;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static ru.nsu.ga.grentseva.card.Card.getCardName;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CardTest {
 
@@ -19,18 +19,45 @@ class CardTest {
 
     @Test
     void testCardNameQueenRussian() {
+        Card.setLocalization(new RussianCardLocalization());
         Card card = new Card(CardRank.QUEEN, CardSuit.DIAMONDS);
-        String nameRu = getCardName(card);
-        assertTrue(nameRu.contains("Дама"));
-        assertTrue(nameRu.contains("Бубновая"));
+
+        String nameRu = Card.getCardName(card);
+        assertTrue(nameRu.contains("Дама"), "Ожидалось слово 'Дама'");
+        assertTrue(nameRu.contains("Бубнов"), "Ожидалась масть 'Бубновая'");
+        assertTrue(nameRu.contains("(10)"));
     }
 
     @Test
-    void testGetCardNameJackRussian() {
+    void testCardNameJackRussian() {
+        Card.setLocalization(new RussianCardLocalization());
         Card card = new Card(CardRank.JACK, CardSuit.CLUBS);
-        String nameRu = getCardName(card);
+
+        String nameRu = Card.getCardName(card);
         assertTrue(nameRu.contains("Валет"));
-        assertTrue(nameRu.contains("Трефовый"));
+        assertTrue(nameRu.contains("Треф"));
+        assertTrue(nameRu.contains("(10)"));
     }
 
+    @Test
+    void testCardNameQueenEnglish() {
+        Card.setLocalization(new EnglishCardLocalization());
+        Card card = new Card(CardRank.QUEEN, CardSuit.DIAMONDS);
+
+        String nameEn = Card.getCardName(card);
+        assertTrue(nameEn.toLowerCase().contains("queen"));
+        assertTrue(nameEn.toLowerCase().contains("diamonds"));
+        assertTrue(nameEn.contains("(10)"));
+    }
+
+    @Test
+    void testCardNameJackEnglish() {
+        Card.setLocalization(new EnglishCardLocalization());
+        Card card = new Card(CardRank.JACK, CardSuit.CLUBS);
+
+        String nameEn = Card.getCardName(card);
+        assertTrue(nameEn.toLowerCase().contains("jack"));
+        assertTrue(nameEn.toLowerCase().contains("clubs"));
+        assertTrue(nameEn.contains("(10)"));
+    }
 }

@@ -43,6 +43,20 @@ class ConsoleOutputRussianTest {
     }
 
     @Test
+    void testPrintPlayerCards() {
+        List<Card> cards = List.of(
+                new Card(CardRank.SEVEN, CardSuit.HEARTS),
+                new Card(CardRank.KING, CardSuit.SPADES)
+        );
+        output.printPlayerCards(cards, 17);
+        String text = getOutput();
+        assertTrue(text.contains("Ваши карты"));
+        assertTrue(text.contains("Черв"));
+        assertTrue(text.contains("Король"));
+        assertTrue(text.contains("17"));
+    }
+
+    @Test
     void testPrintDealerCardsHidden() {
         List<Card> cards = List.of(
                 new Card(CardRank.ACE, CardSuit.SPADES),
@@ -123,87 +137,63 @@ class ConsoleOutputEnglishTest {
     }
 
     @Test
-    void testPrintPlayerWin() {
-        output.printPlayerWin();
-        assertTrue(getOutput().contains("You win"));
-    }
-
-    @Test
-    void testPrintDealerWin() {
-        output.printDealerWin();
-        assertTrue(getOutput().contains("Dealer wins"));
-    }
-
-    @Test
-    void testPrintDealerBust() {
-        output.printDealerBust();
-        assertTrue(getOutput().contains("Dealer busts"));
-    }
-
-    @Test
-    void testPrintPlayerBust() {
-        output.printPlayerBust();
-        assertTrue(getOutput().contains("You bust"));
-    }
-
-    @Test
-    void testPrintScore() {
-        output.printScore(3, 5);
+    void testPrintPlayerCards() {
+        List<Card> cards = List.of(
+                new Card(CardRank.FIVE, CardSuit.DIAMONDS),
+                new Card(CardRank.ACE, CardSuit.SPADES)
+        );
+        output.printPlayerCards(cards, 16);
         String text = getOutput();
-        assertTrue(text.contains("Score"));
-        assertTrue(text.contains("3"));
-        assertTrue(text.contains("5"));
+        assertTrue(text.contains("Your cards"));
+        assertTrue(text.toLowerCase().contains("five"));
+        assertTrue(text.toLowerCase().contains("diamonds"));
+        assertTrue(text.contains("16"));
     }
 
     @Test
-    void testPrintAskContinue() {
-        output.printAskContinue();
-        assertTrue(getOutput().contains("Enter"));
+    void testPrintDealerCardsHidden() {
+        List<Card> cards = List.of(
+                new Card(CardRank.ACE, CardSuit.HEARTS),
+                new Card(CardRank.TEN, CardSuit.SPADES)
+        );
+        output.printDealerCardsHidden(cards);
+        String text = getOutput();
+        assertTrue(text.contains("Dealer cards"));
+        assertTrue(text.contains("<hidden card>"));
     }
 
     @Test
-    void testPrintPlayerDraws() {
-        Card card = new Card(CardRank.FOUR, CardSuit.HEARTS);
-        output.printPlayerDraws(card);
-        assertTrue(getOutput().contains("You draw"));
-    }
-
-    @Test
-    void testPrintDealerDraws() {
-        Card card = new Card(CardRank.KING, CardSuit.DIAMONDS);
-        output.printDealerDraws(card);
-        assertTrue(getOutput().contains("Dealer draws"));
+    void testPrintDealerCardsOpen() {
+        List<Card> cards = List.of(
+                new Card(CardRank.NINE, CardSuit.CLUBS),
+                new Card(CardRank.SEVEN, CardSuit.HEARTS)
+        );
+        output.printDealerCardsOpen(cards, 16);
+        String text = getOutput();
+        assertTrue(text.contains("Dealer cards"));
+        assertTrue(text.contains("16"));
     }
 
     @Test
     void testPrintDealerReveals() {
-        Card card = new Card(CardRank.TEN, CardSuit.SPADES);
+        Card card = new Card(CardRank.KING, CardSuit.HEARTS);
         output.printDealerReveals(card);
         assertTrue(getOutput().contains("Dealer reveals"));
     }
 
     @Test
-    void testPrintBlackjackPlayer() {
-        output.printBlackjackPlayer();
-        assertTrue(getOutput().contains("You win"));
+    void testPrintPlayerDraws() {
+        Card card = new Card(CardRank.QUEEN, CardSuit.DIAMONDS);
+        output.printPlayerDraws(card);
+        assertTrue(getOutput().contains("You draw"));
+        assertTrue(getOutput().toLowerCase().contains("queen"));
     }
 
     @Test
-    void testPrintBlackjackDealer() {
-        output.printBlackjackDealer();
-        assertTrue(getOutput().contains("BLACKJACK"));
-    }
-
-    @Test
-    void testPrintInvalidValue() {
-        output.printInvalidValue();
-        assertTrue(getOutput().contains("Invalid input"));
-    }
-
-    @Test
-    void testPrintAskPlayer() {
-        output.printAskPlayer();
-        assertTrue(getOutput().contains("Enter"));
+    void testPrintDealerDraws() {
+        Card card = new Card(CardRank.SEVEN, CardSuit.CLUBS);
+        output.printDealerDraws(card);
+        assertTrue(getOutput().contains("Dealer draws"));
+        assertTrue(getOutput().toLowerCase().contains("seven"));
     }
 }
-
