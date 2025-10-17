@@ -1,4 +1,4 @@
-package ru.nsu.ga.grentseva.graph;
+package ru.nsu.ga.grentseva.graph.ReadGraphFromFile;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReadGraph {
-    int n;
-    List<int[]> edges;
+    public int n;
+    public List<int[]> edges;
 
-    static ReadGraph readGraphFromFile(String filename) {
+    public static ReadGraph readGraphFromFile(String filename) {
         ReadGraph graph = new ReadGraph();
         graph.edges = new ArrayList<>();
         graph.n = 0;
@@ -28,9 +28,9 @@ public class ReadGraph {
                 graph.n = Math.max(graph.n, Math.max(u, v));
             }
         } catch (IOException e) {
-            System.err.println("Error reading file");
+            System.err.println("Error reading file: " + e.getMessage());
+            e.printStackTrace();
         }
-
         return graph;
     }
 }

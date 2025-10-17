@@ -1,4 +1,4 @@
-package ru.nsu.ga.grentseva.graph;
+package ru.nsu.ga.grentseva.graph.GeneralGraphClasses;
 
 import java.util.List;
 

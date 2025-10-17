@@ -1,9 +1,12 @@
-package ru.nsu.ga.grentseva.graph;
+package ru.nsu.ga.grentseva.graph.RepresentationsOfGraph;
+
+import ru.nsu.ga.grentseva.graph.GeneralGraphClasses.AbstractGraph;
+import ru.nsu.ga.grentseva.graph.ReadGraphFromFile.ReadGraph;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdjacencyMatrixGraph extends AbstractGraph{
+public class AdjacencyMatrixGraph extends AbstractGraph {
     private int n;
     private int [][] matrix;
 
@@ -52,7 +55,11 @@ public class AdjacencyMatrixGraph extends AbstractGraph{
     }
 
     public boolean hasVertex(int v) {
-        return v > 0 && v <= n;
+        return v >= 1 && v <= n;
+    }
+
+    public int getVertexCount() {
+        return n;
     }
 
     public void addEdge(int from, int to) {
@@ -67,9 +74,8 @@ public class AdjacencyMatrixGraph extends AbstractGraph{
 
         from--;
         to--;
-        if (from >= 0 && from < n && to >= 0 && to < n) {
-            matrix[from][to] = 1;
-        }
+
+        matrix[from][to] = 1;
     }
 
     public void removeEdge(int from, int to) {
@@ -84,9 +90,7 @@ public class AdjacencyMatrixGraph extends AbstractGraph{
 
         from--;
         to--;
-        if (from >= 0 && from < n && to >= 0 && to < n) {
-            matrix[from][to] = 0;
-        }
+        matrix[from][to] = 0;
     }
 
     public boolean hasEdge(int from, int to) {
@@ -107,11 +111,11 @@ public class AdjacencyMatrixGraph extends AbstractGraph{
     }
 
     public ArrayList<Integer> getNeighbors(int v) {
-        ArrayList<Integer> listOfNeighbors = new ArrayList<Integer>();
+        ArrayList<Integer> listOfNeighbors = new ArrayList<>();
         if (!hasVertex(v)) return listOfNeighbors;
 
         for (int j = 0; j < n; j++) {
-            if (matrix[v][j] == 1) {
+            if (matrix[v - 1][j] == 1) {
                 listOfNeighbors.add(j + 1);
             }
         }
