@@ -26,7 +26,7 @@ class CardTest {
                 Card card = new Card(rank, suit);
                 String name = Card.getCardName(card);
 
-                assertTrue(name.contains("(" + rank.getValue() + ")"));
+                assertTrue(name.contains("(" + rank.getCardValue() + ")"));
 
                 if (rank == CardRank.QUEEN) {
                     assertTrue(name.contains("Дама"));
@@ -52,7 +52,7 @@ class CardTest {
                 assertTrue(name.contains(rank.name().toLowerCase()));
                 assertTrue(name.contains(suit.name().toLowerCase()));
 
-                assertTrue(Card.getCardName(card).contains("(" + rank.getValue() + ")"));
+                assertTrue(Card.getCardName(card).contains("(" + rank.getCardValue() + ")"));
             }
         }
     }

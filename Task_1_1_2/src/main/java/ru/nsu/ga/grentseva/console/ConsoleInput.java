@@ -1,6 +1,5 @@
 package ru.nsu.ga.grentseva.console;
 
-import ru.nsu.ga.grentseva.console.localization.Localization;
 import java.util.Scanner;
 
 
@@ -13,8 +12,8 @@ public class ConsoleInput {
         this.output = output;
     }
 
-    public int askPlayerChoice() {
-        output.printAskPlayer();
+    public int askPlayerToStopOrTakeCard() {
+        output.askPlayerToStopOrTakeCard();
         while (true) {
             int choice = in.nextInt();
             if (choice == 0 || choice == 1) {
@@ -25,14 +24,14 @@ public class ConsoleInput {
         }
     }
 
-    public boolean askContinue() {
-        output.printAskContinue();
+    public boolean askPlayerWantsToContinueGame() {
+        output.askPlayerWantsToContinueGame();
         while (true) {
             int choice = in.nextInt();
             if (choice == 1) {
                 return true;
             } else if (choice == 0) {
-                close();
+                closeInput();
                 return false;
             } else {
                 output.printInvalidValue();
@@ -40,7 +39,7 @@ public class ConsoleInput {
         }
     }
 
-    public void close() {
+    public void closeInput() {
         in.close();
     }
 }

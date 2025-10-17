@@ -51,14 +51,14 @@ public class RussianCardLocalization implements CardLocalization {
     public String formatCard(Card card) {
         if (card.getRank() == CardRank.QUEEN) {
             return suitAdjective(card.getSuit(), true) + " " + rank(card.getRank()) +
-                    " (" + card.getRank().getValue() + ")";
+                    " (" + card.getRank().getCardValue() + ")";
         }
         if (card.getRank() == CardRank.KING || card.getRank() == CardRank.JACK) {
             return suitAdjective(card.getSuit(), false) + " " + rank(card.getRank()) +
-                    " (" + card.getRank().getValue() + ")";
+                    " (" + card.getRank().getCardValue() + ")";
         }
         return rank(card.getRank()) + " " + suit(card.getSuit()) +
-                " (" + card.getRank().getValue() + ")";
+                " (" + card.getRank().getCardValue() + ")";
     }
 
     @Override

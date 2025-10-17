@@ -21,7 +21,7 @@ public class Card {
     }
 
     public int getCardValue() {
-        return rank.getValue();
+        return rank.getCardValue();
     }
 
     public CardRank getRank() {

@@ -19,9 +19,9 @@ public interface Localization {
     String dealerBust();
     String playerBust();
     String currentScore(int playerScore, int dealerScore);
-    String askContinue();
+    String askPlayerWantsToContinueGame();
 
-    String askPlayerChoice();
+    String askPlayerToStopOrTakeCard();
     String invalidInput();
 
     String playerDraws(Card card);

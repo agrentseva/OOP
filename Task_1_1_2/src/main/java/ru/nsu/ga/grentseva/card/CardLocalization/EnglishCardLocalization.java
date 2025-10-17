@@ -46,9 +46,9 @@ public class EnglishCardLocalization implements CardLocalization {
     @Override
     public String formatCard(Card card) {
         if (card.getRank() == CardRank.QUEEN || card.getRank() == CardRank.JACK || card.getRank() == CardRank.KING || card.getRank() == CardRank.ACE){
-            return rank(card.getRank()) + " of " + suit(card.getSuit()) + " (" + card.getRank().getValue() + ")";
+            return rank(card.getRank()) + " of " + suit(card.getSuit()) + " (" + card.getRank().getCardValue() + ")";
         }
-        return rank(card.getRank()) + " " + suit(card.getSuit()) + " (" + card.getRank().getValue() + ")";
+        return rank(card.getRank()) + " " + suit(card.getSuit()) + " (" + card.getRank().getCardValue() + ")";
     }
 
     @Override

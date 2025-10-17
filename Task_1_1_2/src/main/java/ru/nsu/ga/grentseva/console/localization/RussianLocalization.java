@@ -66,7 +66,7 @@ public class RussianLocalization implements Localization {
     }
 
     @Override
-    public String askContinue() {
+    public String askPlayerWantsToContinueGame() {
         return "Введите “1”, чтобы сыграть ещё, и “0”, чтобы выйти.";
     }
 
@@ -96,7 +96,7 @@ public class RussianLocalization implements Localization {
     }
 
     @Override
-    public String askPlayerChoice() {
+    public String askPlayerToStopOrTakeCard() {
         return "Введите “1”, чтобы взять карту, и “0”, чтобы остановиться.";
     }
 

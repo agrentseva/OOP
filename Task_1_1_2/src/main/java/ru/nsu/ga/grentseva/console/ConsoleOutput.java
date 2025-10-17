@@ -2,7 +2,6 @@ package ru.nsu.ga.grentseva.console;
 
 import ru.nsu.ga.grentseva.card.Card;
 import ru.nsu.ga.grentseva.console.localization.Localization;
-import ru.nsu.ga.grentseva.console.localization.RussianLocalization;
 
 import java.util.List;
 
@@ -57,8 +56,8 @@ public class ConsoleOutput {
         System.out.println(localization.currentScore(playerScore, dealerScore));
     }
 
-    public void printAskContinue() {
-        System.out.println(localization.askContinue());
+    public void askPlayerWantsToContinueGame() {
+        System.out.println(localization.askPlayerWantsToContinueGame());
     }
 
     public void printPlayerDraws(Card card) {
@@ -85,8 +84,8 @@ public class ConsoleOutput {
         System.out.println(localization.invalidInput());
     }
 
-    public void printAskPlayer() {
-        System.out.println(localization.askPlayerChoice());
+    public void askPlayerToStopOrTakeCard() {
+        System.out.println(localization.askPlayerToStopOrTakeCard());
     }
 
 }

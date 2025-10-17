@@ -21,7 +21,7 @@ class RoundTest {
 
     private ConsoleInput input = new ConsoleInput(output) {
             @Override
-            public int askPlayerChoice() {
+            public int askPlayerToStopOrTakeCard() {
                 return 0;
             }
     };

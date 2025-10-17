@@ -66,7 +66,7 @@ public class EnglishLocalization implements Localization {
     }
 
     @Override
-    public String askContinue() {
+    public String askPlayerWantsToContinueGame() {
         return "Enter '1' to play again or '0' to exit.";
     }
 
@@ -96,7 +96,7 @@ public class EnglishLocalization implements Localization {
     }
 
     @Override
-    public String askPlayerChoice() {
+    public String askPlayerToStopOrTakeCard() {
         return "Enter '1' to take another card or '0' to stand.";
     }
 

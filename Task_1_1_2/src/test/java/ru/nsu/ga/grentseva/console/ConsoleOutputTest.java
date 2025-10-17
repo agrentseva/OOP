@@ -231,7 +231,7 @@ class ConsoleOutputEnglishTest {
                 String name = Card.getCardName(card);
                 assertTrue(name.toLowerCase().contains(rank.name().toLowerCase()), "Rank missing: " + name);
                 assertTrue(name.toLowerCase().contains(suit.name().toLowerCase()), "Suit missing: " + name);
-                assertTrue(name.contains("(" + rank.getValue() + ")"), "Value missing: " + name);
+                assertTrue(name.contains("(" + rank.getCardValue() + ")"), "Value missing: " + name);
             }
         }
     }

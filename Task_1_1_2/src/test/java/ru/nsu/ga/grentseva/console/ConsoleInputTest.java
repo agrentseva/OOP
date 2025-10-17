@@ -34,7 +34,7 @@ class ConsoleInputTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
 
         ConsoleInput consoleInput = new ConsoleInput(output);
-        int choice = consoleInput.askPlayerChoice();
+        int choice = consoleInput.askPlayerToStopOrTakeCard();
 
         assertEquals(1, choice);
     }
@@ -46,7 +46,7 @@ class ConsoleInputTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
 
         ConsoleInput consoleInput = new ConsoleInput(output);
-        boolean cont = consoleInput.askContinue();
+        boolean cont = consoleInput.askPlayerWantsToContinueGame();
 
         assertTrue(cont);
     }
@@ -58,7 +58,7 @@ class ConsoleInputTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
 
         ConsoleInput consoleInput = new ConsoleInput(output);
-        boolean cont = consoleInput.askContinue();
+        boolean cont = consoleInput.askPlayerWantsToContinueGame();
 
         assertFalse(cont);
     }
@@ -70,7 +70,7 @@ class ConsoleInputTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         ConsoleInput consoleInput = new ConsoleInput(output);
 
-        consoleInput.close();
+        consoleInput.closeInput();
         assertTrue(true);
     }
 }

@@ -22,9 +22,9 @@ public class Main {
         System.out.print("> ");
 
         Localization localization;
-        String choice = in.nextLine();
+        String playersChoiceOfLocalization = in.nextLine();
 
-        if (choice.equals("2")) {
+        if (playersChoiceOfLocalization.equals("2")) {
             EnglishCardLocalization cardLocalization = new EnglishCardLocalization();
             localization = new EnglishLocalization();
             setLocalization(cardLocalization);

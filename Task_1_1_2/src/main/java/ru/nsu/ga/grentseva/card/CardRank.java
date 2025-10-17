@@ -21,7 +21,7 @@ public enum CardRank {
         this.value = value;
     }
 
-    public int getValue() {
+    public int getCardValue () {
         return value;
     }
 }

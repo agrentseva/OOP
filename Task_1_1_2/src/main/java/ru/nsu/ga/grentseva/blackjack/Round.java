@@ -50,7 +50,6 @@ public class Round {
         }
 
         if (playerTurn(deck)) {
-
             if (dealerTurn(deck)){
                 return Result.DEALER_WIN;
             }
@@ -61,7 +60,7 @@ public class Round {
 
     private boolean playerTurn(Deck deck) {
         while (true) {
-            int choice = input.askPlayerChoice();
+            int choice = input.askPlayerToStopOrTakeCard();
             if (choice == 1) {
                 Card newCard = deck.take();
                 player.addCard(newCard);
@@ -75,7 +74,7 @@ public class Round {
             } else if (choice == 0) {
                 return true;
             } else {
-                output.printAskContinue();
+                output.askPlayerWantsToContinueGame();
             }
         }
     }

@@ -25,9 +25,9 @@ public class Game {
 
     public void start() {
         output.printWelcome();
-        boolean game = true;
+        boolean isRunningGame = true;
 
-        while (game) {
+        while (isRunningGame) {
             roundCounter++;
             Round round = new Round(roundCounter, player, dealer, input, output, random);
             Round.Result result = round.play();
@@ -42,7 +42,7 @@ public class Game {
             }
 
             output.printScore(playerScore, dealerScore);
-            game = input.askContinue();
+            isRunningGame = input.askPlayerWantsToContinueGame();
         }
     }
 }
