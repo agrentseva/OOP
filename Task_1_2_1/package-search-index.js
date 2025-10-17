@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.ga.grentseva.graph"},{"l":"ru.nsu.ga.grentseva.graph.GeneralGraphClasses"},{"l":"ru.nsu.ga.grentseva.graph.GraphSort"},{"l":"ru.nsu.ga.grentseva.graph.ReadGraphFromFile"},{"l":"ru.nsu.ga.grentseva.graph.RepresentationsOfGraph"}];updateSearchResults();
