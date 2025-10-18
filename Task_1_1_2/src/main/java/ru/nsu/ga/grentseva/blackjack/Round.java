@@ -99,18 +99,18 @@ public class Round {
     }
 
     private Result determineWinner() {
-        if (player.getHandValue() > 21) {
+        int playerValue = player.getHandValue();
+        int dealerValue = dealer.getHandValue();
+
+        if (playerValue > 21) {
             output.printPlayerBust();
             return Result.DEALER_WIN;
         }
 
-        if (dealer.getHandValue() > 21) {
+        if (dealerValue > 21) {
             output.printDealerBust();
             return Result.PLAYER_WIN;
         }
-
-        int playerValue = player.getHandValue();
-        int dealerValue = dealer.getHandValue();
 
         if (playerValue > dealerValue) {
             output.printPlayerWin();
