@@ -5,40 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c411eec-1e5f-463c-9787-ca30d629bf07" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/blackjack/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/blackjack/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/blackjack/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/blackjack/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/blackjack/Round.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/blackjack/Round.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/card/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/card/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/card/CardLocalization/CardLocalization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/card/CardLocalization/CardLocalization.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/card/CardLocalization/EnglishCardLocalization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/card/CardLocalization/EnglishCardLocalization.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/card/CardLocalization/RussianCardLocalization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/card/CardLocalization/RussianCardLocalization.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/card/CardRank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/card/CardRank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/card/CardSuit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/card/CardSuit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/card/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/card/Deck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/console/ConsoleInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/console/ConsoleInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/console/ConsoleOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/console/ConsoleOutput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/console/localization/EnglishLocalization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/console/localization/EnglishLocalization.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/console/localization/Localization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/console/localization/Localization.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/console/localization/RussianLocalization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/console/localization/RussianLocalization.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/players/Hand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/players/Hand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/players/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/players/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ga/grentseva/blackjack/RoundTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/ga/grentseva/blackjack/RoundTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ga/grentseva/card/CardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/ga/grentseva/card/CardTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ga/grentseva/card/DeckTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/ga/grentseva/card/DeckTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ga/grentseva/console/ConsoleInputTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/ga/grentseva/console/ConsoleInputTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ga/grentseva/console/ConsoleOutputTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/ga/grentseva/console/ConsoleOutputTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ga/grentseva/players/HandTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/ga/grentseva/players/HandTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ga/grentseva/players/PlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/ga/grentseva/players/PlayerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
