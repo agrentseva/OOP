@@ -128,7 +128,7 @@ public class IncidenceMatrixGraph extends AbstractGraph {
             return;
         }
 
-        int j = getEdge(from, to);
+        int j = getEdge(from - 1, to - 1);
         removeEdgeByIndex(j);
     }
 

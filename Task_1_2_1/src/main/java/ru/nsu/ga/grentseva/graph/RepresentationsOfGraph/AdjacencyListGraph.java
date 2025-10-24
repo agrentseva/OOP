@@ -73,7 +73,7 @@ public class AdjacencyListGraph extends AbstractGraph {
             System.err.println("Error: one of the vertices does not exist.");
             return;
         }
-        if (hasEdge(from, to)) {
+        if (!hasEdge(from, to)) {
             System.err.println("The edge does not exist.");
             return;
         }

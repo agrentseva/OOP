@@ -36,7 +36,6 @@ public class GraphSort {
         inStack[v] = true;
 
         for (int neighbor : graph.getNeighbors(v)) {
-
             if (!visited[neighbor]){
                 dfs(neighbor);
             } else if (inStack[neighbor]){
