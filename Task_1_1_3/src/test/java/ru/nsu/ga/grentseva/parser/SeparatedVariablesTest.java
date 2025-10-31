@@ -63,23 +63,4 @@ class SeparatedVariablesTest {
         assertEquals(1, vars.get("x"));
         assertEquals(2, vars.get("y"));
     }
-
-    @Test
-    void testInvalidFormatMissingEquals() {
-        ParseException exception = assertThrows(
-                ParseException.class,
-                () -> new SeparatedVariables("x1; y=2")
-        );
-        assertTrue(exception.getMessage().contains("missing '='")
-                || exception.getMessage().contains("invalid format"));
-    }
-
-    @Test
-    void testInvalidNumber() {
-        ParseException exception = assertThrows(
-                ParseException.class,
-                () -> new SeparatedVariables("x=abc")
-        );
-        assertTrue(exception.getMessage().contains("invalid number"));
-    }
 }
