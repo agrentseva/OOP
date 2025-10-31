@@ -1,12 +1,27 @@
 package ru.nsu.ga.grentseva.card;
 
+import ru.nsu.ga.grentseva.card.CardLocalization.CardLocalization;
+import ru.nsu.ga.grentseva.card.CardLocalization.RussianCardLocalization;
+
+import java.util.List;
+
 public class Card {
     private final CardRank rank;
     private final CardSuit suit;
 
+    public static CardLocalization cardLocalization = new RussianCardLocalization();
+
     public Card(CardRank rank, CardSuit suit) {
         this.rank = rank;
         this.suit = suit;
+    }
+
+    public static void setLocalization(CardLocalization localization) {
+        cardLocalization = localization;
+    }
+
+    public int getCardValue() {
+        return rank.getCardValue();
     }
 
     public CardRank getRank() {
@@ -17,31 +32,16 @@ public class Card {
         return suit;
     }
 
-    public String getCardName(boolean english) {
-        if (english) {
-            return rank.getNoun(true) + " of " + suit.getNoun(true) + " (" + rank.getValue() + ")";
-        } else {
-            switch (rank) {
-                case JACK:
-                case KING:
-                    return suit.getAdjMale() + " " + rank.getNoun(false) + " (" + rank.getValue() + ")";
-                case QUEEN:
-                    return suit.getAdjFemale() + " " + rank.getNoun(false) + " (" + rank.getValue() + ")";
-                default:
-                    return rank.getNoun(false) + " " + suit.getNoun(false) + " (" + rank.getValue() + ")";
-            }
-        }
+    public static String getCardName(Card card){
+        return cardLocalization.formatCard(card);
     }
 
-    public String toString() {
-        return getCardName(false);
+    public static String getCards(List<Card> cards){
+        return cardLocalization.formatCardList(cards);
     }
 
-    public String toString(boolean english) {
-        return getCardName(english);
-    }
-
-    public int getCardValue() {
-        return rank.getValue();
+    public static String getCards(List<Card> cards, boolean b){
+        return cardLocalization.formatDealerCards(cards, b);
     }
 }
+

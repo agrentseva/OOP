@@ -1,108 +1,238 @@
 package ru.nsu.ga.grentseva.console;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.nsu.ga.grentseva.card.Card;
-import ru.nsu.ga.grentseva.card.Deck;
-import ru.nsu.ga.grentseva.players.Dealer;
-import ru.nsu.ga.grentseva.players.Player;
+import ru.nsu.ga.grentseva.card.*;
+import ru.nsu.ga.grentseva.card.CardLocalization.EnglishCardLocalization;
+import ru.nsu.ga.grentseva.card.CardLocalization.RussianCardLocalization;
+import ru.nsu.ga.grentseva.console.localization.EnglishLocalization;
+import ru.nsu.ga.grentseva.console.localization.RussianLocalization;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class ConsoleOutputTest {
+class ConsoleOutputRussianTest {
+
+    private ByteArrayOutputStream outContent;
+    private ConsoleOutput output;
+
+    @BeforeEach
+    void setup() {
+        outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent, true));
+        output = new ConsoleOutput(new RussianLocalization());
+        Card.setLocalization(new RussianCardLocalization());
+    }
+
+    private String getOutput() {
+        String text = outContent.toString().trim();
+        outContent.reset();
+        return text;
+    }
 
     @Test
-    void testConsoleOutput_RussianAndEnglish() {
-        ByteArrayOutputStream testOut = new ByteArrayOutputStream();
-        PrintStream originalOut = System.out;
-        System.setOut(new PrintStream(testOut));
-
-        ConsoleOutput output = new ConsoleOutput();
-        Player player = new Player();
-        Dealer dealer = new Dealer(output);
-        Deck deck = new Deck(1);
-        deck.shuffle();
-
-        player.addCard(deck.take());
-        player.addCard(deck.take());
-        dealer.addCard(deck.take());
-        dealer.addCard(deck.take());
-        Card card = deck.take();
-
-        output.setUseEnglish(false);
+    void testPrintWelcomeRussian() {
         output.printWelcome();
-        output.printRoundStart(1);
-        output.showInitialCards(player, dealer);
-        output.printPlayerBlackjack();
-        output.printPlayerTurn();
-        output.printPlayerCard(card, player, dealer);
-        output.printPlayerBust();
-        output.printDealerTurn(dealer, player);
-        output.printDealerCard(card, dealer, player);
-        output.printDealerBust();
+        assertTrue(getOutput().contains("Добро пожаловать"));
+    }
+
+    @Test
+    void testPrintPlayerCardsRussian() {
+        List<Card> cards = List.of(
+                new Card(CardRank.ACE, CardSuit.SPADES),
+                new Card(CardRank.TEN, CardSuit.DIAMONDS)
+        );
+        output.printPlayerCards(cards, 21);
+        String text = getOutput();
+        assertTrue(text.contains("Ваши карты"));
+        assertTrue(text.contains("21"));
+        for (Card card : cards) {
+            assertTrue(text.contains(Card.getCardName(card)));
+        }
+    }
+
+    @Test
+    void testPrintRoundRussian() {
+        output.printRound(5);
+        assertTrue(getOutput().contains("Раунд"));
+    }
+
+    @Test
+    void testPrintDealerCardsHiddenRussian() {
+        List<Card> cards = List.of(
+                new Card(CardRank.FIVE, CardSuit.HEARTS),
+                new Card(CardRank.KING, CardSuit.CLUBS)
+        );
+        output.printDealerCardsHidden(cards);
+        String text = getOutput();
+        assertTrue(text.contains("Карты дилера"));
+        assertTrue(text.contains("<закрытая карта>"));
+    }
+
+    @Test
+    void testPrintDealerCardsOpenRussian() {
+        List<Card> cards = List.of(
+                new Card(CardRank.SEVEN, CardSuit.DIAMONDS),
+                new Card(CardRank.QUEEN, CardSuit.HEARTS)
+        );
+        output.printDealerCardsOpen(cards, 17);
+        String text = getOutput();
+        assertTrue(text.contains("Карты дилера"));
+        assertTrue(text.contains("17"));
+        for (Card card : cards) {
+            assertTrue(text.contains(Card.getCardName(card)));
+        }
+    }
+
+    @Test
+    void testPrintPlayerWinRussian() {
         output.printPlayerWin();
+        assertTrue(getOutput().contains("Вы выиграли"));
+    }
+
+    @Test
+    void testPrintDealerWinRussian() {
         output.printDealerWin();
+        assertTrue(getOutput().contains("Дилер выиграл"));
+    }
+
+    @Test
+    void testPrintDrawRussian() {
         output.printDraw();
-        output.printScore(1, 0);
-        output.printInvalidInput();
+        assertTrue(getOutput().contains("Ничья"));
+    }
 
-        String textRu = testOut.toString();
-        assertTrue(textRu.contains("Добро пожаловать"));
-        assertTrue(textRu.contains("Раунд 1"));
-        assertTrue(textRu.contains("Дилер раздал карты"));
-        assertTrue(textRu.contains("Блэкджек"));
-        assertTrue(textRu.contains("Ваш ход"));
-        assertTrue(textRu.contains("Вы открыли карту"));
-        assertTrue(textRu.contains("Перебор"));
-        assertTrue(textRu.contains("Ход дилера"));
-        assertTrue(textRu.contains("Дилер открывает карту"));
-        assertTrue(textRu.contains("Дилер перебрал"));
-        assertTrue(textRu.contains("Вы выиграли раунд"));
-        assertTrue(textRu.contains("Вы проиграли раунд"));
-        assertTrue(textRu.contains("Ничья"));
-        assertTrue(textRu.contains("Счёт: 1:0"));
-        assertTrue(textRu.contains("Неверный ввод"));
-        assertTrue(textRu.contains("[") && textRu.contains("]"));
-        assertTrue(textRu.contains("закрытая карта"));
+    @Test
+    void testPrintScoreRussian() {
+        output.printScore(3, 5);
+        String text = getOutput();
+        assertTrue(text.contains("Счёт"));
+        assertTrue(text.contains("3"));
+        assertTrue(text.contains("5"));
+    }
+}
 
-        testOut.reset();
-        output.setUseEnglish(true);
+class ConsoleOutputEnglishTest {
 
+    private ByteArrayOutputStream outContent;
+    private ConsoleOutput output;
+
+    @BeforeEach
+    void setup() {
+        outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent, true));
+        output = new ConsoleOutput(new EnglishLocalization());
+        Card.setLocalization(new EnglishCardLocalization());
+    }
+
+    private String getOutput() {
+        String text = outContent.toString().trim();
+        outContent.reset();
+        return text;
+    }
+
+    @Test
+    void testPrintWelcomeEnglish() {
         output.printWelcome();
-        output.printRoundStart(2);
-        output.showInitialCards(player, dealer);
-        output.printPlayerBlackjack();
-        output.printPlayerTurn();
-        output.printPlayerCard(card, player, dealer);
-        output.printPlayerBust();
-        output.printDealerTurn(dealer, player);
-        output.printDealerCard(card, dealer, player);
-        output.printDealerBust();
+        assertTrue(getOutput().toLowerCase().contains("welcome"));
+    }
+
+    @Test
+    void testPrintPlayerCardsEnglish() {
+        List<Card> cards = List.of(
+                new Card(CardRank.ACE, CardSuit.SPADES),
+                new Card(CardRank.TEN, CardSuit.DIAMONDS)
+        );
+        output.printPlayerCards(cards, 21);
+        String text = getOutput();
+        assertTrue(text.contains("Your cards"));
+        assertTrue(text.contains("21"));
+        for (Card card : cards) {
+            assertTrue(text.contains(Card.getCardName(card)));
+        }
+    }
+
+    @BeforeEach
+    void setupEnglish() {
+        outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent, true));
+        output = new ConsoleOutput(new EnglishLocalization());
+        Card.setLocalization(new EnglishCardLocalization());
+    }
+
+    @Test
+    void testPrintRoundEnglish() {
+        output.printRound(5);
+        assertTrue(getOutput().contains("Round 5"));
+    }
+
+    @Test
+    void testPrintDealerCardsHiddenEnglish() {
+        List<Card> cards = List.of(
+                new Card(CardRank.FIVE, CardSuit.HEARTS),
+                new Card(CardRank.KING, CardSuit.CLUBS)
+        );
+        output.printDealerCardsHidden(cards);
+        String text = getOutput();
+        assertTrue(text.toLowerCase().contains("dealer"));
+        assertTrue(text.contains("<hidden card>"));
+    }
+
+    @Test
+    void testPrintDealerCardsOpenEnglish() {
+        List<Card> cards = List.of(
+                new Card(CardRank.SEVEN, CardSuit.DIAMONDS),
+                new Card(CardRank.QUEEN, CardSuit.HEARTS)
+        );
+        output.printDealerCardsOpen(cards, 17);
+        String text = getOutput();
+        assertTrue(text.toLowerCase().contains("dealer"));
+        assertTrue(text.contains("17"));
+        for (Card card : cards) {
+            assertTrue(text.contains(Card.getCardName(card)));
+        }
+    }
+
+    @Test
+    void testPrintPlayerWinEnglish() {
         output.printPlayerWin();
+        assertTrue(getOutput().toLowerCase().contains("you win"));
+    }
+
+    @Test
+    void testPrintDealerWinEnglish() {
         output.printDealerWin();
+        assertTrue(getOutput().toLowerCase().contains("dealer wins"));
+    }
+
+    @Test
+    void testPrintDrawEnglish() {
         output.printDraw();
-        output.printScore(2, 1);
-        output.printInvalidInput();
+        assertTrue(getOutput().toLowerCase().contains("draw"));
+    }
 
-        String textEn = testOut.toString();
-        assertTrue(textEn.contains("Welcome"));
-        assertTrue(textEn.contains("Round 2"));
-        assertTrue(textEn.contains("Dealer deals"));
-        assertTrue(textEn.contains("Blackjack"));
-        assertTrue(textEn.contains("Your turn"));
-        assertTrue(textEn.contains("You opened"));
-        assertTrue(textEn.contains("Bust"));
-        assertTrue(textEn.contains("Dealer"));
-        assertTrue(textEn.contains("You won"));
-        assertTrue(textEn.contains("You lost"));
-        assertTrue(textEn.contains("Draw"));
-        assertTrue(textEn.contains("Score: 2:1"));
-        assertTrue(textEn.contains("Invalid input"));
-        assertTrue(textEn.contains("[") && textEn.contains("]"));
-        assertTrue(textEn.contains("hidden card"));
+    @Test
+    void testPrintScoreEnglish() {
+        output.printScore(3, 5);
+        String text = getOutput();
+        assertTrue(text.toLowerCase().contains("score"));
+        assertTrue(text.contains("3"));
+        assertTrue(text.contains("5"));
+    }
 
-        System.setOut(originalOut);
+    @Test
+    void testAllEnglishCards() {
+        for (CardSuit suit : CardSuit.values()) {
+            for (CardRank rank : CardRank.values()) {
+                Card card = new Card(rank, suit);
+                String name = Card.getCardName(card);
+                assertTrue(name.toLowerCase().contains(rank.name().toLowerCase()), "Rank missing: " + name);
+                assertTrue(name.toLowerCase().contains(suit.name().toLowerCase()), "Suit missing: " + name);
+                assertTrue(name.contains("(" + rank.getCardValue() + ")"), "Value missing: " + name);
+            }
+        }
     }
 }

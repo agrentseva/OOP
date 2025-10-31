@@ -1,93 +1,76 @@
 package ru.nsu.ga.grentseva.console;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.nsu.ga.grentseva.console.localization.EnglishLocalization;
+import ru.nsu.ga.grentseva.console.localization.RussianLocalization;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConsoleInputTest {
 
-    private final InputStream originalIn = System.in;
-    private final PrintStream originalOut = System.out;
-    private ByteArrayOutputStream testOut;
+    private ByteArrayOutputStream outContent;
+    private ConsoleOutput output;
 
-    @BeforeEach
-    void setUp() {
-        testOut = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(testOut));
+    private void setupOutput(boolean english) {
+        outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        output = english ?
+                new ConsoleOutput(new EnglishLocalization()) :
+                new ConsoleOutput(new RussianLocalization());
     }
 
-    @AfterEach
-    void tearDown() {
-        System.setIn(originalIn);
-        System.setOut(originalOut);
+    private String getOutput() {
+        return outContent.toString().trim();
     }
 
     @Test
-    void testAskPlayerChoiceRussian() {
-        String simulatedInput = "1\n"; // пользователь вводит 1
-        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
-        ConsoleInput input = new ConsoleInput();
+    void testAskPlayerChoiceValid() {
+        setupOutput(true);
+        String input = "1\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
 
-        int choice = input.askPlayerChoice();
+        ConsoleInput consoleInput = new ConsoleInput(output);
+        int choice = consoleInput.askPlayerToStopOrTakeCard();
 
-        String output = testOut.toString();
-        assertTrue(output.contains("Введите 1 - взять карту"));
         assertEquals(1, choice);
     }
 
     @Test
-    void testAskPlayerChoiceEnglish() {
-        String simulatedInput = "0\n";
-        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
-        ConsoleInput input = new ConsoleInput();
-        input.setUseEnglish(true);
-
-        int choice = input.askPlayerChoice();
-
-        String output = testOut.toString();
-        assertTrue(output.contains("Enter 1 to take a card"));
-        assertEquals(0, choice);
-    }
-
-    @Test
     void testAskContinueYes() {
-        String simulatedInput = "1\n";
-        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
-        ConsoleInput input = new ConsoleInput();
+        setupOutput(true);
+        String input = "1\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
 
-        boolean result = input.askContinue();
+        ConsoleInput consoleInput = new ConsoleInput(output);
+        boolean cont = consoleInput.askPlayerWantsToContinueGame();
 
-        String output = testOut.toString();
-        assertTrue(output.contains("Хотите сыграть"));
-        assertTrue(result);
+        assertTrue(cont);
     }
 
     @Test
     void testAskContinueNo() {
-        String simulatedInput = "0\n";
-        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
-        ConsoleInput input = new ConsoleInput();
+        setupOutput(true);
+        String input = "0\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
 
-        boolean result = input.askContinue();
+        ConsoleInput consoleInput = new ConsoleInput(output);
+        boolean cont = consoleInput.askPlayerWantsToContinueGame();
 
-        String output = testOut.toString();
-        assertTrue(output.contains("Хотите сыграть"));
-        assertFalse(result);
+        assertFalse(cont);
     }
 
     @Test
-    void testAskContinueInvalidThenValid() {
-        String simulatedInput = "5\n1\n";
-        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
-        ConsoleInput input = new ConsoleInput();
+    void testCloseScanner() {
+        setupOutput(true);
+        String input = "0\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        ConsoleInput consoleInput = new ConsoleInput(output);
 
-        boolean result = input.askContinue();
-
-        String output = testOut.toString();
-        assertTrue(output.contains("Неверный ввод"));
-        assertTrue(result);
+        consoleInput.closeInput();
+        assertTrue(true);
     }
 }

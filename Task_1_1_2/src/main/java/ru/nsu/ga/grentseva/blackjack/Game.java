@@ -2,7 +2,6 @@ package ru.nsu.ga.grentseva.blackjack;
 
 import ru.nsu.ga.grentseva.console.ConsoleInput;
 import ru.nsu.ga.grentseva.console.ConsoleOutput;
-import ru.nsu.ga.grentseva.players.Dealer;
 import ru.nsu.ga.grentseva.players.Player;
 
 import java.util.Random;
@@ -17,22 +16,18 @@ public class Game {
     private int roundCounter = 0;
 
     private final Player player = new Player();
-    private final Dealer dealer;
+    private final Player dealer = new Player();
 
     public Game(ConsoleInput input, ConsoleOutput output) {
         this.input = input;
         this.output = output;
-
-        dealer = new Dealer(output);
     }
 
     public void start() {
-        selectLanguage();
-
         output.printWelcome();
-        boolean game = true;
+        boolean isRunningGame = true;
 
-        while (game) {
+        while (isRunningGame) {
             roundCounter++;
             Round round = new Round(roundCounter, player, dealer, input, output, random);
             Round.Result result = round.play();
@@ -44,30 +39,10 @@ public class Game {
                     playerScore++;
                     dealerScore++;
                 }
-                default -> throw new IllegalStateException("Unexpected value: " + result);
             }
 
             output.printScore(playerScore, dealerScore);
-            game = input.askContinue();
-        }
-    }
-    private void selectLanguage() {
-        System.out.println("Choose language:");
-        System.out.println("1 - Russian");
-        System.out.println("2 - English");
-
-        while (true) {
-            int choice = input.nextInt(); // используем метод ввода
-            if (choice == 1) {
-                output.setUseEnglish(false);
-                break;
-            } else if (choice == 2) {
-                output.setUseEnglish(true);
-                input.setUseEnglish(true);
-                break;
-            } else {
-                output.printInvalidInput();
-            }
+            isRunningGame = input.askPlayerWantsToContinueGame();
         }
     }
 }

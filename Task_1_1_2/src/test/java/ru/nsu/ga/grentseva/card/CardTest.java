@@ -1,9 +1,10 @@
 package ru.nsu.ga.grentseva.card;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.ga.grentseva.card.CardLocalization.EnglishCardLocalization;
+import ru.nsu.ga.grentseva.card.CardLocalization.RussianCardLocalization;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CardTest {
 
@@ -17,57 +18,42 @@ class CardTest {
     }
 
     @Test
-    void testCardNameQueenRussian() {
-        Card card = new Card(CardRank.QUEEN, CardSuit.DIAMONDS);
-        String nameRu = card.getCardName(false); // русский
-        assertTrue(nameRu.contains("Дама"));
-        assertTrue(nameRu.contains("Бубновая"));
+    void testAllRussianCards() {
+        Card.setLocalization(new RussianCardLocalization());
+
+        for (CardSuit suit : CardSuit.values()) {
+            for (CardRank rank : CardRank.values()) {
+                Card card = new Card(rank, suit);
+                String name = Card.getCardName(card);
+
+                assertTrue(name.contains("(" + rank.getCardValue() + ")"));
+
+                if (rank == CardRank.QUEEN) {
+                    assertTrue(name.contains("Дама"));
+                } else if (rank == CardRank.JACK) {
+                    assertTrue(name.contains("Валет"));
+                } else if (rank == CardRank.KING) {
+                    assertTrue(name.contains("Король"));
+                }
+            }
+        }
     }
+
 
     @Test
-    void testCardNameQueenEnglish() {
-        Card card = new Card(CardRank.QUEEN, CardSuit.DIAMONDS);
-        String nameEn = card.getCardName(true); // английский
-        assertTrue(nameEn.contains("Queen"));
-        assertTrue(nameEn.contains("of Diamonds"));
-    }
+    void testAllEnglishCards() {
+        Card.setLocalization(new EnglishCardLocalization());
 
-    @Test
-    void testGetCardNameNumberCardRussian() {
-        Card card = new Card(CardRank.TEN, CardSuit.DIAMONDS);
-        String nameRu = card.getCardName(false);
-        assertTrue(nameRu.contains("Десятка"));
-        assertTrue(nameRu.contains("Бубен"));
-    }
+        for (CardSuit suit : CardSuit.values()) {
+            for (CardRank rank : CardRank.values()) {
+                Card card = new Card(rank, suit);
+                String name = Card.getCardName(card).toLowerCase();
 
-    @Test
-    void testGetCardNameNumberCardEnglish() {
-        Card card = new Card(CardRank.TEN, CardSuit.DIAMONDS);
-        String nameEn = card.getCardName(true);
-        assertTrue(nameEn.contains("Ten"));
-        assertTrue(nameEn.contains("of Diamonds"));
-    }
+                assertTrue(name.contains(rank.name().toLowerCase()));
+                assertTrue(name.contains(suit.name().toLowerCase()));
 
-    @Test
-    void testGetCardNameJackRussian() {
-        Card card = new Card(CardRank.JACK, CardSuit.CLUBS);
-        String nameRu = card.getCardName(false);
-        assertTrue(nameRu.contains("Валет"));
-        assertTrue(nameRu.contains("Трефовый"));
+                assertTrue(Card.getCardName(card).contains("(" + rank.getCardValue() + ")"));
+            }
+        }
     }
-
-    @Test
-    void testGetCardNameJackEnglish() {
-        Card card = new Card(CardRank.JACK, CardSuit.CLUBS);
-        String nameEn = card.getCardName(true);
-        assertTrue(nameEn.contains("Jack"));
-        assertTrue(nameEn.contains("of Clubs"));
-    }
-
-    @Test
-    void testToStringDefaultRussian() {
-        Card card = new Card(CardRank.SEVEN, CardSuit.CLUBS);
-        assertEquals(card.getCardName(false), card.toString());
-    }
-
 }

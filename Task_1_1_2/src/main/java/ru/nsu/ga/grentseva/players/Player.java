@@ -24,10 +24,6 @@ public class Player {
         return hand.getHandValue();
     }
 
-    public boolean isBust() {
-        return hand.isBust();
-    }
-
     public boolean hasBlackjack() {
         return hand.hasBlackjack();
     }

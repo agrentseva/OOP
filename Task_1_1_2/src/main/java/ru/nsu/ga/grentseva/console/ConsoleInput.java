@@ -2,43 +2,44 @@ package ru.nsu.ga.grentseva.console;
 
 import java.util.Scanner;
 
+
 public class ConsoleInput {
+
     private final Scanner in = new Scanner(System.in);
-    private boolean useEnglish = false; // флаг языка
+    private final ConsoleOutput output;
 
-    public void setUseEnglish(boolean useEnglish) {
-        this.useEnglish = useEnglish;
+    public ConsoleInput(ConsoleOutput output) {
+        this.output = output;
     }
 
-    private String msg(Message message) {
-        return useEnglish ? message.formatEn() : message.format();
+    public int askPlayerToStopOrTakeCard() {
+        output.askPlayerToStopOrTakeCard();
+        while (true) {
+            int choice = in.nextInt();
+            if (choice == 0 || choice == 1) {
+                return choice;
+            } else {
+                output.printInvalidValue();
+            }
+        }
     }
 
-    private String msg(Message message, Object... args) {
-        return useEnglish ? message.formatEn(args) : message.format(args);
-    }
-
-    public int askPlayerChoice() {
-        System.out.println(msg(Message.ASK_PLAYER_CHOICE));
-        return in.nextInt();
-    }
-
-    public boolean askContinue() {
-        System.out.println(msg(Message.ASK_CONTINUE));
+    public boolean askPlayerWantsToContinueGame() {
+        output.askPlayerWantsToContinueGame();
         while (true) {
             int choice = in.nextInt();
             if (choice == 1) {
                 return true;
-            }
-            if (choice == 0) {
-                in.close();
+            } else if (choice == 0) {
+                closeInput();
                 return false;
+            } else {
+                output.printInvalidValue();
             }
-            System.out.println(msg(Message.INVALID_INPUT));
         }
     }
 
-    public int nextInt() {
-        return in.nextInt();
+    public void closeInput() {
+        in.close();
     }
 }

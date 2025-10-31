@@ -32,22 +32,6 @@ class PlayerTest {
     }
 
     @Test
-    void testIsBust_WhenBelow21() {
-        player.addCard(new Card(CardRank.TEN, CardSuit.HEARTS));
-        player.addCard(new Card(CardRank.FIVE, CardSuit.SPADES));
-        assertFalse(player.isBust());
-    }
-
-    @Test
-    void testIsBust_WhenOver21() {
-        player.addCard(new Card(CardRank.TEN, CardSuit.HEARTS));
-        player.addCard(new Card(CardRank.TEN, CardSuit.SPADES));
-        player.addCard(new Card(CardRank.TWO, CardSuit.HEARTS));
-
-        assertTrue(player.isBust());
-    }
-
-    @Test
     void testClearHand() {
         player.addCard(new Card(CardRank.TEN, CardSuit.DIAMONDS));
         player.clearHand();
