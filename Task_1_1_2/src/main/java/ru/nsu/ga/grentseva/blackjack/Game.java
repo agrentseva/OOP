@@ -1,5 +1,10 @@
 package ru.nsu.ga.grentseva.blackjack;
 
+import ru.nsu.ga.grentseva.console.ConsoleInput;
+import ru.nsu.ga.grentseva.console.ConsoleOutput;
+import ru.nsu.ga.grentseva.players.Dealer;
+import ru.nsu.ga.grentseva.players.Player;
+
 import java.util.Random;
 
 public class Game {
@@ -22,6 +27,8 @@ public class Game {
     }
 
     public void start() {
+        selectLanguage();
+
         output.printWelcome();
         boolean game = true;
 
@@ -42,6 +49,25 @@ public class Game {
 
             output.printScore(playerScore, dealerScore);
             game = input.askContinue();
+        }
+    }
+    private void selectLanguage() {
+        System.out.println("Choose language:");
+        System.out.println("1 - Russian");
+        System.out.println("2 - English");
+
+        while (true) {
+            int choice = input.nextInt(); // используем метод ввода
+            if (choice == 1) {
+                output.setUseEnglish(false);
+                break;
+            } else if (choice == 2) {
+                output.setUseEnglish(true);
+                input.setUseEnglish(true);
+                break;
+            } else {
+                output.printInvalidInput();
+            }
         }
     }
 }
