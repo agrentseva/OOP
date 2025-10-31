@@ -1,5 +1,8 @@
 package ru.nsu.ga.grentseva.operations;
 
+import ru.nsu.ga.grentseva.exceptions.DivisionByZeroException;
+import ru.nsu.ga.grentseva.exceptions.MissingVariableException;
+
 import java.util.Map;
 
 public class Add extends Expression{
@@ -22,7 +25,7 @@ public class Add extends Expression{
     }
 
     @Override
-    public int eval(Map<String, Integer> vars){
+    public int eval(Map<String, Integer> vars) throws DivisionByZeroException, MissingVariableException {
         return left.eval(vars) + right.eval(vars);
     }
 

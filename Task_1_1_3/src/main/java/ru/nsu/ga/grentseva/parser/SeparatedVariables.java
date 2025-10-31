@@ -1,5 +1,7 @@
 package ru.nsu.ga.grentseva.parser;
 
+import ru.nsu.ga.grentseva.exceptions.ParseException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,9 +9,9 @@ public class SeparatedVariables {
 
     private final Map<String, Integer> vars = new HashMap<>();
 
-    public SeparatedVariables(String varsStr){
+    public SeparatedVariables(String varsStr) throws ParseException {
         if (varsStr == null || varsStr.trim().isEmpty()) {
-            throw new IllegalArgumentException("Error: The string is empty");
+            throw new ParseException("Error: The string is empty");
         }
 
         varsStr = varsStr.replaceAll(" ","");

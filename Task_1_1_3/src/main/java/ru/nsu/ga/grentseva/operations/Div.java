@@ -1,5 +1,8 @@
 package ru.nsu.ga.grentseva.operations;
 
+import ru.nsu.ga.grentseva.exceptions.DivisionByZeroException;
+import ru.nsu.ga.grentseva.exceptions.MissingVariableException;
+
 import java.util.Map;
 
 public class Div extends Expression{
@@ -22,17 +25,16 @@ public class Div extends Expression{
     }
 
     @Override
-    public int eval(Map<String, Integer> vars){
+    public int eval(Map<String, Integer> vars) throws DivisionByZeroException, MissingVariableException {
         if (right.eval(vars) != 0){
             return left.eval(vars) / right.eval(vars);
         }
         else{
-            throw new NullPointerException("Error: division by zero");
+            throw new DivisionByZeroException("Error: division by zero");
         }
 
     }
 
-    // (f / g)' = (f'*g - f*g') / (g^2)
     @Override
     public Expression derivative(String var){
         return new Div(new Sub(new Mul(left.derivative(var), right),

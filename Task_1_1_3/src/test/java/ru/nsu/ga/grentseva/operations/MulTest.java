@@ -1,6 +1,9 @@
 package ru.nsu.ga.grentseva.operations;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.ga.grentseva.exceptions.DivisionByZeroException;
+import ru.nsu.ga.grentseva.exceptions.MissingVariableException;
+import ru.nsu.ga.grentseva.exceptions.ParseException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -11,39 +14,39 @@ import static org.junit.jupiter.api.Assertions.*;
 class MulTest {
 
     @Test
-    void testEvalWithNumbers() {
+    void testEvalWithNumbers() throws DivisionByZeroException, ParseException, MissingVariableException {
         Expression expr = new Mul(new Number(3), new Number(4));
         assertEquals(12, expr.eval(Map.of()));
     }
 
     @Test
-    void testEvalWithVariable_Map() {
+    void testEvalWithVariable_Map() throws DivisionByZeroException, ParseException, MissingVariableException {
         Expression expr = new Mul(new Variable("x"), new Number(5));
         assertEquals(20, expr.eval(Map.of("x", 4)));
     }
 
     @Test
-    void testEvalWithVariable_String() {
+    void testEvalWithVariable_String() throws DivisionByZeroException, ParseException, MissingVariableException {
         Expression expr = new Mul(new Variable("x"), new Number(2));
         assertEquals(14, expr.eval("x=7"));
     }
 
     @Test
-    void testDerivative_Number() {
+    void testDerivative_Number() throws DivisionByZeroException, MissingVariableException {
         Expression expr = new Mul(new Number(3), new Number(4));
         Expression derivative = expr.derivative("x");
         assertEquals(0, derivative.eval(Map.of()));
     }
 
     @Test
-    void testDerivative_Variable() {
+    void testDerivative_Variable() throws DivisionByZeroException, ParseException, MissingVariableException {
         Expression expr = new Mul(new Variable("x"), new Number(5));
         Expression derivative = expr.derivative("x");
-        assertEquals(5, derivative.eval("x=10")); // x неважен
+        assertEquals(5, derivative.eval("x=10"));
     }
 
     @Test
-    void testDerivative_MultipleVars() {
+    void testDerivative_MultipleVars() throws DivisionByZeroException, ParseException, MissingVariableException {
         Expression expr = new Mul(new Variable("x"), new Variable("y"));
         Expression derivativeX = expr.derivative("x");
         assertEquals(7, derivativeX.eval("x=3;y=7"));

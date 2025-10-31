@@ -1,5 +1,7 @@
 package ru.nsu.ga.grentseva.operations;
 
+import ru.nsu.ga.grentseva.exceptions.MissingVariableException;
+
 import java.util.Map;
 
 public class Variable extends Expression {
@@ -16,14 +18,13 @@ public class Variable extends Expression {
     }
 
     @Override
-    public int eval(Map<String, Integer> vars){
+    public int eval(Map<String, Integer> vars) throws MissingVariableException {
         if (vars.containsKey(variable)){
             return vars.get(variable);
         }
         else{
-            throw new IllegalArgumentException("Error: No value for variable");
+            throw new MissingVariableException("Error: No value for variable");
         }
-
     }
 
     @Override

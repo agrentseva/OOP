@@ -1,26 +1,27 @@
 package ru.nsu.ga.grentseva.parser;
 
+import ru.nsu.ga.grentseva.exceptions.ParseException;
 import ru.nsu.ga.grentseva.operations.*;
 import ru.nsu.ga.grentseva.operations.Number;
 
-public class ParseExpession {
+public class ParseExpression{
     private final String input;
     private int pos;
 
-    public ParseExpession(String str) {
+    public ParseExpression(String str) {
         this.input = str.replaceAll(" ", "");
         this.pos = 0;
     }
 
-    public Expression parse() {
+    public Expression parse() throws ParseException {
         Expression expr = parseAddSub();
         if (pos != input.length()) {
-            throw new IllegalArgumentException("Error: extra characters");
+            throw new ParseException("Error: extra characters");
         }
         return expr;
     }
 
-    private Expression parseAddSub() {
+    private Expression parseAddSub() throws ParseException {
         Expression left = parseMulDiv();
 
         while (hasMore()) {
@@ -37,7 +38,7 @@ public class ParseExpession {
         return left;
     }
 
-    private Expression parseMulDiv() {
+    private Expression parseMulDiv() throws ParseException {
         Expression left = parseAtom();
 
         while (hasMore()) {
@@ -54,9 +55,9 @@ public class ParseExpession {
         return left;
     }
 
-    private Expression parseAtom() {
+    private Expression parseAtom() throws ParseException {
         if (!hasMore()) {
-            throw new IllegalArgumentException("Error: unexpected end of line");
+            throw new ParseException("Error: unexpected end of line");
         }
 
         char c = currentChar();
@@ -65,7 +66,7 @@ public class ParseExpession {
             consumeChar();
             Expression inside = parseAddSub();
             if (!hasMore() || currentChar() != ')') {
-                throw new IllegalArgumentException("Error: missing closing parenthesis");
+                throw new ParseException("Error: missing closing parenthesis");
             }
             consumeChar();
             return inside;
@@ -79,7 +80,7 @@ public class ParseExpession {
             return parseVariableName();
         }
 
-        throw new IllegalArgumentException("Error: extra symbol");
+        throw new ParseException("Error: extra symbol");
     }
 
     private Expression parseNumberLiteral() {
@@ -108,7 +109,7 @@ public class ParseExpession {
         return input.charAt(pos);
     }
 
-    private char consumeChar() {
-        return input.charAt(pos++);
+    private void consumeChar() {
+        pos++;
     }
 }

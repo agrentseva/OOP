@@ -1,6 +1,9 @@
 package ru.nsu.ga.grentseva.operations;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.ga.grentseva.exceptions.DivisionByZeroException;
+import ru.nsu.ga.grentseva.exceptions.MissingVariableException;
+import ru.nsu.ga.grentseva.exceptions.ParseException;
 
 import java.util.Map;
 
@@ -15,7 +18,7 @@ class NumberTest {
     }
 
     @Test
-    void testDerivative() {
+    void testDerivative() throws DivisionByZeroException, MissingVariableException {
         Number num = new Number(5);
         Expression d = num.derivative("x");
 

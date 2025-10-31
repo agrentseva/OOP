@@ -1,6 +1,7 @@
 package ru.nsu.ga.grentseva.parser;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.ga.grentseva.exceptions.ParseException;
 
 import java.util.Map;
 
@@ -9,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SeparatedVariablesTest {
 
     @Test
-    void testSingleVariable() {
+    void testSingleVariable() throws ParseException {
         SeparatedVariables sv = new SeparatedVariables("x=5");
         Map<String, Integer> vars = sv.getVars();
         assertEquals(1, vars.size());
@@ -17,7 +18,7 @@ class SeparatedVariablesTest {
     }
 
     @Test
-    void testMultipleVariables() {
+    void testMultipleVariables() throws ParseException {
         SeparatedVariables sv = new SeparatedVariables("x=3; y=7; z=10");
         Map<String, Integer> vars = sv.getVars();
         assertEquals(3, vars.size());
@@ -27,7 +28,7 @@ class SeparatedVariablesTest {
     }
 
     @Test
-    void testVariablesWithNoSpaces() {
+    void testVariablesWithNoSpaces() throws ParseException {
         SeparatedVariables sv = new SeparatedVariables("a=1;b=2;c=3");
         Map<String, Integer> vars = sv.getVars();
         assertEquals(3, vars.size());
@@ -38,18 +39,24 @@ class SeparatedVariablesTest {
 
     @Test
     void testEmptyString() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> new SeparatedVariables(""));
+        ParseException exception = assertThrows(
+                ParseException.class,
+                () -> new SeparatedVariables("")
+        );
         assertEquals("Error: The string is empty", exception.getMessage());
     }
 
     @Test
     void testNullString() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> new SeparatedVariables(null));
+        ParseException exception = assertThrows(
+                ParseException.class,
+                () -> new SeparatedVariables(null)
+        );
         assertEquals("Error: The string is empty", exception.getMessage());
     }
 
     @Test
-    void testExtraSemicolons() {
+    void testExtraSemicolons() throws ParseException {
         SeparatedVariables sv = new SeparatedVariables("x=1;;y=2;");
         Map<String, Integer> vars = sv.getVars();
         assertEquals(2, vars.size());
@@ -59,13 +66,20 @@ class SeparatedVariablesTest {
 
     @Test
     void testInvalidFormatMissingEquals() {
-        Exception exception = assertThrows(ArrayIndexOutOfBoundsException.class,
-                () -> new SeparatedVariables("x1; y=2"));
+        ParseException exception = assertThrows(
+                ParseException.class,
+                () -> new SeparatedVariables("x1; y=2")
+        );
+        assertTrue(exception.getMessage().contains("missing '='")
+                || exception.getMessage().contains("invalid format"));
     }
 
     @Test
     void testInvalidNumber() {
-        Exception exception = assertThrows(NumberFormatException.class,
-                () -> new SeparatedVariables("x=abc"));
+        ParseException exception = assertThrows(
+                ParseException.class,
+                () -> new SeparatedVariables("x=abc")
+        );
+        assertTrue(exception.getMessage().contains("invalid number"));
     }
 }

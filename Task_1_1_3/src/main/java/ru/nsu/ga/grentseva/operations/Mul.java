@@ -1,5 +1,8 @@
 package ru.nsu.ga.grentseva.operations;
 
+import ru.nsu.ga.grentseva.exceptions.DivisionByZeroException;
+import ru.nsu.ga.grentseva.exceptions.MissingVariableException;
+
 import java.util.Map;
 
 public class Mul extends Expression{
@@ -22,11 +25,10 @@ public class Mul extends Expression{
     }
 
     @Override
-    public int eval(Map<String, Integer> vars){
+    public int eval(Map<String, Integer> vars) throws MissingVariableException, DivisionByZeroException {
         return left.eval(vars) * right.eval(vars);
     }
 
-    // (f * g)' = f'*g + f*g'
     @Override
     public Expression derivative(String var){
         return new Add(new Mul(left.derivative(var), right),

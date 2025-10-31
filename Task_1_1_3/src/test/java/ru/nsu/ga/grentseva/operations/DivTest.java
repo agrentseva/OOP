@@ -1,6 +1,9 @@
 package ru.nsu.ga.grentseva.operations;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.ga.grentseva.exceptions.DivisionByZeroException;
+import ru.nsu.ga.grentseva.exceptions.MissingVariableException;
+import ru.nsu.ga.grentseva.exceptions.ParseException;
 
 import java.util.Map;
 
@@ -9,19 +12,19 @@ import static org.junit.jupiter.api.Assertions.*;
 class DivTest {
 
     @Test
-    void testEvalWithNumbers() {
+    void testEvalWithNumbers() throws DivisionByZeroException, MissingVariableException {
         Expression expr = new Div(new Number(10), new Number(2));
         assertEquals(5, expr.eval(Map.of()));
     }
 
     @Test
-    void testEvalWithVariable() {
+    void testEvalWithVariable() throws DivisionByZeroException, MissingVariableException {
         Expression expr = new Div(new Variable("x"), new Number(2));
         assertEquals(3, expr.eval(Map.of("x", 6)));
     }
 
     @Test
-    void testEvalWithVariable_String() {
+    void testEvalWithVariable_String() throws DivisionByZeroException, ParseException, MissingVariableException {
         Expression expr = new Div(new Variable("x"), new Number(2));
         assertEquals(4, expr.eval("x=8"));
     }
@@ -29,11 +32,15 @@ class DivTest {
     @Test
     void testDivisionByZero() {
         Expression expr = new Div(new Number(5), new Number(0));
-        assertThrows(NullPointerException.class, () -> expr.eval(Map.of()));
+        DivisionByZeroException exception = assertThrows(
+                DivisionByZeroException.class,
+                () -> expr.eval(Map.of())
+        );
+        assertEquals("Error: division by zero", exception.getMessage());
     }
 
     @Test
-    void testDerivative() {
+    void testDerivative() throws DivisionByZeroException, ParseException, MissingVariableException {
         Expression expr = new Div(new Variable("x"), new Number(2));
         Expression derivative = expr.derivative("x");
 
