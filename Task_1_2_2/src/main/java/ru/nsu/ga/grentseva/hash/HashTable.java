@@ -18,10 +18,6 @@ public class HashTable<K, V> implements Iterable<Node<K, V>> {
         modificationsCount = 0;
     }
 
-    private int hash(K key) {
-        return Math.abs(key.hashCode() % capacity);
-    }
-
     public void put(K key, V value) {
         if (size >= capacity) resize();
 
@@ -41,20 +37,6 @@ public class HashTable<K, V> implements Iterable<Node<K, V>> {
 
         size++;
         modificationsCount++;
-    }
-
-    public void update(K key, V value) {
-        int index = hash(key);
-        Node<K, V> current = table[index];
-        while (current != null) {
-            if (current.getKey().equals(key)) {
-                current.setValue(value);
-                modificationsCount++;
-                return;
-            }
-            current = current.getNext();
-        }
-        throw new NoSuchElementException("Key not found: " + key);
     }
 
     public V get(K key) {
@@ -86,29 +68,26 @@ public class HashTable<K, V> implements Iterable<Node<K, V>> {
         return false;
     }
 
+    public void update(K key, V value) {
+        int index = hash(key);
+        Node<K, V> current = table[index];
+        while (current != null) {
+            if (current.getKey().equals(key)) {
+                current.setValue(value);
+                modificationsCount++;
+                return;
+            }
+            current = current.getNext();
+        }
+        throw new NoSuchElementException("Key not found: " + key);
+    }
+
     public boolean containsKey(K key) {
         return get(key) != null;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof HashTable)) return false;
-
-        HashTable<K, V> other = (HashTable<K, V>) obj;
-        if (this.size != other.size) return false;
-
-        for (Node<K, V> chain : table) {
-            Node<K, V> node = chain;
-            while (node != null) {
-                if (!other.containsKey(node.getKey()) ||
-                        !other.get(node.getKey()).equals(node.getValue())) {
-                    return false;
-                }
-                node = node.getNext();
-            }
-        }
-        return true;
+    private int hash(K key) {
+        return Math.abs(key.hashCode() % capacity);
     }
 
     private void resize() {
@@ -124,23 +103,6 @@ public class HashTable<K, V> implements Iterable<Node<K, V>> {
                 node = node.getNext();
             }
         }
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder("{");
-        boolean first = true;
-        for (Node<K, V> chain : table) {
-            Node<K, V> node = chain;
-            while (node != null) {
-                if (!first) sb.append(", ");
-                sb.append(node);
-                first = false;
-                node = node.getNext();
-            }
-        }
-        sb.append("}");
-        return sb.toString();
     }
 
     @Override
@@ -183,5 +145,43 @@ public class HashTable<K, V> implements Iterable<Node<K, V>> {
                 return current;
             }
         };
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof HashTable)) return false;
+
+        HashTable<K, V> other = (HashTable<K, V>) obj;
+        if (this.size != other.size) return false;
+
+        for (Node<K, V> chain : table) {
+            Node<K, V> node = chain;
+            while (node != null) {
+                if (!other.containsKey(node.getKey()) ||
+                        !other.get(node.getKey()).equals(node.getValue())) {
+                    return false;
+                }
+                node = node.getNext();
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("{");
+        boolean first = true;
+        for (Node<K, V> chain : table) {
+            Node<K, V> node = chain;
+            while (node != null) {
+                if (!first) sb.append(", ");
+                sb.append(node);
+                first = false;
+                node = node.getNext();
+            }
+        }
+        sb.append("}");
+        return sb.toString();
     }
 }
