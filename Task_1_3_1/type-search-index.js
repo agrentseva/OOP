@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"ru.nsu.ga.grentseva.substring","l":"Main"},{"p":"ru.nsu.ga.grentseva.substring","l":"SubstringSearcher"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"ru.nsu.ga.grentseva.substring.auxiliaryArray","l":"IntArrayList"},{"p":"ru.nsu.ga.grentseva.substring","l":"Main"},{"p":"ru.nsu.ga.grentseva.substring.search","l":"SubstringSearcher"}];updateSearchResults();
