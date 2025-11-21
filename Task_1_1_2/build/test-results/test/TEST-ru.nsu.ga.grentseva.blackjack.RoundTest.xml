@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.nsu.ga.grentseva.blackjack.RoundTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-09-26T10:53:39.153Z" hostname="PUPAALINA" time="0.072">
+  <properties/>
+  <testcase name="testResult()" classname="ru.nsu.ga.grentseva.blackjack.RoundTest" time="0.072"/>
+  <system-out><![CDATA[
+Раунд 0
+Дилер раздал карты:
+    Ваши карты: [Девятка Червы (9), Пятерка Бубен (5)] => 14
+    Карты дилера: [Семерка Пики (7), <закрытая карта>]
+
+Ваш ход
+-------
+
+Ход дилера
+-------
+Дилер открывает закрытую карту: Трефовый валет (10)
+    Ваши карты: [Девятка Червы (9), Пятерка Бубен (5)] => 14
+    Карты дилера: [Семерка Пики (7), Трефовый валет (10)] => 17
+Вы проиграли раунд!
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

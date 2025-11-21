@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.nsu.ga.grentseva.hash.HashTableTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2025-11-07T15:56:53.337Z" hostname="PUPAALINA" time="0.124">
+  <properties/>
+  <testcase name="testIteratorConcurrentModification()" classname="ru.nsu.ga.grentseva.hash.HashTableTest" time="0.049"/>
+  <testcase name="testToString()" classname="ru.nsu.ga.grentseva.hash.HashTableTest" time="0.012"/>
+  <testcase name="testContainsKey()" classname="ru.nsu.ga.grentseva.hash.HashTableTest" time="0.004"/>
+  <testcase name="testPutAndGet()" classname="ru.nsu.ga.grentseva.hash.HashTableTest" time="0.009"/>
+  <testcase name="testEquals()" classname="ru.nsu.ga.grentseva.hash.HashTableTest" time="0.006"/>
+  <testcase name="testRemove()" classname="ru.nsu.ga.grentseva.hash.HashTableTest" time="0.003"/>
+  <testcase name="testResize()" classname="ru.nsu.ga.grentseva.hash.HashTableTest" time="0.005"/>
+  <testcase name="testUpdate()" classname="ru.nsu.ga.grentseva.hash.HashTableTest" time="0.002"/>
+  <testcase name="testIterator()" classname="ru.nsu.ga.grentseva.hash.HashTableTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

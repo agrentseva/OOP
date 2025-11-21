@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.nsu.ga.grentseva.console.ConsoleInputTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2025-10-05T11:18:38.945Z" hostname="PUPAALINA" time="0.073">
+  <properties/>
+  <testcase name="testAskContinueYes()" classname="ru.nsu.ga.grentseva.console.ConsoleInputTest" time="0.047"/>
+  <testcase name="testAskContinueNo()" classname="ru.nsu.ga.grentseva.console.ConsoleInputTest" time="0.005"/>
+  <testcase name="testAskPlayerChoiceRussian()" classname="ru.nsu.ga.grentseva.console.ConsoleInputTest" time="0.005"/>
+  <testcase name="testAskContinueInvalidThenValid()" classname="ru.nsu.ga.grentseva.console.ConsoleInputTest" time="0.004"/>
+  <testcase name="testAskPlayerChoiceEnglish()" classname="ru.nsu.ga.grentseva.console.ConsoleInputTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
