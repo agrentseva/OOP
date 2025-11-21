@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.nsu.ga.grentseva.substring.SubstringSearcherTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2025-12-13T05:50:41.425Z" hostname="PUPAALINA" time="0.159">
+  <properties/>
+  <testcase name="testBasicAscii()" classname="ru.nsu.ga.grentseva.substring.SubstringSearcherTest" time="0.081"/>
+  <testcase name="testEmoji()" classname="ru.nsu.ga.grentseva.substring.SubstringSearcherTest" time="0.021"/>
+  <testcase name="testChinese()" classname="ru.nsu.ga.grentseva.substring.SubstringSearcherTest" time="0.015"/>
+  <testcase name="testCyrillic()" classname="ru.nsu.ga.grentseva.substring.SubstringSearcherTest" time="0.016"/>
+  <testcase name="testEmptySubstring()" classname="ru.nsu.ga.grentseva.substring.SubstringSearcherTest" time="0.002"/>
+  <testcase name="testArabic()" classname="ru.nsu.ga.grentseva.substring.SubstringSearcherTest" time="0.015"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
