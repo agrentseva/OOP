@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.ga.grentseva.gradebook"},{"l":"ru.nsu.ga.grentseva.gradebook.electronicGradebook"},{"l":"ru.nsu.ga.grentseva.gradebook.localization"}];updateSearchResults();
