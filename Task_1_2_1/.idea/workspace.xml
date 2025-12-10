@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21cb62ac-91d6-49c9-b5eb-7f4f65f9cc08" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="45a876cc-2f80-4927-bf21-97422049e021" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,7 +31,6 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
-        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -41,9 +38,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 6
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 4
 }</component>
-  <component name="ProjectId" id="34ll0ygL67ZAT4GVrCE4yqSv2pN" />
+  <component name="ProjectId" id="35V7f7ok06OiyDoEZ44cUq6FiuO" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
@@ -51,33 +49,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.HashTableTest.executor": "Run",
-    "Gradle.NodeTest.executor": "Run",
-    "Gradle.Task_1_2_2 [:ru.nsu.ga.grentseva.hash.Main.main()].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "Task__1__5__1",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/emoch/OOP/Task_1_2_2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build Task_1_2_1.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Task_1_2_1 [:ru.nsu.ga.grentseva.graph.Main.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Tests in 'Task_1_2_1.test'.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.TopologicalSortDFSTest.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Task__1__2__1&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/emoch/OOP/Task_1_2_1&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;
   }
-}]]></component>
-  <component name="RecentsManager">
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="ru.nsu.ga.grentseva.hash" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Gradle.HashTableTest">
-    <configuration name="HashTableTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+}</component>
+  <component name="RunManager" selected="Gradle.TopologicalSortDFSTest">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ru.nsu.ga.grentseva.graph.Main" />
+      <module name="Task_1_2_1.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.nsu.ga.grentseva.graph.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tests in 'Task_1_2_1.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -89,8 +93,6 @@
         <option name="taskNames">
           <list>
             <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;ru.nsu.ga.grentseva.hash.HashTableTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -101,7 +103,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="NodeTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TopologicalSortDFSTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -114,7 +116,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;ru.nsu.ga.grentseva.hash.NodeTest&quot;" />
+            <option value="&quot;ru.nsu.ga.grentseva.graph.GraphSort.TopologicalSortDFSTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -127,30 +129,23 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.NodeTest" />
-        <item itemvalue="Gradle.HashTableTest" />
+        <item itemvalue="Gradle.TopologicalSortDFSTest" />
+        <item itemvalue="Gradle.Tests in 'Task_1_2_1.test'" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="21cb62ac-91d6-49c9-b5eb-7f4f65f9cc08" name="Changes" comment="" />
-      <created>1761795821684</created>
+      <changelist id="45a876cc-2f80-4927-bf21-97422049e021" name="Changes" comment="" />
+      <created>1763183485317</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1761795821684</updated>
+      <updated>1763183485317</updated>
     </task>
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Task_1_2_1$Tests_in__Task_1_2_1_test_.ic" NAME="Tests in 'Task_1_2_1.test' Coverage Results" MODIFIED="1763790687458" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
   </component>
 </project>
