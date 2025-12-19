@@ -1,7 +1,5 @@
 package ru.nsu.ga.grentseva.substring.search;
 
-import ru.nsu.ga.grentseva.substring.auxiliaryArray.IntArrayList;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,6 +10,8 @@ import java.util.List;
 
 public class SubstringSearcher {
 
+    private static final int BUFFER_SIZE = 8192;
+
     public List<Long> find(String filePath, String substring) throws IOException {
         if (substring == null || substring.isEmpty()) {
             return Collections.emptyList();
@@ -21,18 +21,22 @@ public class SubstringSearcher {
         int[] prefix = buildPrefixFunction(pattern);
 
         List<Long> positions = new ArrayList<>();
-        IntArrayList leftover = new IntArrayList();
-        long globalPos = 0;
-        int kmpState = 0;
 
         try (InputStreamReader reader = new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8)) {
-            char[] buffer = new char[8192];
+            char[] buffer = new char[BUFFER_SIZE];
             int read;
 
+            int[] leftover = new int[0];
+            long globalPos = 0;
+            int kmpState = 0;
+
             while ((read = reader.read(buffer)) != -1) {
-                int[] chunkCodepoints = new String(buffer, 0, read).codePoints().toArray();
-                int[] text = concat(leftover, chunkCodepoints);
-                leftover.clear();
+                String chunk = new String(buffer, 0, read);
+                int[] chunkCodepoints = chunk.codePoints().toArray();
+
+                int[] text = new int[leftover.length + chunkCodepoints.length];
+                System.arraycopy(leftover, 0, text, 0, leftover.length);
+                System.arraycopy(chunkCodepoints, 0, text, leftover.length, chunkCodepoints.length);
 
                 for (int i = 0; i < text.length; i++) {
                     while (kmpState > 0 && text[i] != pattern[kmpState]) {
@@ -42,16 +46,15 @@ public class SubstringSearcher {
                         kmpState++;
                     }
                     if (kmpState == pattern.length) {
-                        long start = globalPos + i - pattern.length + 1;
+                        long start = globalPos + i - leftover.length - pattern.length + 1;
                         positions.add(start);
                         kmpState = prefix[kmpState - 1];
                     }
                 }
 
-                int tailStart = Math.max(0, text.length - pattern.length + 1);
-                for (int i = tailStart; i < text.length; i++) {
-                    leftover.add(text[i]);
-                }
+                int tailLength = Math.min(pattern.length - 1, text.length);
+                leftover = new int[tailLength];
+                System.arraycopy(text, text.length - tailLength, leftover, 0, tailLength);
 
                 globalPos += chunkCodepoints.length;
             }
@@ -76,14 +79,4 @@ public class SubstringSearcher {
         }
         return pi;
     }
-
-    private int[] concat(IntArrayList leftover, int[] chunk) {
-        int[] res = new int[leftover.size() + chunk.length];
-        for (int i = 0; i < leftover.size(); i++) {
-            res[i] = leftover.get(i);
-        }
-        System.arraycopy(chunk, 0, res, leftover.size(), chunk.length);
-        return res;
-    }
-
 }
