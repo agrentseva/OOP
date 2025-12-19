@@ -1,9 +1,8 @@
-package ru.nsu.ga.grentseva.substring;
+package ru.nsu.ga.grentseva.substring.search;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.nsu.ga.grentseva.substring.search.SubstringSearcher;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -61,10 +60,6 @@ class SubstringSearcherTest {
         assertEquals(List.of(2L, 3L), result);
     }
 
-    /**
-     * Проверяет случай, когда подстрока пустая.
-     * Метод должен вернуть пустой список, независимо от содержимого файла.
-     */
     @Test
     void testEmptySubstring() throws IOException {
         Files.writeString(tempFile, "Любой текст здесь");
