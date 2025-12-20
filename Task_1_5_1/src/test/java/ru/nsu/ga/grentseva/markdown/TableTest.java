@@ -77,4 +77,19 @@ public class TableTest {
         Table table = new Table.Builder().build();
         assertEquals("", table.toMarkdown());
     }
+
+    @Test
+    void testTableWithoutAlign() {
+        Table table = new Table.Builder()
+                .addRow("A", "B")
+                .addRow("1", "2")
+                .build();
+
+        String expected =
+                "| A | B | \n" +
+                        "| :--- | :--- | \n" +
+                        "| 1 | 2 | \n";
+
+        assertEquals(expected, table.toMarkdown());
+    }
 }
