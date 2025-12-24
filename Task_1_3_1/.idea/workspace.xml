@@ -5,7 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4190f78a-dfe3-4b8f-a2da-f9813eb02737" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Task_1_2_2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Task_1_2_2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/test/ru/nsu/ga/grentseva/substring/SubstringSearcherTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/ru.nsu.ga.grentseva.substring.SubstringSearcherTest.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/packages/ru.nsu.ga.grentseva.substring.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-ru.nsu.ga.grentseva.substring.SubstringSearcherTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/substring/auxiliaryArray/IntArrayList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/substring/search/SubstringSearcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/substring/search/SubstringSearcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ga/grentseva/substring/SubstringSearcherTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/ga/grentseva/substring/search/SubstringSearcherTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ga/grentseva/substring/auxiliaryArray/IntArrayListTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,26 +71,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.SubstringAtBufferBoundaryTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SubstringSearcherAtBufferBoundaryTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SubstringSearcherLargeFileTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SubstringSearcherTest (1).executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SubstringSearcherTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SubstringSearcherTest.testEmoji.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SubstringSearcherTest.testUnicodeSearch.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Task_1_3_1 [:ru.nsu.ga.grentseva.substring.Main.main()].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Task__1__3__1&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/emoch/OOP/Task_1_3_1&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.SubstringAtBufferBoundaryTest.executor": "Run",
+    "Gradle.SubstringSearcherAtBufferBoundaryTest.executor": "Run",
+    "Gradle.SubstringSearcherLargeFileTest.executor": "Run",
+    "Gradle.SubstringSearcherTest (1).executor": "Run",
+    "Gradle.SubstringSearcherTest.executor": "Run",
+    "Gradle.SubstringSearcherTest.testEmoji.executor": "Run",
+    "Gradle.SubstringSearcherTest.testUnicodeSearch.executor": "Run",
+    "Gradle.Task_1_3_1 [:ru.nsu.ga.grentseva.substring.Main.main()].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "Task__1__3__1",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/emoch/OOP/Task_1_3_1"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\emoch\OOP\Task_1_3_1\src\main\resources" />

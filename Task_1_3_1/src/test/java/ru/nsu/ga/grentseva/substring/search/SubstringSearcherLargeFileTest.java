@@ -2,8 +2,10 @@ package ru.nsu.ga.grentseva.substring.search;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -13,21 +15,31 @@ class SubstringSearcherLargeFileTest {
 
     @Test
     void testLargeFile() throws Exception {
-        File tempFile = File.createTempFile("largeTest", ".txt");
+        File tempFile = File.createTempFile("giganticTest", ".txt");
         tempFile.deleteOnExit();
 
-        try (FileWriter writer = new FileWriter(tempFile, StandardCharsets.UTF_8)) {
-            for (int i = 0; i < 1_000_000; i++) {
-                writer.write('a');
+        String chunk = "a".repeat(1024 * 1024);
+        int iterations = 2000;
+        String pattern = "special_pattern";
+
+        try (BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(new FileOutputStream(tempFile), StandardCharsets.UTF_8))) {
+
+            for (int i = 0; i < iterations; i++) {
+                writer.write(chunk);
+                if (i == 1500) {
+                    writer.write(pattern);
+                }
             }
-            writer.write('b');
         }
+        System.out.println("Размер созданного файла: " + (tempFile.length() / (1024 * 1024)) + " МБ");
 
         SubstringSearcher searcher = new SubstringSearcher();
+        List<Long> positions = searcher.find(tempFile.getAbsolutePath(), pattern);
 
-        List<Long> positions = searcher.find(tempFile.getAbsolutePath(), "aaab");
+        long expectedPosition = 1501L * 1024 * 1024;
 
         assertEquals(1, positions.size());
-        assertEquals(999_997L, positions.get(0));
+        assertEquals(expectedPosition, positions.get(0));
     }
 }
