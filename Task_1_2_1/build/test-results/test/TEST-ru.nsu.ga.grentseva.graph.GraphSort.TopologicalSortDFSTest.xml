@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.nsu.ga.grentseva.graph.GraphSort.TopologicalSortDFSTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2025-11-28T14:39:28.689Z" hostname="PUPAALINA" time="0.078">
+  <properties/>
+  <testcase name="testEmptyGraph()" classname="ru.nsu.ga.grentseva.graph.GraphSort.TopologicalSortDFSTest" time="0.049"/>
+  <testcase name="testSimpleDAG()" classname="ru.nsu.ga.grentseva.graph.GraphSort.TopologicalSortDFSTest" time="0.011"/>
+  <testcase name="testSingleVertex()" classname="ru.nsu.ga.grentseva.graph.GraphSort.TopologicalSortDFSTest" time="0.001"/>
+  <testcase name="testCycleDetection()" classname="ru.nsu.ga.grentseva.graph.GraphSort.TopologicalSortDFSTest" time="0.008"/>
+  <testcase name="testGraphWithMultipleBranches()" classname="ru.nsu.ga.grentseva.graph.GraphSort.TopologicalSortDFSTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
