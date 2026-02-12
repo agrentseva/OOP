@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.ga.grentseva.primenumbers"},{"l":"ru.nsu.ga.grentseva.primenumbers.graph"},{"l":"ru.nsu.ga.grentseva.primenumbers.searchPrimeNum"}];updateSearchResults();
