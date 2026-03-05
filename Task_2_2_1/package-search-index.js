@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.ga.grentseva.pizzeria"},{"l":"ru.nsu.ga.grentseva.pizzeria.config"},{"l":"ru.nsu.ga.grentseva.pizzeria.ordermodel"},{"l":"ru.nsu.ga.grentseva.pizzeria.storage"},{"l":"ru.nsu.ga.grentseva.pizzeria.workers"}];updateSearchResults();
