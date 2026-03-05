@@ -74,9 +74,14 @@ loadScripts(document, 'script');</script>
 <div class="inheritance">ru.nsu.ga.grentseva.pizzeria.storage.Warehouse</div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>All Implemented Interfaces:</dt>
+<dd><code><a href="Storage.html" title="interface in ru.nsu.ga.grentseva.pizzeria.storage">Storage</a></code></dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Warehouse</span>
-<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
+implements <a href="Storage.html" title="interface in ru.nsu.ga.grentseva.pizzeria.storage">Storage</a></span></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -150,6 +155,8 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">put</span><wbr><span class="parameters">(<a href="../ordermodel/Order.html" title="class in ru.nsu.ga.grentseva.pizzeria.ordermodel">Order</a>&nbsp;order)</span>
          throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></span></div>
 <dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="Storage.html#put(ru.nsu.ga.grentseva.pizzeria.ordermodel.Order)">put</a></code>&nbsp;in interface&nbsp;<code><a href="Storage.html" title="interface in ru.nsu.ga.grentseva.pizzeria.storage">Storage</a></code></dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code></dd>
 </dl>
@@ -161,6 +168,8 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../ordermodel/Order.html" title="class in ru.nsu.ga.grentseva.pizzeria.ordermodel">Order</a>&gt;</span>&nbsp;<span class="element-name">take</span><wbr><span class="parameters">(int&nbsp;max)</span>
                  throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></span></div>
 <dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="Storage.html#take(int)">take</a></code>&nbsp;in interface&nbsp;<code><a href="Storage.html" title="interface in ru.nsu.ga.grentseva.pizzeria.storage">Storage</a></code></dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code></dd>
 </dl>
@@ -170,6 +179,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="close()">
 <h3>close</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">close</span>()</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="Storage.html#close()">close</a></code>&nbsp;in interface&nbsp;<code><a href="Storage.html" title="interface in ru.nsu.ga.grentseva.pizzeria.storage">Storage</a></code></dd>
+</dl>
 </section>
 </li>
 </ul>
