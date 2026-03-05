@@ -1,0 +1,137 @@
+@startuml
+
+package ru.nsu.ga.grentseva.pizzeria {
+
+class Main {
++ {static} void main(String[])
+}
+
+class Pizzeria {
+- OrderQueue orderQueue
+- Warehouse warehouse
+- List<Baker> bakers
+- List<Courier> couriers
+- int workingTime
++ void start()
+}
+
+}
+
+package ru.nsu.ga.grentseva.pizzeria.workers {
+
+class Baker {
+- int id
+- int cookTime
+- OrderQueue orderQueue
+- Warehouse warehouse
++ void run()
+}
+
+class Courier {
+- int id
+- int capacity
+- int deliveryTime
+- Warehouse warehouse
++ void run()
+}
+
+}
+
+package ru.nsu.ga.grentseva.pizzeria.storage {
+
+class OrderQueue {
+- Queue<Order> queue
+- boolean closed
++ void addOrder(Order)
++ Order getOrder()
++ void close()
+}
+
+class Warehouse {
+- int capacity
+- List<Order> pizzas
+- boolean closed
++ void put(Order)
++ List<Order> take(int)
++ void close()
+}
+
+}
+
+package ru.nsu.ga.grentseva.pizzeria.ordermodel {
+
+class Order {
+- int id
+- OrderStatus status
++ int getId()
++ void setStatus(OrderStatus)
+- void printStatus()
+}
+
+enum OrderStatus {
+NEW
+COOKING
+COOKED
+STORED
+DELIVERING
+DELIVERED
+}
+
+}
+
+package ru.nsu.ga.grentseva.pizzeria.config {
+
+class Config {
+- int warehouseCapacity
+- int workingTime
+- List<BakerConfig> bakers
+- List<CourierConfig> couriers
++ int getWarehouseCapacity()
++ int getWorkingTime()
++ List<BakerConfig> getBakers()
++ List<CourierConfig> getCouriers()
+}
+
+class BakerConfig {
+- int cookTime
++ int getCookTime()
+}
+
+class CourierConfig {
+- int capacity
+- int deliveryTime
++ int getCapacity()
++ int getDeliveryTime()
+}
+
+class ConfigLoader {
++ {static} Config load(String)
+}
+
+}
+
+' inheritance
+java.lang.Thread <|-- Baker
+java.lang.Thread <|-- Courier
+
+' associations
+Pizzeria --> OrderQueue
+Pizzeria --> Warehouse
+Pizzeria --> Baker
+Pizzeria --> Courier
+
+Baker --> OrderQueue
+Baker --> Warehouse
+
+Courier --> Warehouse
+
+Warehouse --> Order
+OrderQueue --> Order
+
+Order --> OrderStatus
+
+Config --> BakerConfig
+Config --> CourierConfig
+ConfigLoader --> Config
+
+@enduml

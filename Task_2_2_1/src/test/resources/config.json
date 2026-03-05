@@ -1,0 +1,10 @@
+{
+  "warehouseCapacity": 3,
+  "workingTime": 2000,
+  "bakers": [
+    { "cookTime": 200 }
+  ],
+  "couriers": [
+    { "capacity": 2, "deliveryTime": 300 }
+  ]
+}
