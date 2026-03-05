@@ -23,4 +23,9 @@ public class Order {
     private void printStatus() {
         System.out.println(id + " " + status);
     }
+
+    @Override
+    public String toString() {
+        return "order " + id;
+    }
 }

@@ -2,45 +2,50 @@ package ru.nsu.ga.grentseva.pizzeria.workers;
 
 import ru.nsu.ga.grentseva.pizzeria.ordermodel.Order;
 import ru.nsu.ga.grentseva.pizzeria.ordermodel.OrderStatus;
-import ru.nsu.ga.grentseva.pizzeria.storage.Warehouse;
+import ru.nsu.ga.grentseva.pizzeria.storage.Storage;
+import ru.nsu.ga.grentseva.pizzeria.util.Logger;
+
 import java.util.List;
 
-public class Courier extends Thread {
+public class Courier extends Worker {
 
     private final int capacity;
     private final int deliveryTime;
-    private final Warehouse warehouse;
-    private final int id;
+    private final Storage storage;
 
-    public Courier(int id, int capacity, int deliveryTime, Warehouse warehouse) {
-        this.id = id;
+    public Courier(int id, int capacity, int deliveryTime, Storage storage) {
+        super(id);
         this.capacity = capacity;
         this.deliveryTime = deliveryTime;
-        this.warehouse = warehouse;
+        this.storage = storage;
     }
 
     @Override
     public void run() {
         try {
             while (true) {
-                List<Order> orders = warehouse.take(capacity);
+                List<Order> orders = storage.take(capacity);
                 if (orders == null) {
+                    Logger.log(this + " finished");
                     break;
                 }
-                System.out.println("Courier " + id + " took " + orders.size() + " pizza" +
-                        (orders.size() > 1 ? "s" : ""));
 
+                Logger.log(this + " took " + orders.size() + " pizza" +
+                        (orders.size() > 1 ? "s" : ""));
                 for (Order order : orders) {
                     order.setStatus(OrderStatus.DELIVERING);
                 }
-                Thread.sleep(deliveryTime);
+                synchronized (this) {
+                    wait(deliveryTime);
+                }
 
                 for (Order order : orders) {
                     order.setStatus(OrderStatus.DELIVERED);
                 }
-                Thread.sleep(deliveryTime);
+                synchronized (this) {
+                    wait(deliveryTime);
+                }
             }
-
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }

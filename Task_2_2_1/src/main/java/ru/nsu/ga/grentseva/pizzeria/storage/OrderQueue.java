@@ -1,22 +1,26 @@
 package ru.nsu.ga.grentseva.pizzeria.storage;
 
 import ru.nsu.ga.grentseva.pizzeria.ordermodel.Order;
+import ru.nsu.ga.grentseva.pizzeria.util.Logger;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class OrderQueue {
+public class OrderQueue implements OrderSource {
 
     private final Queue<Order> queue = new LinkedList<>();
     private boolean closed = false;
 
+    @Override
     public synchronized void addOrder(Order order) {
         queue.add(order);
         notifyAll();
     }
 
+    @Override
     public synchronized Order getOrder() throws InterruptedException {
         while (queue.isEmpty() && !closed) {
-            System.out.println("Baker waiting: no orders");
+            Logger.log("OrderQueue waiting: no orders");
             wait();
         }
 
@@ -26,6 +30,7 @@ public class OrderQueue {
         return queue.poll();
     }
 
+    @Override
     public synchronized void close() {
         closed = true;
         notifyAll();

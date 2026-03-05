@@ -1,6 +1,7 @@
 package ru.nsu.ga.grentseva.pizzeria.config;
 
 import com.google.gson.Gson;
+
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -14,6 +15,9 @@ public class ConfigLoader {
         if (is == null) {
             throw new RuntimeException("Config file not found: " + filename);
         }
-        return new Gson().fromJson(new InputStreamReader(is), Config.class);
+
+        try (InputStreamReader reader = new InputStreamReader(is)) {
+            return new Gson().fromJson(reader, Config.class);
+        }
     }
 }

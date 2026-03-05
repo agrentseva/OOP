@@ -2,10 +2,12 @@ package ru.nsu.ga.grentseva.pizzeria.storage;
 
 import ru.nsu.ga.grentseva.pizzeria.ordermodel.Order;
 import ru.nsu.ga.grentseva.pizzeria.ordermodel.OrderStatus;
+import ru.nsu.ga.grentseva.pizzeria.util.Logger;
+
 import java.util.LinkedList;
 import java.util.List;
 
-public class Warehouse {
+public class Warehouse implements Storage {
 
     private final int capacity;
     private final List<Order> pizzas = new LinkedList<>();
@@ -15,21 +17,25 @@ public class Warehouse {
         this.capacity = capacity;
     }
 
+    @Override
     public synchronized void put(Order order) throws InterruptedException {
         while (pizzas.size() >= capacity) {
-            System.out.println("Baker waiting: warehouse full");
+            Logger.log("Warehouse waiting: full");
             wait();
         }
+
         pizzas.add(order);
         order.setStatus(OrderStatus.STORED);
         notifyAll();
     }
 
+    @Override
     public synchronized List<Order> take(int max) throws InterruptedException {
         while (pizzas.isEmpty() && !closed) {
-            System.out.println("Courier waiting: warehouse empty");
+            Logger.log("Warehouse waiting: empty");
             wait();
         }
+
         if (pizzas.isEmpty()) {
             return null;
         }
@@ -44,6 +50,7 @@ public class Warehouse {
         return result;
     }
 
+    @Override
     public synchronized void close() {
         closed = true;
         notifyAll();
