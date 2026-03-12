@@ -1,71 +1,8 @@
 @startuml
 
-class ru.nsu.ga.grentseva.pizzeria.config.BakerConfig {
-- int cookTime
-+ int getCookTime()
-}
+package config {
 
-class ru.nsu.ga.grentseva.pizzeria.storage.OrderQueue {
-- Queue<Order> queue
-- boolean closed
-+ void addOrder(Order)
-+ Order getOrder()
-+ void close()
-}
-
-interface ru.nsu.ga.grentseva.pizzeria.storage.OrderSource {
-~ void addOrder(Order)
-~ Order getOrder()
-~ void close()
-}
-
-class ru.nsu.ga.grentseva.pizzeria.ordermodel.Order {
-- int id
-- OrderStatus status
-+ int getId()
-+ void setStatus(OrderStatus)
-- void printStatus()
-+ String toString()
-}
-
-class ru.nsu.ga.grentseva.pizzeria.workers.Courier {
-- int capacity
-- int deliveryTime
-- Storage storage
-+ void run()
-}
-
-class ru.nsu.ga.grentseva.pizzeria.util.Logger {
-+ {static} void log(String)
-}
-
-class ru.nsu.ga.grentseva.pizzeria.config.CourierConfig {
-- int capacity
-- int deliveryTime
-+ int getCapacity()
-+ int getDeliveryTime()
-}
-
-class ru.nsu.ga.grentseva.pizzeria.Pizzeria {
-- OrderSource orderSource
-- Storage storage
-- List<Baker> bakers
-- List<Courier> couriers
-- int workingTime
-+ void start()
-}
-
-class ru.nsu.ga.grentseva.pizzeria.Main {
-+ {static} void main(String[])
-}
-
-interface ru.nsu.ga.grentseva.pizzeria.storage.Storage {
-~ void put(Order)
-~ List<Order> take(int)
-~ void close()
-}
-
-class ru.nsu.ga.grentseva.pizzeria.config.Config {
+class Config {
 - int warehouseCapacity
 - int workingTime
 - List<BakerConfig> bakers
@@ -76,25 +13,41 @@ class ru.nsu.ga.grentseva.pizzeria.config.Config {
 + List<CourierConfig> getCouriers()
 }
 
-class ru.nsu.ga.grentseva.pizzeria.config.ConfigLoader {
+class BakerConfig {
+- int cookTime
++ int getCookTime()
+}
+
+class CourierConfig {
+- int capacity
++ int getCapacity()
+}
+
+class ConfigLoader {
 + {static} Config load(String)
 }
 
-class ru.nsu.ga.grentseva.pizzeria.storage.Warehouse {
-- int capacity
-- List<Order> pizzas
-- boolean closed
-+ void put(Order)
-+ List<Order> take(int)
-+ void close()
 }
 
-abstract class ru.nsu.ga.grentseva.pizzeria.workers.Worker {
-# int id
+package ordermodel {
+
+class Order {
+- int id
+- OrderStatus status
++ int getId()
++ void setStatus(OrderStatus)
 + String toString()
 }
 
-enum ru.nsu.ga.grentseva.pizzeria.ordermodel.OrderStatus {
+interface OrderFactory {
++ Order create(int id)
+}
+
+class DefaultOrderFactory {
++ Order create(int id)
+}
+
+enum OrderStatus {
 NEW
 COOKING
 COOKED
@@ -103,46 +56,112 @@ DELIVERING
 DELIVERED
 }
 
-class ru.nsu.ga.grentseva.pizzeria.workers.Baker {
+}
+
+package storage {
+
+interface OrderSource {
++ void addOrder(Order)
++ Order getOrder()
++ void close()
+}
+
+class OrderQueue {
+- Queue<Order> queue
+- boolean closed
+- Logger logger
++ void addOrder(Order)
++ Order getOrder()
++ void close()
+}
+
+interface Storage {
++ void put(Order)
++ List<Order> take(int)
++ void close()
+}
+
+class Warehouse {
+- int capacity
+- LinkedList<Order> pizzas
+- boolean closed
+- Logger logger
++ void put(Order)
++ List<Order> take(int)
++ void close()
+}
+
+}
+
+package workers {
+
+abstract class Worker {
+# int id
++ String toString()
+}
+
+class Baker {
 - int cookTime
 - OrderSource orderSource
 - Storage storage
+- Logger logger
 + void run()
 }
 
-' inheritance
-java.lang.Thread <|-- ru.nsu.ga.grentseva.pizzeria.workers.Worker
-ru.nsu.ga.grentseva.pizzeria.workers.Worker <|-- ru.nsu.ga.grentseva.pizzeria.workers.Baker
-ru.nsu.ga.grentseva.pizzeria.workers.Worker <|-- ru.nsu.ga.grentseva.pizzeria.workers.Courier
+class Courier {
+- int capacity
+- int deliveryTime
+- Storage storage
+- Logger logger
++ void run()
+}
 
-' interfaces
-ru.nsu.ga.grentseva.pizzeria.storage.OrderSource <|.. ru.nsu.ga.grentseva.pizzeria.storage.OrderQueue
-ru.nsu.ga.grentseva.pizzeria.storage.Storage <|.. ru.nsu.ga.grentseva.pizzeria.storage.Warehouse
+}
 
-' associations
-ru.nsu.ga.grentseva.pizzeria.workers.Baker --> ru.nsu.ga.grentseva.pizzeria.storage.OrderSource
-ru.nsu.ga.grentseva.pizzeria.workers.Baker --> ru.nsu.ga.grentseva.pizzeria.storage.Storage
+package util {
 
-ru.nsu.ga.grentseva.pizzeria.workers.Courier --> ru.nsu.ga.grentseva.pizzeria.storage.Storage
+interface Logger {
++ void log(String)
+}
 
-ru.nsu.ga.grentseva.pizzeria.storage.Warehouse --> ru.nsu.ga.grentseva.pizzeria.ordermodel.Order
-ru.nsu.ga.grentseva.pizzeria.storage.OrderQueue --> ru.nsu.ga.grentseva.pizzeria.ordermodel.Order
+class ConsoleLogger {
++ void log(String)
+}
 
-ru.nsu.ga.grentseva.pizzeria.ordermodel.Order --> ru.nsu.ga.grentseva.pizzeria.ordermodel.OrderStatus
+}
 
-' config relations
-ru.nsu.ga.grentseva.pizzeria.config.Config --> ru.nsu.ga.grentseva.pizzeria.config.BakerConfig
-ru.nsu.ga.grentseva.pizzeria.config.Config --> ru.nsu.ga.grentseva.pizzeria.config.CourierConfig
+class Pizzeria {
+- OrderSource orderSource
+- Storage storage
+- List<Worker> workers
+- OrderFactory orderFactory
+- Logger logger
+- int workingTime
++ void start()
+}
 
-ru.nsu.ga.grentseva.pizzeria.config.ConfigLoader --> ru.nsu.ga.grentseva.pizzeria.config.Config
+class Main {
++ {static} void main(String[])
+}
 
-' main relations
-ru.nsu.ga.grentseva.pizzeria.Main --> ru.nsu.ga.grentseva.pizzeria.config.ConfigLoader
-ru.nsu.ga.grentseva.pizzeria.Main --> ru.nsu.ga.grentseva.pizzeria.Pizzeria
+OrderFactory <|.. DefaultOrderFactory
+Logger <|.. ConsoleLogger
+OrderSource <|.. OrderQueue
+Storage <|.. Warehouse
 
-ru.nsu.ga.grentseva.pizzeria.Pizzeria --> ru.nsu.ga.grentseva.pizzeria.storage.OrderSource
-ru.nsu.ga.grentseva.pizzeria.Pizzeria --> ru.nsu.ga.grentseva.pizzeria.storage.Storage
-ru.nsu.ga.grentseva.pizzeria.Pizzeria o-- ru.nsu.ga.grentseva.pizzeria.workers.Baker
-ru.nsu.ga.grentseva.pizzeria.Pizzeria o-- ru.nsu.ga.grentseva.pizzeria.workers.Courier
+Worker <|-- Baker
+Worker <|-- Courier
+
+Pizzeria --> Worker
+Pizzeria --> Storage
+Pizzeria --> OrderSource
+Pizzeria --> OrderFactory
+Pizzeria --> Logger
+
+OrderQueue --> Order
+Warehouse --> Order
+
+Main --> Pizzeria
+Main --> ConfigLoader
 
 @enduml

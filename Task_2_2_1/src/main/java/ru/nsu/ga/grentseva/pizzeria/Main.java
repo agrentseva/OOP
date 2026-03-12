@@ -15,7 +15,6 @@ import ru.nsu.ga.grentseva.pizzeria.util.Logger;
 import ru.nsu.ga.grentseva.pizzeria.workers.Baker;
 import ru.nsu.ga.grentseva.pizzeria.workers.Courier;
 import ru.nsu.ga.grentseva.pizzeria.workers.Worker;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

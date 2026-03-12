@@ -4,7 +4,6 @@ import ru.nsu.ga.grentseva.pizzeria.ordermodel.Order;
 import ru.nsu.ga.grentseva.pizzeria.ordermodel.OrderStatus;
 import ru.nsu.ga.grentseva.pizzeria.storage.Storage;
 import ru.nsu.ga.grentseva.pizzeria.util.Logger;
-
 import java.util.List;
 
 public class Courier extends Worker {

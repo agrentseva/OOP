@@ -1,7 +1,6 @@
 package ru.nsu.ga.grentseva.pizzeria.storage;
 
 import ru.nsu.ga.grentseva.pizzeria.ordermodel.Order;
-
 import java.util.List;
 
 public interface Storage {
