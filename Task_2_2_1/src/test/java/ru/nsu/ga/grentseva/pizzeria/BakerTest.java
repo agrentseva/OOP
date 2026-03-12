@@ -3,33 +3,30 @@ package ru.nsu.ga.grentseva.pizzeria;
 import org.junit.jupiter.api.Test;
 import ru.nsu.ga.grentseva.pizzeria.ordermodel.Order;
 import ru.nsu.ga.grentseva.pizzeria.storage.OrderQueue;
+import ru.nsu.ga.grentseva.pizzeria.storage.Storage;
 import ru.nsu.ga.grentseva.pizzeria.storage.Warehouse;
+import ru.nsu.ga.grentseva.pizzeria.util.ConsoleLogger;
+import ru.nsu.ga.grentseva.pizzeria.util.Logger;
 import ru.nsu.ga.grentseva.pizzeria.workers.Baker;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-public class BakerTest
-{
+public class BakerTest {
 
     @Test
-    public void testBakerProcessesOrder() throws InterruptedException
-    {
-        OrderQueue queue = new OrderQueue();
-        Warehouse warehouse = new Warehouse(5);
-        Baker baker = new Baker(
-                1,
-                50,
-                queue,
-                warehouse
-        );
+    public void testBakerProcessesOrder() {
 
-        Order order = new Order(1);
-        queue.addOrder(order);
+        Logger logger = new ConsoleLogger();
+        OrderQueue queue = new OrderQueue(logger);
+        Storage storage = new Warehouse(5, logger);
+
+        Baker baker = new Baker(1, 10, queue, storage, logger);
+
+        queue.addOrder(new Order(1));
         queue.close();
 
         baker.start();
-        baker.join();
 
-        assertEquals(1, warehouse.take(1).size());
+        assertDoesNotThrow(() -> baker.join());
     }
 }

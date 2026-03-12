@@ -11,12 +11,20 @@ public class Baker extends Worker {
     private final int cookTime;
     private final OrderSource orderSource;
     private final Storage storage;
+    private final Logger logger;
 
-    public Baker(int id, int cookTime, OrderSource orderSource, Storage storage) {
+    public Baker(
+            int id,
+            int cookTime,
+            OrderSource orderSource,
+            Storage storage,
+            Logger logger
+    ) {
         super(id);
         this.cookTime = cookTime;
         this.orderSource = orderSource;
         this.storage = storage;
+        this.logger = logger;
     }
 
     @Override
@@ -25,15 +33,13 @@ public class Baker extends Worker {
             while (true) {
                 Order order = orderSource.getOrder();
                 if (order == null) {
-                    Logger.log(this + " finished");
+                    logger.log(this + " finished");
                     break;
                 }
 
-                Logger.log(this + " cooking " + order);
+                logger.log(this + " cooking " + order);
                 order.setStatus(OrderStatus.COOKING);
-                synchronized (this) {
-                    wait(cookTime);
-                }
+                Thread.sleep(cookTime);
 
                 order.setStatus(OrderStatus.COOKED);
                 storage.put(order);

@@ -10,29 +10,35 @@ import java.util.List;
 public class Warehouse implements Storage {
 
     private final int capacity;
-    private final List<Order> pizzas = new LinkedList<>();
+    private final LinkedList<Order> pizzas = new LinkedList<>();
+    private final Logger logger;
+
     private boolean closed = false;
 
-    public Warehouse(int capacity) {
+    public Warehouse(int capacity, Logger logger) {
         this.capacity = capacity;
+        this.logger = logger;
     }
 
     @Override
     public synchronized void put(Order order) throws InterruptedException {
+
         while (pizzas.size() >= capacity) {
-            Logger.log("Warehouse waiting: full");
+            logger.log("Warehouse waiting: full");
             wait();
         }
 
         pizzas.add(order);
         order.setStatus(OrderStatus.STORED);
+
         notifyAll();
     }
 
     @Override
     public synchronized List<Order> take(int max) throws InterruptedException {
+
         while (pizzas.isEmpty() && !closed) {
-            Logger.log("Warehouse waiting: empty");
+            logger.log("Warehouse waiting: empty");
             wait();
         }
 
@@ -43,10 +49,11 @@ public class Warehouse implements Storage {
         List<Order> result = new LinkedList<>();
         int count = Math.min(max, pizzas.size());
         for (int i = 0; i < count; i++) {
-            result.add(pizzas.remove(0));
+            result.add(pizzas.removeFirst());
         }
 
         notifyAll();
+
         return result;
     }
 

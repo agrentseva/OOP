@@ -12,12 +12,20 @@ public class Courier extends Worker {
     private final int capacity;
     private final int deliveryTime;
     private final Storage storage;
+    private final Logger logger;
 
-    public Courier(int id, int capacity, int deliveryTime, Storage storage) {
+    public Courier(
+            int id,
+            int capacity,
+            int deliveryTime,
+            Storage storage,
+            Logger logger
+    ) {
         super(id);
         this.capacity = capacity;
         this.deliveryTime = deliveryTime;
         this.storage = storage;
+        this.logger = logger;
     }
 
     @Override
@@ -26,25 +34,21 @@ public class Courier extends Worker {
             while (true) {
                 List<Order> orders = storage.take(capacity);
                 if (orders == null) {
-                    Logger.log(this + " finished");
+                    logger.log(this + " finished");
                     break;
                 }
 
-                Logger.log(this + " took " + orders.size() + " pizza" +
+                logger.log(this + " took " + orders.size() + " pizza" +
                         (orders.size() > 1 ? "s" : ""));
                 for (Order order : orders) {
                     order.setStatus(OrderStatus.DELIVERING);
                 }
-                synchronized (this) {
-                    wait(deliveryTime);
-                }
+                Thread.sleep(deliveryTime);
 
                 for (Order order : orders) {
                     order.setStatus(OrderStatus.DELIVERED);
                 }
-                synchronized (this) {
-                    wait(deliveryTime);
-                }
+                Thread.sleep(deliveryTime);
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();

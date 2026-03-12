@@ -11,10 +11,6 @@ public class Order {
         printStatus();
     }
 
-    public int getId() {
-        return id;
-    }
-
     public synchronized void setStatus(OrderStatus status) {
         this.status = status;
         printStatus();

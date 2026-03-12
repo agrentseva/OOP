@@ -9,7 +9,13 @@ import java.util.Queue;
 public class OrderQueue implements OrderSource {
 
     private final Queue<Order> queue = new LinkedList<>();
+    private final Logger logger;
+
     private boolean closed = false;
+
+    public OrderQueue(Logger logger) {
+        this.logger = logger;
+    }
 
     @Override
     public synchronized void addOrder(Order order) {
@@ -19,14 +25,15 @@ public class OrderQueue implements OrderSource {
 
     @Override
     public synchronized Order getOrder() throws InterruptedException {
+
         while (queue.isEmpty() && !closed) {
-            Logger.log("OrderQueue waiting: no orders");
+            logger.log("OrderQueue waiting: no orders");
             wait();
         }
-
         if (queue.isEmpty()) {
             return null;
         }
+
         return queue.poll();
     }
 

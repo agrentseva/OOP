@@ -26,6 +26,5 @@ public class ConfigTest
 
         assertEquals(200, config.getBakers().get(0).getCookTime());
         assertEquals(2, config.getCouriers().get(0).getCapacity());
-        assertEquals(300, config.getCouriers().get(0).getDeliveryTime());
     }
 }

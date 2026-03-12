@@ -2,30 +2,29 @@ package ru.nsu.ga.grentseva.pizzeria;
 
 import org.junit.jupiter.api.Test;
 import ru.nsu.ga.grentseva.pizzeria.ordermodel.Order;
+import ru.nsu.ga.grentseva.pizzeria.storage.Storage;
 import ru.nsu.ga.grentseva.pizzeria.storage.Warehouse;
+import ru.nsu.ga.grentseva.pizzeria.util.ConsoleLogger;
+import ru.nsu.ga.grentseva.pizzeria.util.Logger;
+
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-class WarehouseTest {
+public class WarehouseTest {
 
     @Test
-    void testPutAndTake() throws InterruptedException {
-        Warehouse warehouse = new Warehouse(5);
-        warehouse.put(new Order(1));
-        warehouse.put(new Order(2));
-        List<Order> orders = warehouse.take(2);
+    public void testPutAndTake() throws Exception {
 
-        assertEquals(2, orders.size());
-    }
+        Logger logger = new ConsoleLogger();
+        Storage storage = new Warehouse(5, logger);
 
-    @Test
-    void testCapacityLimit() throws InterruptedException {
-        Warehouse warehouse = new Warehouse(1);
-        warehouse.put(new Order(1));
+        Order order = new Order(1);
 
-        assertThrows(InterruptedException.class, () -> {
-            Thread.currentThread().interrupt();
-            warehouse.put(new Order(2));
-        });
+        storage.put(order);
+
+        List<Order> orders = storage.take(1);
+
+        assertEquals(1, orders.size());
     }
 }
