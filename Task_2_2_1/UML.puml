@@ -1,0 +1,167 @@
+@startuml
+
+package config {
+
+class Config {
+- int warehouseCapacity
+- int workingTime
+- List<BakerConfig> bakers
+- List<CourierConfig> couriers
++ int getWarehouseCapacity()
++ int getWorkingTime()
++ List<BakerConfig> getBakers()
++ List<CourierConfig> getCouriers()
+}
+
+class BakerConfig {
+- int cookTime
++ int getCookTime()
+}
+
+class CourierConfig {
+- int capacity
++ int getCapacity()
+}
+
+class ConfigLoader {
++ {static} Config load(String)
+}
+
+}
+
+package ordermodel {
+
+class Order {
+- int id
+- OrderStatus status
++ int getId()
++ void setStatus(OrderStatus)
++ String toString()
+}
+
+interface OrderFactory {
++ Order create(int id)
+}
+
+class DefaultOrderFactory {
++ Order create(int id)
+}
+
+enum OrderStatus {
+NEW
+COOKING
+COOKED
+STORED
+DELIVERING
+DELIVERED
+}
+
+}
+
+package storage {
+
+interface OrderSource {
++ void addOrder(Order)
++ Order getOrder()
++ void close()
+}
+
+class OrderQueue {
+- Queue<Order> queue
+- boolean closed
+- Logger logger
++ void addOrder(Order)
++ Order getOrder()
++ void close()
+}
+
+interface Storage {
++ void put(Order)
++ List<Order> take(int)
++ void close()
+}
+
+class Warehouse {
+- int capacity
+- LinkedList<Order> pizzas
+- boolean closed
+- Logger logger
++ void put(Order)
++ List<Order> take(int)
++ void close()
+}
+
+}
+
+package workers {
+
+abstract class Worker {
+# int id
++ String toString()
+}
+
+class Baker {
+- int cookTime
+- OrderSource orderSource
+- Storage storage
+- Logger logger
++ void run()
+}
+
+class Courier {
+- int capacity
+- int deliveryTime
+- Storage storage
+- Logger logger
++ void run()
+}
+
+}
+
+package util {
+
+interface Logger {
++ void log(String)
+}
+
+class ConsoleLogger {
++ void log(String)
+}
+
+}
+
+class Pizzeria {
+- OrderSource orderSource
+- Storage storage
+- List<Worker> workers
+- OrderFactory orderFactory
+- Logger logger
+- int workingTime
++ void start()
+}
+
+class Main {
++ {static} void main(String[])
+}
+
+OrderFactory <|.. DefaultOrderFactory
+Logger <|.. ConsoleLogger
+OrderSource <|.. OrderQueue
+Storage <|.. Warehouse
+
+Worker <|-- Baker
+Worker <|-- Courier
+
+Pizzeria --> Worker
+Pizzeria --> Storage
+Pizzeria --> OrderSource
+Pizzeria --> OrderFactory
+Pizzeria --> Logger
+
+OrderQueue --> Order
+Warehouse --> Order
+
+Main --> Pizzeria
+Main --> ConfigLoader
+
+@enduml
