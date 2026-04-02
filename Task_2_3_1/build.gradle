@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'jacoco'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.13'
 }
@@ -29,10 +30,10 @@ application {
 
 test {
     useJUnitPlatform()
-    
-    // Добавляем флаги для обхода ограничений модулей в JavaFX 17 при тестировании
-    jvmArgs += [
-        '--add-exports=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED',
-        '--add-exports=javafx.graphics/com.sun.glass.ui=ALL-UNNAMED'
-    ]
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
 }
