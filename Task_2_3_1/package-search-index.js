@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.ga.grentseva.snake"},{"l":"ru.nsu.ga.grentseva.snake.config"},{"l":"ru.nsu.ga.grentseva.snake.controller"},{"l":"ru.nsu.ga.grentseva.snake.model"},{"l":"ru.nsu.ga.grentseva.snake.render"},{"l":"ru.nsu.ga.grentseva.snake.service"}];updateSearchResults();
