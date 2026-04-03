@@ -20,4 +20,18 @@ public class DirectionTest {
         assertFalse(Direction.DOWN.isOpposite(Direction.RIGHT));
         assertFalse(Direction.DOWN.isOpposite(Direction.DOWN));
     }
+
+    @Test
+    public void testNoReverseDirection() {
+        Snake snake = new Snake(new Cell(5, 5));
+
+        snake.setDirection(Direction.RIGHT);
+        snake.consumeDirection();
+
+        snake.setDirection(Direction.LEFT);
+
+        Direction result = snake.consumeDirection();
+
+        assertEquals(Direction.RIGHT, result);
+    }
 }
