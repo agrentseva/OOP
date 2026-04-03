@@ -172,7 +172,6 @@ public class GameModel {
 
     private void updateFood(List<RenderCommand> commands, Food eaten) {
         foods.remove(eaten);
-        commands.add(new RenderCommand(eaten.position(), RenderType.EMPTY, null));
 
         spawnFood();
 
