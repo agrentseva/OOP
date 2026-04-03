@@ -102,4 +102,85 @@ public class GameModelTest {
 
         assertEquals(GameState.GAME_OVER, model.getState());
     }
+
+    @Test
+    public void testBonusFoodGivesExtraScoreAndGrowth() {
+        GameModel model = new GameModel(config, false);
+        model.getField().getObstacles().clear();
+
+        Snake snake = model.getSnake();
+        Cell next = snake.head().move(Direction.RIGHT);
+
+        model.getFoods().clear();
+        model.getFoods().add(new Food(next, FoodType.BONUS));
+
+        model.update();
+
+        assertEquals(2, model.getScore());
+        assertTrue(snake.size() >= 2);
+    }
+
+    @Test
+    public void testPoisonFoodDecreasesScore() {
+        GameModel model = new GameModel(config, false);
+        model.getField().getObstacles().clear();
+
+        Snake snake = model.getSnake();
+        Cell next = snake.head().move(Direction.RIGHT);
+
+        model.getFoods().clear();
+        model.getFoods().add(new Food(next, FoodType.POISON));
+
+        model.update();
+
+        assertEquals(-1, model.getScore());
+    }
+
+    @Test
+    public void testPoisonFoodGameOverWhenNegativeScore() {
+        GameModel model = new GameModel(config, false);
+        model.getField().getObstacles().clear();
+
+        Snake snake = model.getSnake();
+        Cell next = snake.head().move(Direction.RIGHT);
+
+        model.getFoods().clear();
+        model.getFoods().add(new Food(next, FoodType.POISON));
+
+        model.update();
+
+        assertEquals(GameState.GAME_OVER, model.getState());
+    }
+
+    @Test
+    public void testFoodRespawnsAfterEating() {
+        GameModel model = new GameModel(config, false);
+        model.getField().getObstacles().clear();
+
+        Snake snake = model.getSnake();
+        Cell next = snake.head().move(Direction.RIGHT);
+
+        model.getFoods().clear();
+        model.getFoods().add(new Food(next, FoodType.NORMAL));
+
+        model.update();
+
+        assertEquals(config.foodCount, model.getFoods().size());
+    }
+
+    @Test
+    public void testSnakeGrowsOnNormalFood() {
+        GameModel model = new GameModel(config, false);
+        model.getField().getObstacles().clear();
+
+        Snake snake = model.getSnake();
+        Cell next = snake.head().move(Direction.RIGHT);
+
+        model.getFoods().clear();
+        model.getFoods().add(new Food(next, FoodType.NORMAL));
+
+        model.update();
+
+        assertEquals(2, snake.size());
+    }
 }
