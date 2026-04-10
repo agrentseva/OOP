@@ -108,8 +108,11 @@ loadScripts(document, 'script');</script>
 <div class="col-second odd-row-color"><code><a href="#ticksPerSecond" class="member-name-link">ticksPerSecond</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>final int</code></div>
-<div class="col-second even-row-color"><code><a href="#width" class="member-name-link">width</a></code></div>
+<div class="col-second even-row-color"><code><a href="#wallCount" class="member-name-link">wallCount</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>final int</code></div>
+<div class="col-second odd-row-color"><code><a href="#width" class="member-name-link">width</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -121,13 +124,14 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int,int,int,double,double,double)" class="member-name-link">GameConfig</a><wbr>(int&nbsp;width,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int,int,int,double,double,double,int)" class="member-name-link">GameConfig</a><wbr>(int&nbsp;width,
  int&nbsp;height,
  int&nbsp;targetLength,
  int&nbsp;foodCount,
  double&nbsp;speed,
  double&nbsp;foodSpawnChance,
- double&nbsp;ticksPerSecond)</code></div>
+ double&nbsp;ticksPerSecond,
+ int&nbsp;wallCount)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
@@ -211,6 +215,12 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">ticksPerSecond</span></div>
 </section>
 </li>
+<li>
+<section class="detail" id="wallCount">
+<h3>wallCount</h3>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">wallCount</span></div>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -220,7 +230,7 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(int,int,int,int,double,double,double)">
+<section class="detail" id="&lt;init&gt;(int,int,int,int,double,double,double,int)">
 <h3>GameConfig</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">GameConfig</span><wbr><span class="parameters">(int&nbsp;width,
  int&nbsp;height,
@@ -228,7 +238,8 @@ loadScripts(document, 'script');</script>
  int&nbsp;foodCount,
  double&nbsp;speed,
  double&nbsp;foodSpawnChance,
- double&nbsp;ticksPerSecond)</span></div>
+ double&nbsp;ticksPerSecond,
+ int&nbsp;wallCount)</span></div>
 </section>
 </li>
 </ul>
