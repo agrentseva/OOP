@@ -12,7 +12,7 @@ public class GameModelTest {
 
     @BeforeEach
     public void setup() {
-        config = new GameConfig(10, 10, 20, 1, 1.0, 1.0, 1.0);
+        config = new GameConfig(10, 10, 20, 1, 1.0, 1.0, 1.0, 10);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class GameModelTest {
 
     @Test
     public void testEatFoodAndWin() {
-        GameConfig winConfig = new GameConfig(10, 10, 2, 1, 1.0, 1.0, 1.0);
+        GameConfig winConfig = new GameConfig(10, 10, 2, 1, 1.0, 1.0, 1.0, 10);
         GameModel model = new GameModel(winConfig, false);
         model.getField().getObstacles().clear();
         Snake snake = model.getSnake();

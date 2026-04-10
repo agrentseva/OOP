@@ -53,8 +53,6 @@ public class GameController {
     public void initialize() {
         legendLabel.setText(LocalizationManager.get("food.legend"));
 
-        setupCanvas();
-
         canvas.setFocusTraversable(true);
         canvas.requestFocus();
     }
@@ -81,6 +79,8 @@ public class GameController {
 
     private void startGame() {
         gameEnded = false;
+
+        setupCanvas();
 
         model = new GameModel(getConfigForLevel(), isEndless);
         updateUI();

@@ -44,8 +44,8 @@ public class Baker extends Worker {
                 order.setStatus(OrderStatus.COOKED);
                 storage.put(order);
             }
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+        } catch (InterruptedException ignore) {
+
         }
     }
 }

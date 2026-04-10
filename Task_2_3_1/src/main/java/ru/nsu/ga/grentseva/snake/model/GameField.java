@@ -27,22 +27,19 @@ public class GameField {
 
 
     public void generateWalls(int count, Cell start) {
+
         List<Cell> safeZone = getSafeZone(start);
 
-        int attempts = 0;
-        int maxAttempts = count * 10;
+        List<Cell> candidates = new ArrayList<>(freeCells);
 
-        while (obstacles.size() < count && attempts < maxAttempts) {
+        candidates.removeAll(safeZone);
 
-            if (freeCells.isEmpty()) break;
+        Collections.shuffle(candidates);
 
-            Cell c = freeCells.get(random.nextInt(freeCells.size()));
+        int wallsToPlace = Math.min(count, candidates.size());
 
-            if (safeZone.contains(c)) {
-                attempts++;
-                continue;
-            }
-
+        for (int i = 0; i < wallsToPlace; i++) {
+            Cell c = candidates.get(i);
             obstacles.add(c);
             occupy(c);
         }

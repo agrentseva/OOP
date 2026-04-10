@@ -9,37 +9,41 @@ public final class GameConfig {
     public final double speed;
     public final double foodSpawnChance;
     public final double ticksPerSecond;
+    public final int wallCount;
 
     public static GameConfig level1() {
         return new GameConfig(
-                35, 25,
+                20, 30,
                 5,
                 3,
                 1.0,
                 1.0,
-                5.0
+                5.0,
+                2
         );
     }
 
     public static GameConfig level2() {
         return new GameConfig(
-                35, 25,
+                20, 30,
                 7,
                 5,
                 1.5,
                 0.8,
-                7.0
+                7.0,
+                10
         );
     }
 
     public static GameConfig endless() {
         return new GameConfig(
-                35, 25,
+                100, 100,
                 Integer.MAX_VALUE,
                 5,
                 1.0,
                 1.0,
-                5.0
+                5.0,
+                50
         );
     }
 
@@ -49,7 +53,8 @@ public final class GameConfig {
                       int foodCount,
                       double speed,
                       double foodSpawnChance,
-                      double ticksPerSecond) {
+                      double ticksPerSecond,
+                      int wallCount) {
 
         this.width = width;
         this.height = height;
@@ -58,5 +63,6 @@ public final class GameConfig {
         this.speed = speed;
         this.foodSpawnChance = foodSpawnChance;
         this.ticksPerSecond = ticksPerSecond;
+        this.wallCount = wallCount;
     }
 }

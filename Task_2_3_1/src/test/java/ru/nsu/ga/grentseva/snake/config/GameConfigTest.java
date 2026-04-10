@@ -46,7 +46,7 @@ public class GameConfigTest {
 
     @Test
     public void testCustomConfigCreation() {
-        GameConfig config = new GameConfig(10, 20, 30, 4, 2.5, 0.5, 10.0);
+        GameConfig config = new GameConfig(10, 20, 30, 4, 2.5, 0.5, 10.0, 5);
         assertEquals(10, config.width);
         assertEquals(20, config.height);
         assertEquals(30, config.targetLength);
@@ -54,5 +54,6 @@ public class GameConfigTest {
         assertEquals(2.5, config.speed, 0.001);
         assertEquals(0.5, config.foodSpawnChance, 0.001);
         assertEquals(10.0, config.ticksPerSecond, 0.001);
+        assertEquals(10.0, config.wallCount, 5);
     }
 }

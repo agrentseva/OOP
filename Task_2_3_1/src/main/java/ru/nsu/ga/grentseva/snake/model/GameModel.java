@@ -32,7 +32,7 @@ public class GameModel {
         snake = new Snake(start);
 
         field.occupy(start);
-        field.generateWalls(30, start);
+        field.generateWalls(config.wallCount, start);
 
         spawnFood();
     }
