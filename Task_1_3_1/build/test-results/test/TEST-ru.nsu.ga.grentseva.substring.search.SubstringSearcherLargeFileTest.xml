@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.nsu.ga.grentseva.substring.search.SubstringSearcherLargeFileTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-12-25T12:20:22.021Z" hostname="PUPAALINA" time="10.667">
+  <properties/>
+  <testcase name="testLargeFile()" classname="ru.nsu.ga.grentseva.substring.search.SubstringSearcherLargeFileTest" time="10.667"/>
+  <system-out><![CDATA[Размер созданного файла: 2000 МБ
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

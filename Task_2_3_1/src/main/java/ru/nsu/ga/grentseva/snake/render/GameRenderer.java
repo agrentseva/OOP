@@ -2,9 +2,14 @@ package ru.nsu.ga.grentseva.snake.render;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
+import ru.nsu.ga.grentseva.snake.model.AnimationEffect;
 import ru.nsu.ga.grentseva.snake.model.Cell;
 import ru.nsu.ga.grentseva.snake.model.FoodType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameRenderer {
@@ -13,14 +18,15 @@ public class GameRenderer {
 
     private static final Color BG_LIGHT = Color.web("#AAD751");
     private static final Color BG_DARK = Color.web("#A2D149");
-    private static final Color SNAKE = Color.web("#E3973B");
     private static final Color WALL = Color.web("#578A34");
-
 
     public GameRenderer(int cellSize) {
         this.cellSize = cellSize;
     }
 
+    public int getCellSize() {
+        return cellSize;
+    }
 
     public void drawBackground(GraphicsContext gc, int width, int height) {
         int cols = width / cellSize;
@@ -40,6 +46,35 @@ public class GameRenderer {
         }
     }
 
+    public List<Cell> drawEffects(GraphicsContext gc, List<AnimationEffect> effects) {
+        List<Cell> drawnCells = new ArrayList<>();
+
+        gc.setTextAlign(TextAlignment.CENTER);
+        gc.setFont(Font.font("Arial", FontWeight.BOLD, cellSize * 0.8));
+
+        for (AnimationEffect effect : effects) {
+            Cell pos = effect.getPosition();
+
+            double x = pos.x() * cellSize + cellSize / 2.0;
+            double y = pos.y() * cellSize + cellSize * 0.75;
+
+            double opacity = Math.max(0, effect.getLifetime());
+            gc.setGlobalAlpha(opacity);
+
+            gc.setFill(Color.WHITE);
+            gc.fillText(effect.getText(), x, y);
+
+            drawnCells.add(pos);
+        }
+
+        gc.setGlobalAlpha(1.0);
+        return drawnCells;
+    }
+
+    public void clearCell(GraphicsContext gc, int pixelX, int pixelY, int gridX, int gridY) {
+        gc.setFill(isLightCell(gridX, gridY) ? BG_LIGHT : BG_DARK);
+        gc.fillRect(pixelX, pixelY, cellSize, cellSize);
+    }
 
     private void draw(GraphicsContext gc, RenderCommand cmd) {
         Cell c = cmd.cell();
@@ -48,16 +83,18 @@ public class GameRenderer {
         int y = c.y() * cellSize;
 
         switch (cmd.type()) {
-            case SNAKE -> drawSnake(gc, x, y);
+            case SNAKE_PLAYER -> drawSnake(gc, x, y, Color.web("#E3973B"));
+            case SNAKE_RANDOM -> drawSnake(gc, x, y, Color.GRAY);
+            case SNAKE_GREEDY -> drawSnake(gc, x, y, Color.BLUE);
+            case SNAKE_HUNTER -> drawSnake(gc, x, y, Color.RED);
             case FOOD -> drawFood(gc, x, y, cmd.foodType());
             case OBSTACLE -> drawWall(gc, x, y);
             case EMPTY -> clearCell(gc, x, y, c.x(), c.y());
         }
     }
 
-
-    private void drawSnake(GraphicsContext gc, int x, int y) {
-        gc.setFill(SNAKE);
+    private void drawSnake(GraphicsContext gc, int x, int y, Color color) {
+        gc.setFill(color);
         gc.fillRoundRect(
                 x,
                 y,
@@ -82,12 +119,6 @@ public class GameRenderer {
         gc.setFill(WALL);
         gc.fillRect(x, y, cellSize, cellSize);
     }
-
-    private void clearCell(GraphicsContext gc, int pixelX, int pixelY, int gridX, int gridY) {
-        gc.setFill(isLightCell(gridX, gridY) ? BG_LIGHT : BG_DARK);
-        gc.fillRect(pixelX, pixelY, cellSize, cellSize);
-    }
-
 
     private boolean isLightCell(int x, int y) {
         return (x + y) % 2 == 0;

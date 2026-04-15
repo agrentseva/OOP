@@ -13,14 +13,13 @@ import javafx.stage.Stage;
 
 import ru.nsu.ga.grentseva.snake.config.GameConfig;
 import ru.nsu.ga.grentseva.snake.config.LocalizationManager;
-import ru.nsu.ga.grentseva.snake.model.Direction;
-import ru.nsu.ga.grentseva.snake.model.GameModel;
-import ru.nsu.ga.grentseva.snake.model.GameState;
+import ru.nsu.ga.grentseva.snake.model.*;
 import ru.nsu.ga.grentseva.snake.render.GameRenderer;
 import ru.nsu.ga.grentseva.snake.render.RenderCommand;
 import ru.nsu.ga.grentseva.snake.render.RenderType;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GameController {
 
@@ -35,10 +34,12 @@ public class GameController {
     private GraphicsContext gc;
     private AnimationTimer timer;
 
+    private List<RenderCommand> lastCommands = new ArrayList<>();
+    private final List<Cell> dirtyEffectCells = new ArrayList<>();
+
     private int level = 1;
     private boolean gameEnded = false;
     private boolean isEndless = false;
-
 
     public void setEndlessMode(boolean isEndless) {
         this.isEndless = isEndless;
@@ -48,29 +49,11 @@ public class GameController {
         this.level = level;
     }
 
-
     @FXML
     public void initialize() {
         legendLabel.setText(LocalizationManager.get("food.legend"));
-
         canvas.setFocusTraversable(true);
         canvas.requestFocus();
-    }
-
-
-    private void setupCanvas() {
-        GameConfig config = getConfigForLevel();
-
-        int cellSize = Math.min(
-                1200 / config.width,
-                800 / config.height
-        );
-
-        canvas.setWidth(config.width * cellSize);
-        canvas.setHeight(config.height * cellSize);
-
-        gc = canvas.getGraphicsContext2D();
-        renderer = new GameRenderer(cellSize);
     }
 
     public void start() {
@@ -90,17 +73,29 @@ public class GameController {
                 (int) canvas.getHeight());
 
         renderInitialState();
-
         restartTimer();
     }
 
+    private void setupCanvas() {
+        GameConfig config = getConfigForLevel();
+
+        int cellSize = Math.min(
+                1200 / config.width,
+                800 / config.height
+        );
+
+        canvas.setWidth(config.width * cellSize);
+        canvas.setHeight(config.height * cellSize);
+
+        gc = canvas.getGraphicsContext2D();
+        renderer = new GameRenderer(cellSize);
+    }
 
     private void restartTimer() {
         if (timer != null) timer.stop();
         timer = createGameLoop();
         timer.start();
     }
-
 
     private AnimationTimer createGameLoop() {
         return new AnimationTimer() {
@@ -122,34 +117,88 @@ public class GameController {
 
                 accumulator += deltaTime;
 
+                model.updateEffects(deltaTime);
+
                 double tickTime = 1.0 / getTicksPerSecond();
 
-                while (accumulator >= tickTime) {
-                    updateGame();
+                if (accumulator >= tickTime) {
+                    lastCommands = model.update();
+                    updateUI();
                     accumulator -= tickTime;
                 }
+
+                clearEffectCells();
+                renderer.render(gc, lastCommands);
+                dirtyEffectCells.addAll(
+                        renderer.drawEffects(gc, model.getAnimationEffects())
+                );
 
                 handleGameState();
             }
         };
     }
 
+    private void clearEffectCells() {
+        int radius = 1;
+
+        for (Cell c : dirtyEffectCells) {
+            for (int dx = -radius; dx <= radius; dx++) {
+                for (int dy = -radius; dy <= radius; dy++) {
+
+                    Cell cell = new Cell(c.x() + dx, c.y() + dy);
+
+                    renderer.clearCell(gc,
+                            cell.x() * renderer.getCellSize(),
+                            cell.y() * renderer.getCellSize(),
+                            cell.x(),
+                            cell.y());
+
+                    redrawCell(cell);
+                }
+            }
+        }
+        dirtyEffectCells.clear();
+    }
+
+    private void redrawCell(Cell c) {
+        if (model.getField().getObstacles().contains(c)) {
+            renderer.render(gc, List.of(
+                    new RenderCommand(c, RenderType.OBSTACLE, null)
+            ));
+            return;
+        }
+
+        for (Food f : model.getFoods()) {
+            if (f.position().equals(c)) {
+                renderer.render(gc, List.of(
+                        new RenderCommand(c, RenderType.FOOD, f.type())
+                ));
+                return;
+            }
+        }
+
+        for (Snake s : model.getSnakes()) {
+            if (s.contains(c)) {
+                renderer.render(gc, List.of(
+                        new RenderCommand(c, getRenderType(s), null)
+                ));
+                return;
+            }
+        }
+
+        renderer.clearCell(gc,
+                c.x() * renderer.getCellSize(),
+                c.y() * renderer.getCellSize(),
+                c.x(),
+                c.y());
+    }
 
     private double getTicksPerSecond() {
         double base = model.getConfig().ticksPerSecond;
         return base + model.getScore() / 20.0;
     }
 
-
-    private void updateGame() {
-        var commands = model.update();
-        renderer.render(gc, commands);
-        updateUI();
-    }
-
-
     private void handleGameState() {
-
         if (!gameEnded && model.getState() == GameState.GAME_OVER) {
             gameEnded = true;
             timer.stop();
@@ -164,7 +213,6 @@ public class GameController {
         }
     }
 
-
     private void handleWin() {
         if (level == 1) {
             level = 2;
@@ -173,7 +221,6 @@ public class GameController {
             showEndScreen(true);
         }
     }
-
 
     private void updateUI() {
         scoreLabel.setText(LocalizationManager.get("score") + model.getScore());
@@ -187,12 +234,13 @@ public class GameController {
         }
     }
 
-
     private void renderInitialState() {
-        ArrayList<RenderCommand> initial = new ArrayList<>();
+        List<RenderCommand> initial = new ArrayList<>();
 
-        for (var c : model.getSnake().getBody()) {
-            initial.add(new RenderCommand(c, RenderType.SNAKE, null));
+        for (var s : model.getSnakes()) {
+            for (var c : s.getBody()) {
+                initial.add(new RenderCommand(c, getRenderType(s), null));
+            }
         }
 
         for (var f : model.getFoods()) {
@@ -206,7 +254,6 @@ public class GameController {
         renderer.render(gc, initial);
     }
 
-
     @FXML
     public void onKeyPressed(KeyEvent e) {
         switch (e.getCode()) {
@@ -217,11 +264,9 @@ public class GameController {
         }
     }
 
-
     private void showEndScreen(boolean win) {
         try {
             FXMLLoader loader = loadFXML("/end_screen.fxml");
-
             Scene scene = new Scene(loader.load());
 
             EndController controller = loader.getController();
@@ -234,7 +279,6 @@ public class GameController {
         }
     }
 
-
     private Stage getStage() {
         return (Stage) canvas.getScene().getWindow();
     }
@@ -243,6 +287,16 @@ public class GameController {
         return new FXMLLoader(getClass().getResource(path));
     }
 
+    private RenderType getRenderType(Snake s) {
+        if (s == model.getPlayer()) return RenderType.SNAKE_PLAYER;
+
+        BotType t = ((BotSnake) s).getType();
+        return switch (t) {
+            case RANDOM -> RenderType.SNAKE_RANDOM;
+            case GREEDY -> RenderType.SNAKE_GREEDY;
+            case HUNTER -> RenderType.SNAKE_HUNTER;
+        };
+    }
 
     private GameConfig getConfigForLevel() {
         if (isEndless) return GameConfig.endless();

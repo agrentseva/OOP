@@ -9,7 +9,7 @@ public class GameConfigTest {
     public void testLevel1Config() {
         GameConfig config = GameConfig.level1();
         assertNotNull(config);
-        assertEquals(20, config.width);
+        assertEquals(30, config.width);
         assertEquals(30, config.height);
         assertEquals(5, config.targetLength);
         assertEquals(3, config.foodCount);
@@ -22,7 +22,7 @@ public class GameConfigTest {
     public void testLevel2Config() {
         GameConfig config = GameConfig.level2();
         assertNotNull(config);
-        assertEquals(20, config.width);
+        assertEquals(30, config.width);
         assertEquals(30, config.height);
         assertEquals(7, config.targetLength);
         assertEquals(5, config.foodCount);
@@ -35,8 +35,8 @@ public class GameConfigTest {
     public void testEndlessConfig() {
         GameConfig config = GameConfig.endless();
         assertNotNull(config);
-        assertEquals(100, config.width);
-        assertEquals(100, config.height);
+        assertEquals(30, config.width);
+        assertEquals(30, config.height);
         assertEquals(Integer.MAX_VALUE, config.targetLength);
         assertEquals(5, config.foodCount);
         assertEquals(1.0, config.speed, 0.001);

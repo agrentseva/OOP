@@ -13,7 +13,7 @@ public final class GameConfig {
 
     public static GameConfig level1() {
         return new GameConfig(
-                20, 30,
+                30, 30,
                 5,
                 3,
                 1.0,
@@ -25,7 +25,7 @@ public final class GameConfig {
 
     public static GameConfig level2() {
         return new GameConfig(
-                20, 30,
+                30, 30,
                 7,
                 5,
                 1.5,
@@ -37,13 +37,13 @@ public final class GameConfig {
 
     public static GameConfig endless() {
         return new GameConfig(
-                100, 100,
+                30, 30,
                 Integer.MAX_VALUE,
                 5,
                 1.0,
                 1.0,
                 5.0,
-                50
+                0
         );
     }
 
