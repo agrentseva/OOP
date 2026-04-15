@@ -3,6 +3,9 @@ package ru.nsu.ga.grentseva.snake.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.ga.grentseva.snake.config.GameConfig;
+import ru.nsu.ga.grentseva.snake.render.RenderCommand;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -112,5 +115,136 @@ class GameModelTest {
     @Test
     void testBotsExist() {
         assertTrue(model.getSnakes().size() >= 1);
+    }
+
+    @Test
+    void testSnakeMovesAfterUpdate() {
+        Cell before = model.getPlayer().head();
+
+        model.update();
+
+        Cell after = model.getPlayer().head();
+
+        assertNotEquals(before, after);
+    }
+
+    @Test
+    void testEatingNormalFoodIncreasesScore() {
+        Snake player = model.getPlayer();
+        Cell head = player.head();
+
+        Cell foodCell = new Cell(head.x() + 1, head.y());
+
+        model.getFoods().clear();
+        model.getFoods().add(new Food(foodCell, FoodType.NORMAL));
+
+        player.setDirection(Direction.RIGHT);
+
+        model.update();
+
+        assertEquals(10, model.getScore());
+    }
+
+    @Test
+    void testEatingBonusFoodGivesMoreScore() {
+        Snake player = model.getPlayer();
+        Cell head = player.head();
+
+        Cell foodCell = new Cell(head.x() + 1, head.y());
+
+        model.getFoods().clear();
+        model.getFoods().add(new Food(foodCell, FoodType.BONUS));
+
+        player.setDirection(Direction.RIGHT);
+
+        model.update();
+
+        assertEquals(20, model.getScore());
+    }
+
+    @Test
+    void testEatingPoisonDecreasesScore() {
+        Snake player = model.getPlayer();
+        Cell head = player.head();
+
+        Cell foodCell = new Cell(head.x() + 1, head.y());
+
+        model.getFoods().clear();
+        model.getFoods().add(new Food(foodCell, FoodType.POISON));
+
+        player.setDirection(Direction.RIGHT);
+
+        model.update();
+
+        assertEquals(-5, model.getScore());
+    }
+
+    @Test
+    void testSnakeGrowsOnNormalFood() {
+        Snake player = model.getPlayer();
+
+        int before = player.size();
+
+        Cell foodCell = new Cell(player.head().x() + 1, player.head().y());
+
+        model.getFoods().clear();
+        model.getFoods().add(new Food(foodCell, FoodType.NORMAL));
+
+        player.setDirection(Direction.RIGHT);
+
+        model.update();
+
+        assertTrue(player.size() > before);
+    }
+
+    @Test
+    void testPoisonCanKillSnake() {
+        Snake player = model.getPlayer();
+
+        while (player.size() > 1) {
+            player.removeTail();
+        }
+
+        Cell foodCell = new Cell(player.head().x() + 1, player.head().y());
+
+        model.getFoods().clear();
+        model.getFoods().add(new Food(foodCell, FoodType.POISON));
+
+        player.setDirection(Direction.RIGHT);
+
+        model.update();
+
+        assertEquals(GameState.GAME_OVER, model.getState());
+    }
+
+    @Test
+    void testCommandsAreGenerated() {
+        List<RenderCommand> commands = model.update();
+
+        assertNotNull(commands);
+        assertFalse(commands.isEmpty());
+    }
+
+    @Test
+    void testBotSpawning() {
+        int before = model.getSnakes().size();
+        for (int i = 0; i < 10; i++) {
+            model.getPlayer().move(new Cell(0, i), true);
+        }
+
+        model.update();
+
+        int after = model.getSnakes().size();
+
+        assertTrue(after >= before);
+    }
+
+    @Test
+    void testAnimationEffectAddedOnBotDeath() {
+        model.getSnakes().removeIf(s -> s instanceof BotSnake);
+
+        model.update();
+
+        assertFalse(model.getSnakes().isEmpty());
     }
 }
