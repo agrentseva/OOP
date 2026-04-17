@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="ru.nsu.ga.grentseva.snake.controller.EndController"
+           style="-fx-background-color: #A2D149;">
+
+    <VBox alignment="CENTER" spacing="30">
+
+        <Label fx:id="titleLabel"
+               style="-fx-font-size: 48px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+
+        <Label fx:id="scoreLabel"
+               style="-fx-font-size: 24px; -fx-text-fill: white;"/>
+
+        <HBox spacing="20" alignment="CENTER">
+
+            <Button fx:id="restartButton"
+                    onAction="#onRestart"
+                    prefWidth="180"
+                    prefHeight="50"
+                    style="-fx-background-color: #4A752C; -fx-text-fill: white; -fx-font-size: 16px;"/>
+
+            <Button fx:id="menuButton"
+                    onAction="#onMenu"
+                    prefWidth="180"
+                    prefHeight="50"
+                    style="-fx-background-color: #E7471D; -fx-text-fill: white; -fx-font-size: 16px;"/>
+
+        </HBox>
+
+    </VBox>
+
+</StackPane>
