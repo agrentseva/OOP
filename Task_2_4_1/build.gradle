@@ -1,0 +1,61 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'application' // Добавляем плагин для создания исполняемого JAR
+}
+
+group = 'ru.nsu.ga.grentseva.checker'
+version = '1.0-SNAPSHOT'
+
+// Указываем главный класс для запуска
+application {
+    mainClass = 'ru.nsu.ga.grentseva.checker.Main'
+}
+
+// Заставляем Gradle использовать UTF-8 при компиляции и запуске
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+// Заставляем задачу запуска из IDEA использовать UTF-8
+tasks.withType(JavaExec) {
+    jvmArgs = ['-Dfile.encoding=UTF-8', '-Dconsole.encoding=UTF-8']
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Добавляем Groovy. Он нужен для парсинга DSL
+    implementation 'org.apache.groovy:groovy:4.0.21'
+    implementation 'com.puppycrawl.tools:checkstyle:10.12.4'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+}
+
+// Задача для создания "толстого" JAR, который включает все зависимости
+jar {
+    manifest {
+        attributes(
+            'Main-Class': application.mainClass
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
