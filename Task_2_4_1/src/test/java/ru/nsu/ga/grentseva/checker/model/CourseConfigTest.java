@@ -46,7 +46,7 @@ class CourseConfigTest {
 
         assertEquals(
                 task,
-                config.getTasks().getFirst()
+                config.getTasks().get(0)
         );
     }
 
@@ -70,7 +70,7 @@ class CourseConfigTest {
 
         assertEquals(
                 group,
-                config.getGroups().getFirst()
+                config.getGroups().get(0)
         );
     }
 
@@ -94,7 +94,7 @@ class CourseConfigTest {
 
         assertEquals(
                 submission,
-                config.getSubmissions().getFirst()
+                config.getSubmissions().get(0)
         );
     }
 
@@ -118,7 +118,7 @@ class CourseConfigTest {
 
         assertEquals(
                 checkpoint,
-                config.getCheckpoints().getFirst()
+                config.getCheckpoints().get(0)
         );
     }
 

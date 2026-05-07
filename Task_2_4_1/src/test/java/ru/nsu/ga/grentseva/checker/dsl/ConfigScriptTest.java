@@ -46,22 +46,22 @@ class ConfigScriptTest {
 
         assertEquals(
                 "1.1.1",
-                config.getTasks().getFirst().getId()
+                config.getTasks().get(0).getId()
         );
 
         assertEquals(
                 "Heap sort",
-                config.getTasks().getFirst().getName()
+                config.getTasks().get(0).getName()
         );
 
         assertEquals(
                 2,
-                config.getTasks().getFirst().getMaxScore()
+                config.getTasks().get(0).getMaxScore()
         );
 
         assertEquals(
                 LocalDate.of(2025, 9, 14),
-                config.getTasks().getFirst().getSoftDeadline()
+                config.getTasks().get(0).getSoftDeadline()
         );
     }
 
@@ -95,20 +95,20 @@ class ConfigScriptTest {
 
         assertEquals(
                 "24214",
-                config.getGroups().getFirst().getName()
+                config.getGroups().get(0).getName()
         );
 
         assertEquals(
                 1,
-                config.getGroups().getFirst().getStudents().size()
+                config.getGroups().get(0).getStudents().size()
         );
 
         assertEquals(
                 "agrentseva",
                 config.getGroups()
-                        .getFirst()
+                        .get(0)
                         .getStudents()
-                        .getFirst()
+                        .get(0)
                         .getGithubId()
         );
     }
@@ -142,21 +142,21 @@ class ConfigScriptTest {
         assertEquals(
                 "agrentseva",
                 config.getSubmissions()
-                        .getFirst()
+                        .get(0)
                         .getStudentId()
         );
 
         assertEquals(
                 "1.1.1",
                 config.getSubmissions()
-                        .getFirst()
+                        .get(0)
                         .getTaskId()
         );
 
         assertEquals(
                 1,
                 config.getSubmissions()
-                        .getFirst()
+                        .get(0)
                         .getBonus()
         );
     }
@@ -189,7 +189,7 @@ class ConfigScriptTest {
         assertEquals(
                 "Checkpoint 1",
                 config.getCheckpoints()
-                        .getFirst()
+                        .get(0)
                         .getName()
         );
     }
@@ -272,7 +272,7 @@ class ConfigScriptTest {
         assertEquals(
                 "Included task",
                 config.getTasks()
-                        .getFirst()
+                        .get(0)
                         .getName()
         );
     }

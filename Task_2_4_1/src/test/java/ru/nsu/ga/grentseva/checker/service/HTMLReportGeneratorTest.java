@@ -239,7 +239,7 @@ class HTMLReportGeneratorTest {
 
         Submission submission =
                 config.getSubmissions()
-                        .getFirst();
+                        .get(0);
 
         SubmissionResult result =
                 new SubmissionResult();

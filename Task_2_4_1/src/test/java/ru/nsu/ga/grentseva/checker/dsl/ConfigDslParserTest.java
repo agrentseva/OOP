@@ -45,12 +45,12 @@ class ConfigDslParserTest {
 
         assertEquals(
                 "1.1.1",
-                config.getTasks().getFirst().getId()
+                config.getTasks().get(0).getId()
         );
 
         assertEquals(
                 "Test task",
-                config.getTasks().getFirst().getName()
+                config.getTasks().get(0).getName()
         );
     }
 
@@ -99,7 +99,7 @@ class ConfigDslParserTest {
 
         assertEquals(
                 "2.2.1",
-                config.getTasks().getFirst().getId()
+                config.getTasks().get(0).getId()
         );
     }
 

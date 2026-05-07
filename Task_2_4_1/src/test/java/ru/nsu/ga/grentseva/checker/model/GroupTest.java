@@ -66,7 +66,7 @@ class GroupTest {
 
         assertEquals(
                 student,
-                group.getStudents().getFirst()
+                group.getStudents().get(0)
         );
     }
 
