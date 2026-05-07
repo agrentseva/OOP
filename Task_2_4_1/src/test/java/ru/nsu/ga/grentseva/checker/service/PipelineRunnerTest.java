@@ -298,4 +298,58 @@ class PipelineRunnerTest {
                 result.getErrorMessage()
         );
     }
+
+    @Test
+    void runWithEmptyConfig() {
+
+        PipelineRunner runner =
+                new PipelineRunner();
+
+        CourseConfig config =
+                new CourseConfig();
+
+        Map<?, ?> result =
+                runner.run(config);
+
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void findTaskDirectoryWorks()
+            throws Exception {
+
+        PipelineRunner runner =
+                new PipelineRunner();
+
+        File repository =
+                tempDir.toFile();
+
+        File folder =
+                new File(
+                        repository,
+                        "Task_1_1_1"
+                );
+
+        folder.mkdirs();
+
+        Method method =
+                PipelineRunner.class
+                        .getDeclaredMethod(
+                                "findTaskDirectory",
+                                File.class,
+                                String.class
+                        );
+
+        method.setAccessible(true);
+
+        File result =
+                (File) method.invoke(
+                        runner,
+                        repository,
+                        "1.1.1"
+                );
+
+        assertNotNull(result);
+    }
+
 }

@@ -206,4 +206,63 @@ class GitServiceTest {
                 )
         );
     }
+
+    @Test
+    void gitServiceExists() {
+
+        GitService gitService =
+                new GitService();
+
+        assertNotNull(gitService);
+    }
+
+    @Test
+    void getLastCommitDateFailsForEmptyDirectory() {
+
+        GitService gitService =
+                new GitService();
+
+        File repository =
+                tempDir.toFile();
+
+        File task =
+                new File(repository, "Task");
+
+        task.mkdirs();
+
+        assertThrows(
+                Exception.class,
+                () -> gitService.getLastCommitDate(
+                        repository,
+                        task
+                )
+        );
+    }
+
+    @Test
+    void branchExistsReturnsFalse()
+            throws Exception {
+
+        GitService gitService =
+                new GitService();
+
+        Method method =
+                GitService.class
+                        .getDeclaredMethod(
+                                "branchExists",
+                                File.class,
+                                String.class
+                        );
+
+        method.setAccessible(true);
+
+        boolean result =
+                (boolean) method.invoke(
+                        gitService,
+                        tempDir.toFile(),
+                        "main"
+                );
+
+        assertFalse(result);
+    }
 }
