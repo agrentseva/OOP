@@ -2,7 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/checker_workspace/24216-Maslova-Alina" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/checker_workspace/DeshinMichael" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/checker_workspace/Marat-nsu" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/checker_workspace/NetscapeNav" vcs="Git" />

@@ -2,33 +2,35 @@ package ru.nsu.ga.grentseva.checker.model;
 
 public class SubmissionResult {
 
-    private boolean compileSuccess;
-    private boolean javadocPassed;
-    private boolean stylePassed;
+    private boolean compiled;
 
+    private boolean javadocGenerated;
+
+    private boolean stylePassed;
     private int styleErrors;
 
     private int testsPassed;
     private int testsFailed;
     private int testsSkipped;
 
-    private double bonus;
     private double finalScore;
 
-    public boolean isCompileSuccess() {
-        return compileSuccess;
+    private String errorMessage;
+
+    public boolean isCompiled() {
+        return compiled;
     }
 
-    public void setCompileSuccess(boolean compileSuccess) {
-        this.compileSuccess = compileSuccess;
+    public void setCompiled(boolean compiled) {
+        this.compiled = compiled;
     }
 
-    public boolean isJavadocPassed() {
-        return javadocPassed;
+    public boolean isJavadocGenerated() {
+        return javadocGenerated;
     }
 
-    public void setJavadocPassed(boolean javadocPassed) {
-        this.javadocPassed = javadocPassed;
+    public void setJavadocGenerated(boolean javadocGenerated) {
+        this.javadocGenerated = javadocGenerated;
     }
 
     public boolean isStylePassed() {
@@ -71,19 +73,19 @@ public class SubmissionResult {
         this.testsSkipped = testsSkipped;
     }
 
-    public double getBonus() {
-        return bonus;
-    }
-
-    public void setBonus(double bonus) {
-        this.bonus = bonus;
-    }
-
     public double getFinalScore() {
         return finalScore;
     }
 
     public void setFinalScore(double finalScore) {
         this.finalScore = finalScore;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }
