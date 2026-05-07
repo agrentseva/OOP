@@ -182,4 +182,28 @@ class GitServiceTest {
                 date.getDayOfMonth()
         );
     }
+
+    @Test
+    void cloneRepositoryThrowsException()
+            throws Exception {
+
+        GitService gitService =
+                new GitService();
+
+        File file =
+                new File(
+                        tempDir.toFile(),
+                        "test.txt"
+                );
+
+        file.createNewFile();
+
+        assertThrows(
+                Exception.class,
+                () -> gitService.cloneOrUpdate(
+                        "invalid",
+                        file
+                )
+        );
+    }
 }

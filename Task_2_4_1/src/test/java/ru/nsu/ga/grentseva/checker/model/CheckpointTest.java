@@ -29,4 +29,40 @@ class CheckpointTest {
         assertNull(checkpoint.getName());
         assertNull(checkpoint.getDate());
     }
+
+    @Test
+    void equalsSameObject() {
+
+        Checkpoint checkpoint =
+                new Checkpoint();
+
+        assertEquals(
+                checkpoint,
+                checkpoint
+        );
+    }
+
+    @Test
+    void equalsNullReturnsFalse() {
+
+        Checkpoint checkpoint =
+                new Checkpoint();
+
+        assertNotEquals(
+                null,
+                checkpoint
+        );
+    }
+
+    @Test
+    void equalsDifferentClassReturnsFalse() {
+
+        Checkpoint checkpoint =
+                new Checkpoint();
+
+        assertNotEquals(
+                "text",
+                checkpoint
+        );
+    }
 }
