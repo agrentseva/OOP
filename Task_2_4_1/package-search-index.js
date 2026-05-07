@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.ga.grentseva.checker"},{"l":"ru.nsu.ga.grentseva.checker.dsl"},{"l":"ru.nsu.ga.grentseva.checker.model"},{"l":"ru.nsu.ga.grentseva.checker.runner"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.ga.grentseva.checker"},{"l":"ru.nsu.ga.grentseva.checker.dsl"},{"l":"ru.nsu.ga.grentseva.checker.model"},{"l":"ru.nsu.ga.grentseva.checker.service"}];updateSearchResults();
