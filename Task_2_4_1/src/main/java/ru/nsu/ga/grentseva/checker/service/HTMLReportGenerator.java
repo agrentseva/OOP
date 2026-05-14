@@ -7,28 +7,20 @@ import java.util.Map;
 
 public class HTMLReportGenerator {
 
-    public void generate(CourseConfig config,
-                         Map<Submission,
-                                 SubmissionResult> results,
-                         String outputFile) {
-
+    public void generate(CourseConfig config, Map<Submission, SubmissionResult> results, String outputFile) {
         StringBuilder html = new StringBuilder();
-
         html.append("""
                 <!DOCTYPE html>
                 <html lang='ru'>
                 <head>
                     <meta charset='UTF-8'>
                     <title>OOP Checker</title>
-
                     <style>
-
                         * {
                             margin: 0;
                             padding: 0;
                             box-sizing: border-box;
                         }
-
                         body {
                             font-family: -apple-system,
                                          BlinkMacSystemFont,
@@ -198,7 +190,6 @@ public class HTMLReportGenerator {
                             font-weight: 700;
                             color: #34c759;
                         }
-
                     </style>
                 </head>
                 <body>
@@ -212,27 +203,14 @@ public class HTMLReportGenerator {
 
         
         for (Task task : config.getTasks()) {
-
             html.append("<div class='task-card'>");
-
-            html.append("<div class='task-title'>")
-                    .append(task.getId())
-                    .append(" • ")
-                    .append(task.getName())
-                    .append("</div>");
-
+            html.append("<div class='task-title'>").append(task.getId()).append(" • ")
+                    .append(task.getName()).append("</div>");
             html.append("<div class='deadline'>");
-
-            html.append("Soft deadline: ")
-                    .append(task.getSoftDeadline());
-
-            html.append(" • Hard deadline: ")
-                    .append(task.getHardDeadline());
-
+            html.append("Soft deadline: ").append(task.getSoftDeadline());
+            html.append(" • Hard deadline: ").append(task.getHardDeadline());
             html.append("</div>");
-
             html.append("<table>");
-
             html.append("""
                     <tr>
                         <th>Студент</th>
@@ -247,104 +225,56 @@ public class HTMLReportGenerator {
                     """);
 
             for (Group group : config.getGroups()) {
-
                 for (Student student : group.getStudents()) {
+                    Submission submission = findSubmission(config, student, task);
 
-                    Submission submission =
-                            findSubmission(config,
-                                    student,
-                                    task);
-
-                    SubmissionResult result =
-                            submission == null
-                                    ? null
-                                    : results.get(submission);
+                    SubmissionResult result = submission == null ? null : results.get(submission);
 
                     html.append("<tr>");
-
-                    html.append("<td class='student-name'>")
-                            .append(student.getFullName())
-                            .append("</td>");
+                    html.append("<td class='student-name'>").append(student.getFullName()).append("</td>");
 
                     if (result == null) {
-
                         html.append("<td colspan='5' class='empty'>Нет данных</td>");
-
                     } else {
-
                         html.append(createStatus(result.isCompiled()));
-
                         html.append(createStatus(result.isJavadocGenerated()));
-
                         html.append(createStatus(result.isStylePassed()));
 
                         boolean softPassed = false;
                         boolean hardPassed = false;
 
-                        if (submission != null
-                                && submission.getSubmitDate() != null) {
-
+                        if (submission != null && submission.getSubmitDate() != null) {
                             if (task.getSoftDeadline() != null) {
-
-                                softPassed =
-                                        !submission.getSubmitDate()
-                                                .isAfter(task.getSoftDeadline());
+                                softPassed = !submission.getSubmitDate().isAfter(task.getSoftDeadline());
                             }
-
                             if (task.getHardDeadline() != null) {
-
-                                hardPassed =
-                                        !submission.getSubmitDate()
-                                                .isAfter(task.getHardDeadline());
+                                hardPassed = !submission.getSubmitDate().isAfter(task.getHardDeadline());
                             }
                         }
 
                         html.append(createDeadlineStatus(softPassed));
-
                         html.append(createDeadlineStatus(hardPassed));
-
                         html.append("<td class='tests'>");
-
-                        html.append("<span class='passed-tests'>")
-                                .append(result.getTestsPassed())
-                                .append("</span>");
-
+                        html.append("<span class='passed-tests'>").append(result.getTestsPassed()).append("</span>");
                         html.append(" / ");
-
-                        html.append("<span class='failed-tests'>")
-                                .append(result.getTestsFailed())
-                                .append("</span>");
-
+                        html.append("<span class='failed-tests'>").append(result.getTestsFailed()).append("</span>");
                         html.append("</td>");
-
-                        html.append("<td class='score'>")
-                                .append(result.getFinalScore())
-                                .append("</td>");
+                        html.append("<td class='score'>").append(result.getFinalScore()).append("</td>");
                     }
-
                     html.append("</tr>");
                 }
             }
-
             html.append("</table>");
             html.append("</div>");
         }
-
-        
         html.append("<div class='summary-card'>");
-
         html.append("<div class='summary-title'>Общая статистика</div>");
-
         html.append("<table>");
-
         html.append("<tr>");
         html.append("<th>Студент</th>");
 
         for (Task task : config.getTasks()) {
-
-            html.append("<th>")
-                    .append(task.getId())
-                    .append("</th>");
+            html.append("<th>").append(task.getId()).append("</th>");
         }
 
         html.append("<th>Итого</th>");
@@ -352,89 +282,52 @@ public class HTMLReportGenerator {
         html.append("</tr>");
 
         for (Group group : config.getGroups()) {
-
             for (Student student : group.getStudents()) {
-
                 double total = 0;
                 double max = 0;
 
                 html.append("<tr>");
-
-                html.append("<td class='student-name'>")
-                        .append(student.getFullName())
-                        .append("</td>");
+                html.append("<td class='student-name'>").append(student.getFullName()).append("</td>");
 
                 for (Task task : config.getTasks()) {
-
                     max += task.getMaxScore();
 
-                    Submission submission =
-                            findSubmission(config,
-                                    student,
-                                    task);
-
-                    if (submission == null
-                            || !results.containsKey(submission)) {
-
+                    Submission submission = findSubmission(config, student, task);
+                    if (submission == null || !results.containsKey(submission)) {
                         html.append("<td class='empty'>0</td>");
-
                         continue;
                     }
 
-                    SubmissionResult result =
-                            results.get(submission);
-
-                    double score =
-                            result.getFinalScore();
-
+                    SubmissionResult result = results.get(submission);
+                    double score = result.getFinalScore();
                     total += score;
 
-                    html.append("<td>")
-                            .append(score)
-                            .append("</td>");
+                    html.append("<td>").append(score).append("</td>");
                 }
 
-                int percent =
-                        max == 0
-                                ? 0
-                                : (int)((total / max) * 100);
+                int percent = max == 0 ? 0 : (int)((total / max) * 100);
 
-                html.append("<td class='score'>")
-                        .append(total)
-                        .append("</td>");
-
-                html.append("<td class='percent'>")
-                        .append(percent)
-                        .append("%</td>");
-
+                html.append("<td class='score'>").append(total).append("</td>");
+                html.append("<td class='percent'>").append(percent).append("%</td>");
                 html.append("</tr>");
             }
         }
 
         html.append("</table>");
         html.append("</div>");
-
         html.append("</div>");
         html.append("</body>");
         html.append("</html>");
 
-        try (FileWriter writer =
-                     new FileWriter(outputFile)) {
-
+        try (FileWriter writer = new FileWriter(outputFile)) {
             writer.write(html.toString());
-
         } catch (Exception e) {
-
-            System.out.println(
-                    "Ошибка генерации HTML"
-            );
+            System.out.println("Ошибка генерации HTML");
         }
     }
 
     private String createDeadlineStatus(boolean passed) {
-
         if (passed) {
-
             return """
                 <td>
                     <span class='deadline-ok'>
@@ -454,32 +347,18 @@ public class HTMLReportGenerator {
     }
 
     private String createStatus(boolean ok) {
-
         if (ok) {
-
             return "<td class='status-ok'>●</td>";
         }
 
         return "<td class='status-fail'>●</td>";
     }
 
-    private Submission findSubmission(CourseConfig config,
-                                      Student student,
-                                      Task task) {
-
-        for (Submission submission :
-                config.getSubmissions()) {
-
-            boolean sameStudent =
-                    submission.getStudentId()
-                            .equals(student.getGithubId());
-
-            boolean sameTask =
-                    submission.getTaskId()
-                            .equals(task.getId());
-
+    private Submission findSubmission(CourseConfig config, Student student, Task task) {
+        for (Submission submission : config.getSubmissions()) {
+            boolean sameStudent = submission.getStudentId().equals(student.getGithubId());
+            boolean sameTask = submission.getTaskId().equals(task.getId());
             if (sameStudent && sameTask) {
-
                 return submission;
             }
         }

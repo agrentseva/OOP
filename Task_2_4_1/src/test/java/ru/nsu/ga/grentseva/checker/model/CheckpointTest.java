@@ -1,9 +1,7 @@
 package ru.nsu.ga.grentseva.checker.model;
 
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class CheckpointTest {
@@ -32,37 +30,22 @@ class CheckpointTest {
 
     @Test
     void equalsSameObject() {
+        Checkpoint checkpoint = new Checkpoint();
 
-        Checkpoint checkpoint =
-                new Checkpoint();
-
-        assertEquals(
-                checkpoint,
-                checkpoint
-        );
+        assertEquals(checkpoint, checkpoint);
     }
 
     @Test
     void equalsNullReturnsFalse() {
+        Checkpoint checkpoint = new Checkpoint();
 
-        Checkpoint checkpoint =
-                new Checkpoint();
-
-        assertNotEquals(
-                null,
-                checkpoint
-        );
+        assertNotEquals(null, checkpoint);
     }
 
     @Test
     void equalsDifferentClassReturnsFalse() {
+        Checkpoint checkpoint = new Checkpoint();
 
-        Checkpoint checkpoint =
-                new Checkpoint();
-
-        assertNotEquals(
-                "text",
-                checkpoint
-        );
+        assertNotEquals("text", checkpoint);
     }
 }

@@ -6,13 +6,9 @@ import java.util.List;
 public class CourseConfig {
 
     private List<Task> tasks = new ArrayList<>();
-
     private List<Group> groups = new ArrayList<>();
-
     private List<Submission> submissions = new ArrayList<>();
-
     private List<Checkpoint> checkpoints = new ArrayList<>();
-
     private Settings settings = new Settings();
 
     public List<Task> getTasks() {

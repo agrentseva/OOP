@@ -1,16 +1,13 @@
 tasks {
+    task("1.1.1") {
 
-    
-
-    task("2.2.1") {
-
-        name = "Змейка"
+        name = "Пирамидальная сортировка"
 
         maxScore = 1
 
-        softDeadline = "07/03/2026"
+        softDeadline = "06/09/2025"
 
-        hardDeadline = "14/03/2026"
+        hardDeadline = "13/09/2025"
     }
 }
 
@@ -20,7 +17,8 @@ groups {
 
         student("VlanAni") {
 
-            name = "Анисимов Владимир Сергеевич"
+            name =
+                    "Анисимов Владимир Сергеевич"
 
             repositoryUrl =
                     "https://github.com/VlanAni/OOP.git"
@@ -28,7 +26,8 @@ groups {
 
         student("agrentseva") {
 
-            name = "Гренцева Алина Олеговна"
+            name =
+                    "Гренцева Алина Олеговна"
 
             repositoryUrl =
                     "https://github.com/agrentseva/OOP.git"
@@ -36,7 +35,8 @@ groups {
 
         student("DeshinMichael") {
 
-            name = "Дешин Михаил Александрович"
+            name =
+                    "Дешин Михаил Александрович"
 
             repositoryUrl =
                     "https://github.com/DeshinMichael/OOP.git"
@@ -44,7 +44,8 @@ groups {
 
         student("Proletcultist") {
 
-            name = "Зенин Матвей Вадимович"
+            name =
+                    "Зенин Матвей Вадимович"
 
             repositoryUrl =
                     "https://github.com/Proletcultist/OOP.git"
@@ -52,7 +53,8 @@ groups {
 
         student("pkrasnyanskii") {
 
-            name = "Краснянский Пётр Михайлович"
+            name =
+                    "Краснянский Пётр Михайлович"
 
             repositoryUrl =
                     "https://github.com/pkrasnyanskii/OOP.git"
@@ -60,7 +62,8 @@ groups {
 
         student("NetscapeNav") {
 
-            name = "Кученков Степан Андреевич"
+            name =
+                    "Кученков Степан Андреевич"
 
             repositoryUrl =
                     "https://github.com/NetscapeNav/OOP.git"
@@ -68,7 +71,8 @@ groups {
 
         student("dmObraztsov") {
 
-            name = "Образцов Дмитрий Евгеньевич"
+            name =
+                    "Образцов Дмитрий Евгеньевич"
 
             repositoryUrl =
                     "https://github.com/dmObraztsov/OOP.git"
@@ -76,7 +80,8 @@ groups {
 
         student("Yojik1-cpu") {
 
-            name = "Пешков Алексей Максимович"
+            name =
+                    "Пешков Алексей Максимович"
 
             repositoryUrl =
                     "https://github.com/Yojik1-cpu/OOP.git"
@@ -84,7 +89,8 @@ groups {
 
         student("NikRo12") {
 
-            name = "Романенко Никита Сергеевич"
+            name =
+                    "Романенко Никита Сергеевич"
 
             repositoryUrl =
                     "https://github.com/NikRo12/OOP.git"
@@ -92,7 +98,8 @@ groups {
 
         student("Marat-nsu") {
 
-            name = "Тимофеев Марат Вадимович"
+            name =
+                    "Тимофеев Марат Вадимович"
 
             repositoryUrl =
                     "https://github.com/Marat-nsu/OOP.git"
@@ -100,7 +107,8 @@ groups {
 
         student("chebupelka332-pro") {
 
-            name = "Токарев Максим Константинович"
+            name =
+                    "Токарев Максим Константинович"
 
             repositoryUrl =
                     "https://github.com/chebupelka332-pro/OOP.git"
@@ -109,60 +117,22 @@ groups {
 }
 
 submissions {
-
-    
-
-    submission("VlanAni", "2.2.1") {
+    submission("VlanAni", "1.1.1") {
 
         bonus = 0
     }
 
-    submission("agrentseva", "2.2.1") {
+    submission("agrentseva", "1.1.1") {
 
         bonus = 0
     }
 
-    submission("DeshinMichael", "2.2.1") {
+    submission("DeshinMichael", "1.1.1") {
 
         bonus = 0
     }
 
-    submission("Proletcultist", "2.2.1") {
-
-        bonus = 0
-    }
-
-    submission("pkrasnyanskii", "2.2.1") {
-
-        bonus = 0
-    }
-
-    submission("NetscapeNav", "2.2.1") {
-
-        bonus = 0
-    }
-
-    submission("dmObraztsov", "2.2.1") {
-
-        bonus = 0
-    }
-
-    submission("Yojik1-cpu", "2.2.1") {
-
-        bonus = 0
-    }
-
-    submission("NikRo12", "2.2.1") {
-
-        bonus = 0
-    }
-
-    submission("Marat-nsu", "2.2.1") {
-
-        bonus = 0
-    }
-
-    submission("chebupelka332-pro", "2.2.1") {
+    submission("Proletcultist", "1.1.1") {
 
         bonus = 0
     }

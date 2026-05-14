@@ -19,245 +19,111 @@ class HTMLReportGeneratorTest {
 
     @Test
     void generateCreatesHtmlFile() throws Exception {
+        CourseConfig config = createConfig();
+        Map<Submission, SubmissionResult> results = createResults(config);
+        Path output = tempDir.resolve("report.html");
 
-        CourseConfig config =
-                createConfig();
+        HTMLReportGenerator generator = new HTMLReportGenerator();
+        generator.generate(config, results, output.toString());
 
-        Map<Submission,
-                SubmissionResult> results =
-                createResults(config);
-
-        Path output =
-                tempDir.resolve("report.html");
-
-        HTMLReportGenerator generator =
-                new HTMLReportGenerator();
-
-        generator.generate(
-                config,
-                results,
-                output.toString()
-        );
-
-        assertTrue(
-                Files.exists(output)
-        );
+        assertTrue(Files.exists(output));
     }
 
     @Test
-    void generatedHtmlContainsStudentName()
-            throws Exception {
+    void generatedHtmlContainsStudentName() throws Exception {
+        CourseConfig config = createConfig();
+        Map<Submission, SubmissionResult> results = createResults(config);
+        Path output = tempDir.resolve("report.html");
 
-        CourseConfig config =
-                createConfig();
+        new HTMLReportGenerator().generate(config, results, output.toString());
 
-        Map<Submission,
-                SubmissionResult> results =
-                createResults(config);
-
-        Path output =
-                tempDir.resolve("report.html");
-
-        new HTMLReportGenerator().generate(
-                config,
-                results,
-                output.toString()
-        );
-
-        String html =
-                Files.readString(output);
-
-        assertTrue(
-                html.contains(
-                        "Гренцева Алина"
-                )
-        );
+        String html = Files.readString(output);
+        assertTrue(html.contains("Гренцева Алина"));
     }
 
     @Test
-    void generatedHtmlContainsTaskName()
-            throws Exception {
+    void generatedHtmlContainsTaskName() throws Exception {
+        CourseConfig config = createConfig();
+        Map<Submission, SubmissionResult> results = createResults(config);
+        Path output = tempDir.resolve("report.html");
 
-        CourseConfig config =
-                createConfig();
+        new HTMLReportGenerator().generate(config, results, output.toString());
 
-        Map<Submission,
-                SubmissionResult> results =
-                createResults(config);
-
-        Path output =
-                tempDir.resolve("report.html");
-
-        new HTMLReportGenerator().generate(
-                config,
-                results,
-                output.toString()
-        );
-
-        String html =
-                Files.readString(output);
-
-        assertTrue(
-                html.contains("Checker")
-        );
+        String html = Files.readString(output);
+        assertTrue(html.contains("Checker"));
     }
 
     @Test
-    void generatedHtmlContainsScore()
-            throws Exception {
+    void generatedHtmlContainsScore() throws Exception {
+        CourseConfig config = createConfig();
+        Map<Submission, SubmissionResult> results = createResults(config);
+        Path output = tempDir.resolve("report.html");
 
-        CourseConfig config =
-                createConfig();
+        new HTMLReportGenerator().generate(config, results, output.toString());
 
-        Map<Submission,
-                SubmissionResult> results =
-                createResults(config);
-
-        Path output =
-                tempDir.resolve("report.html");
-
-        new HTMLReportGenerator().generate(
-                config,
-                results,
-                output.toString()
-        );
-
-        String html =
-                Files.readString(output);
-
-        assertTrue(
-                html.contains("10.0")
-        );
+        String html = Files.readString(output);
+        assertTrue(html.contains("10.0"));
     }
 
     @Test
-    void generatedHtmlContainsPassedStatus()
-            throws Exception {
+    void generatedHtmlContainsPassedStatus() throws Exception {
+        CourseConfig config = createConfig();
+        Map<Submission, SubmissionResult> results = createResults(config);
+        Path output = tempDir.resolve("report.html");
 
-        CourseConfig config =
-                createConfig();
+        new HTMLReportGenerator().generate(config, results, output.toString());
 
-        Map<Submission,
-                SubmissionResult> results =
-                createResults(config);
-
-        Path output =
-                tempDir.resolve("report.html");
-
-        new HTMLReportGenerator().generate(
-                config,
-                results,
-                output.toString()
-        );
-
-        String html =
-                Files.readString(output);
-
-        assertTrue(
-                html.contains("Passed")
-        );
+        String html = Files.readString(output);
+        assertTrue(html.contains("Passed"));
     }
 
     @Test
-    void generatedHtmlContainsPercent()
-            throws Exception {
+    void generatedHtmlContainsPercent() throws Exception {
+        CourseConfig config = createConfig();
+        Map<Submission, SubmissionResult> results = createResults(config);
+        Path output = tempDir.resolve("report.html");
 
-        CourseConfig config =
-                createConfig();
+        new HTMLReportGenerator().generate(config, results, output.toString());
 
-        Map<Submission,
-                SubmissionResult> results =
-                createResults(config);
-
-        Path output =
-                tempDir.resolve("report.html");
-
-        new HTMLReportGenerator().generate(
-                config,
-                results,
-                output.toString()
-        );
-
-        String html =
-                Files.readString(output);
-
-        assertTrue(
-                html.contains("%")
-        );
+        String html = Files.readString(output);
+        assertTrue(html.contains("%"));
     }
 
     private CourseConfig createConfig() {
-
-        CourseConfig config =
-                new CourseConfig();
-
-        Task task =
-                new Task(
-                        "2.4.1",
-                        "Checker",
-                        10,
-                        LocalDate.of(2026, 4, 25),
-                        LocalDate.of(2026, 5, 16)
-                );
-
+        CourseConfig config = new CourseConfig();
+        Task task = new Task(
+                "2.4.1",
+                "Checker",
+                10,
+                LocalDate.of(2026, 4, 25),
+                LocalDate.of(2026, 5, 16)
+        );
         config.addTask(task);
 
-        Student student =
-                new Student(
-                        "agrentseva",
-                        "Гренцева Алина",
-                        "repo"
-                );
-
-        Group group =
-                new Group("24214");
-
+        Student student = new Student("agrentseva", "Гренцева Алина", "repo");
+        Group group = new Group("24214");
         group.addStudent(student);
-
         config.addGroup(group);
 
-        Submission submission =
-                new Submission(
-                        "agrentseva",
-                        "2.4.1",
-                        LocalDate.of(2026, 4, 20),
-                        0
-                );
-
+        Submission submission = new Submission("agrentseva", "2.4.1", LocalDate.of(2026, 4, 20), 0);
         config.addSubmission(submission);
 
         return config;
     }
 
-    private Map<Submission,
-            SubmissionResult> createResults(
-            CourseConfig config) {
+    private Map<Submission, SubmissionResult> createResults(CourseConfig config) {
+        Map<Submission, SubmissionResult> results = new HashMap<>();
+        Submission submission = config.getSubmissions().get(0);
 
-        Map<Submission,
-                SubmissionResult> results =
-                new HashMap<>();
-
-        Submission submission =
-                config.getSubmissions()
-                        .get(0);
-
-        SubmissionResult result =
-                new SubmissionResult();
-
+        SubmissionResult result = new SubmissionResult();
         result.setCompiled(true);
-
         result.setJavadocGenerated(true);
-
         result.setStylePassed(true);
-
         result.setTestsPassed(10);
-
         result.setTestsFailed(0);
-
         result.setFinalScore(10);
 
         results.put(submission, result);
-
         return results;
     }
 }

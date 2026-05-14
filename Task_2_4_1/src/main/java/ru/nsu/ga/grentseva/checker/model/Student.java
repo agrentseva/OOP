@@ -3,6 +3,7 @@ package ru.nsu.ga.grentseva.checker.model;
 import java.util.Objects;
 
 public class Student {
+
     private String githubId;
     private String fullName;
     private String repositoryUrl;
@@ -42,11 +43,8 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "githubId='" + githubId + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", repositoryUrl='" + repositoryUrl + '\'' +
-                '}';
+        return "Student{" + "githubId='" + githubId + '\'' + ", fullName='"
+                + fullName + '\'' + ", repositoryUrl='" + repositoryUrl + '\'' + '}';
     }
 
     @Override

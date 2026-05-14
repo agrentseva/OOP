@@ -4,22 +4,17 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Task {
+
     private String id;
     private String name;
     private double maxScore;
-
     private LocalDate softDeadline;
     private LocalDate hardDeadline;
 
     public Task() {
     }
 
-    public Task(String id,
-                String name,
-                double maxScore,
-                LocalDate softDeadline,
-                LocalDate hardDeadline) {
-
+    public Task(String id, String name, double maxScore, LocalDate softDeadline, LocalDate hardDeadline) {
         this.id = id;
         this.name = name;
         this.maxScore = maxScore;
@@ -69,13 +64,8 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", maxScore=" + maxScore +
-                ", softDeadline=" + softDeadline +
-                ", hardDeadline=" + hardDeadline +
-                '}';
+        return "Task{" + "id='" + id + '\'' + ", name='" + name + '\'' + ", maxScore="
+                + maxScore + ", softDeadline=" + softDeadline + ", hardDeadline=" + hardDeadline + '}';
     }
 
     @Override

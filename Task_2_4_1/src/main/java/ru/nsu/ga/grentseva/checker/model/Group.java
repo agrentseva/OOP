@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Group {
+
     private String name;
     private List<Student> students = new ArrayList<>();
 
@@ -37,10 +38,7 @@ public class Group {
 
     @Override
     public String toString() {
-        return "Group{" +
-                "name='" + name + '\'' +
-                ", students=" + students +
-                '}';
+        return "Group{" + "name='" + name + '\'' + ", students=" + students + '}';
     }
 
     @Override

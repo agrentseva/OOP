@@ -3,18 +3,13 @@ package ru.nsu.ga.grentseva.checker.model;
 public class SubmissionResult {
 
     private boolean compiled;
-
     private boolean javadocGenerated;
-
     private boolean stylePassed;
     private int styleErrors;
-
     private int testsPassed;
     private int testsFailed;
     private int testsSkipped;
-
     private double finalScore;
-
     private String errorMessage;
 
     public boolean isCompiled() {

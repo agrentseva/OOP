@@ -17,104 +17,55 @@ class ConfigDslParserTest {
 
     @Test
     void parseValidConfig() throws Exception {
-
-        Path file =
-                tempDir.resolve("config.groovy");
-
-        Files.writeString(
-                file,
-                """
+        Path file = tempDir.resolve("config.groovy");
+        Files.writeString(file, """
                 tasks {
                     task("1.1.1") {
                         name = "Test task"
                         maxScore = 1
                     }
                 }
-                """
-        );
+                """);
 
-        CourseConfig config =
-                ConfigDslParser.parse(file);
+        CourseConfig config = ConfigDslParser.parse(file);
 
         assertNotNull(config);
-
-        assertEquals(
-                1,
-                config.getTasks().size()
-        );
-
-        assertEquals(
-                "1.1.1",
-                config.getTasks().get(0).getId()
-        );
-
-        assertEquals(
-                "Test task",
-                config.getTasks().get(0).getName()
-        );
+        assertEquals(1, config.getTasks().size());
+        assertEquals("1.1.1", config.getTasks().get(0).getId());
+        assertEquals("Test task", config.getTasks().get(0).getName());
     }
 
     @Test
     void parseMissingFileThrowsException() {
+        Path file = tempDir.resolve("missing.groovy");
 
-        Path file =
-                tempDir.resolve("missing.groovy");
-
-        assertThrows(
-                IOException.class,
-                () -> ConfigDslParser.parse(file)
-        );
+        assertThrows(IOException.class, () -> ConfigDslParser.parse(file));
     }
 
     @Test
     void loadFileAddsTaskToExistingConfig() throws Exception {
-
-        Path file =
-                tempDir.resolve("config.groovy");
-
-        Files.writeString(
-                file,
-                """
+        Path file = tempDir.resolve("config.groovy");
+        Files.writeString(file, """
                 tasks {
                     task("2.2.1") {
                         name = "Pizza"
                         maxScore = 2
                     }
                 }
-                """
-        );
+                """);
 
-        CourseConfig config =
-                new CourseConfig();
+        CourseConfig config = new CourseConfig();
+        ConfigDslParser.loadFile(file, config);
 
-        ConfigDslParser.loadFile(
-                file,
-                config
-        );
-
-        assertEquals(
-                1,
-                config.getTasks().size()
-        );
-
-        assertEquals(
-                "2.2.1",
-                config.getTasks().get(0).getId()
-        );
+        assertEquals(1, config.getTasks().size());
+        assertEquals("2.2.1", config.getTasks().get(0).getId());
     }
 
     @Test
     void loadFileWithInvalidPathThrowsException() {
+        Path file = tempDir.resolve("invalid.groovy");
+        CourseConfig config = new CourseConfig();
 
-        Path file =
-                tempDir.resolve("invalid.groovy");
-
-        CourseConfig config =
-                new CourseConfig();
-
-        assertThrows(
-                IOException.class,
-                () -> ConfigDslParser.loadFile(file, config)
-        );
+        assertThrows(IOException.class, () -> ConfigDslParser.loadFile(file, config));
     }
 }

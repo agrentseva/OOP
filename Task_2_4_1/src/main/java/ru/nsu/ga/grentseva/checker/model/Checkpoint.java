@@ -34,10 +34,7 @@ public class Checkpoint {
 
     @Override
     public String toString() {
-        return "Checkpoint{" +
-                "name='" + name + '\'' +
-                ", date=" + date +
-                '}';
+        return "Checkpoint{" + "name='" + name + '\'' + ", date=" + date + '}';
     }
 
     @Override

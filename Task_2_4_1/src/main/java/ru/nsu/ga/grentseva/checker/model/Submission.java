@@ -4,21 +4,16 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Submission {
+
     private String studentId;
     private String taskId;
-
     private LocalDate submitDate;
-
     private double bonus;
 
     public Submission() {
     }
 
-    public Submission(String studentId,
-                      String taskId,
-                      LocalDate submitDate,
-                      double bonus) {
-
+    public Submission(String studentId, String taskId, LocalDate submitDate, double bonus) {
         this.studentId = studentId;
         this.taskId = taskId;
         this.submitDate = submitDate;
@@ -59,21 +54,15 @@ public class Submission {
 
     @Override
     public String toString() {
-        return "Submission{" +
-                "studentId='" + studentId + '\'' +
-                ", taskId='" + taskId + '\'' +
-                ", submitDate=" + submitDate +
-                ", bonus=" + bonus +
-                '}';
+        return "Submission{" + "studentId='" + studentId + '\'' + ", taskId='"
+                + taskId + '\'' + ", submitDate=" + submitDate + ", bonus=" + bonus + '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Submission that)) return false;
-
-        return Objects.equals(studentId, that.studentId)
-                && Objects.equals(taskId, that.taskId);
+        return Objects.equals(studentId, that.studentId) && Objects.equals(taskId, that.taskId);
     }
 
     @Override
