@@ -51,9 +51,16 @@ loadScripts(document, 'script');</script>
 <span class="package-hierarchy-label">Package Hierarchies:</span>
 <ul class="horizontal">
 <li><a href="ru/nsu/ga/grentseva/checker/package-tree.html">ru.nsu.ga.grentseva.checker</a>, </li>
+<li><a href="ru/nsu/ga/grentseva/checker/controller/package-tree.html">ru.nsu.ga.grentseva.checker.controller</a>, </li>
 <li><a href="ru/nsu/ga/grentseva/checker/dsl/package-tree.html">ru.nsu.ga.grentseva.checker.dsl</a>, </li>
 <li><a href="ru/nsu/ga/grentseva/checker/model/package-tree.html">ru.nsu.ga.grentseva.checker.model</a>, </li>
-<li><a href="ru/nsu/ga/grentseva/checker/service/package-tree.html">ru.nsu.ga.grentseva.checker.service</a></li>
+<li><a href="ru/nsu/ga/grentseva/checker/service/git/package-tree.html">ru.nsu.ga.grentseva.checker.service.git</a>, </li>
+<li><a href="ru/nsu/ga/grentseva/checker/service/gradle/package-tree.html">ru.nsu.ga.grentseva.checker.service.gradle</a>, </li>
+<li><a href="ru/nsu/ga/grentseva/checker/service/logging/package-tree.html">ru.nsu.ga.grentseva.checker.service.logging</a>, </li>
+<li><a href="ru/nsu/ga/grentseva/checker/service/parser/package-tree.html">ru.nsu.ga.grentseva.checker.service.parser</a>, </li>
+<li><a href="ru/nsu/ga/grentseva/checker/service/pipeline/package-tree.html">ru.nsu.ga.grentseva.checker.service.pipeline</a>, </li>
+<li><a href="ru/nsu/ga/grentseva/checker/service/report/package-tree.html">ru.nsu.ga.grentseva.checker.service.report</a>, </li>
+<li><a href="ru/nsu/ga/grentseva/checker/service/scoring/package-tree.html">ru.nsu.ga.grentseva.checker.service.scoring</a></li>
 </ul>
 </div>
 <section class="hierarchy">
@@ -61,10 +68,13 @@ loadScripts(document, 'script');</script>
 <ul>
 <li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" class="type-name-link external-link" title="class or interface in java.lang">Object</a>
 <ul>
+<li class="circle">ru.nsu.ga.grentseva.checker.service.gradle.<a href="ru/nsu/ga/grentseva/checker/service/gradle/BuildChecker.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.service.gradle">BuildChecker</a></li>
+<li class="circle">ru.nsu.ga.grentseva.checker.controller.<a href="ru/nsu/ga/grentseva/checker/controller/CheckerController.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.controller">CheckerController</a></li>
 <li class="circle">ru.nsu.ga.grentseva.checker.model.<a href="ru/nsu/ga/grentseva/checker/model/Checkpoint.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.model">Checkpoint</a></li>
 <li class="circle">ru.nsu.ga.grentseva.checker.dsl.<a href="ru/nsu/ga/grentseva/checker/dsl/ConfigDslParser.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.dsl">ConfigDslParser</a></li>
 <li class="circle">ru.nsu.ga.grentseva.checker.model.<a href="ru/nsu/ga/grentseva/checker/model/CourseConfig.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.model">CourseConfig</a></li>
-<li class="circle">ru.nsu.ga.grentseva.checker.service.<a href="ru/nsu/ga/grentseva/checker/service/GitService.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.service">GitService</a></li>
+<li class="circle">ru.nsu.ga.grentseva.checker.service.git.<a href="ru/nsu/ga/grentseva/checker/service/git/GitService.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.service.git">GitService</a></li>
+<li class="circle">ru.nsu.ga.grentseva.checker.service.gradle.<a href="ru/nsu/ga/grentseva/checker/service/gradle/GradleTaskRunner.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.service.gradle">GradleTaskRunner</a></li>
 <li class="circle">groovy.lang.GroovyObjectSupport (implements groovy.lang.GroovyObject)
 <ul>
 <li class="circle">ru.nsu.ga.grentseva.checker.dsl.<a href="ru/nsu/ga/grentseva/checker/dsl/ConfigScript.CheckpointBuilder.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.dsl">ConfigScript.CheckpointBuilder</a></li>
@@ -81,15 +91,24 @@ loadScripts(document, 'script');</script>
 </ul>
 </li>
 <li class="circle">ru.nsu.ga.grentseva.checker.model.<a href="ru/nsu/ga/grentseva/checker/model/Group.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.model">Group</a></li>
-<li class="circle">ru.nsu.ga.grentseva.checker.service.<a href="ru/nsu/ga/grentseva/checker/service/HTMLReportGenerator.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.service">HTMLReportGenerator</a></li>
+<li class="circle">ru.nsu.ga.grentseva.checker.service.report.<a href="ru/nsu/ga/grentseva/checker/service/report/HTMLReportGenerator.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.service.report">HTMLReportGenerator</a></li>
+<li class="circle">ru.nsu.ga.grentseva.checker.service.gradle.<a href="ru/nsu/ga/grentseva/checker/service/gradle/JavadocChecker.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.service.gradle">JavadocChecker</a></li>
+<li class="circle">ru.nsu.ga.grentseva.checker.service.logging.<a href="ru/nsu/ga/grentseva/checker/service/logging/Logger.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.service.logging">Logger</a></li>
 <li class="circle">ru.nsu.ga.grentseva.checker.<a href="ru/nsu/ga/grentseva/checker/Main.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker">Main</a></li>
-<li class="circle">ru.nsu.ga.grentseva.checker.service.<a href="ru/nsu/ga/grentseva/checker/service/PipelineRunner.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.service">PipelineRunner</a></li>
-<li class="circle">ru.nsu.ga.grentseva.checker.service.<a href="ru/nsu/ga/grentseva/checker/service/ScoreCalculator.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.service">ScoreCalculator</a></li>
+<li class="circle">ru.nsu.ga.grentseva.checker.service.pipeline.<a href="ru/nsu/ga/grentseva/checker/service/pipeline/PipelineRunner.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.service.pipeline">PipelineRunner</a></li>
+<li class="circle">ru.nsu.ga.grentseva.checker.service.pipeline.<a href="ru/nsu/ga/grentseva/checker/service/pipeline/RepositoryPreparer.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.service.pipeline">RepositoryPreparer</a></li>
+<li class="circle">ru.nsu.ga.grentseva.checker.service.scoring.<a href="ru/nsu/ga/grentseva/checker/service/scoring/ScoreCalculator.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.service.scoring">ScoreCalculator</a></li>
 <li class="circle">ru.nsu.ga.grentseva.checker.model.<a href="ru/nsu/ga/grentseva/checker/model/Settings.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.model">Settings</a></li>
 <li class="circle">ru.nsu.ga.grentseva.checker.model.<a href="ru/nsu/ga/grentseva/checker/model/Student.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.model">Student</a></li>
+<li class="circle">ru.nsu.ga.grentseva.checker.service.pipeline.<a href="ru/nsu/ga/grentseva/checker/service/pipeline/StudentProcessor.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.service.pipeline">StudentProcessor</a></li>
+<li class="circle">ru.nsu.ga.grentseva.checker.service.gradle.<a href="ru/nsu/ga/grentseva/checker/service/gradle/StyleChecker.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.service.gradle">StyleChecker</a></li>
 <li class="circle">ru.nsu.ga.grentseva.checker.model.<a href="ru/nsu/ga/grentseva/checker/model/Submission.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.model">Submission</a></li>
 <li class="circle">ru.nsu.ga.grentseva.checker.model.<a href="ru/nsu/ga/grentseva/checker/model/SubmissionResult.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.model">SubmissionResult</a></li>
 <li class="circle">ru.nsu.ga.grentseva.checker.model.<a href="ru/nsu/ga/grentseva/checker/model/Task.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.model">Task</a></li>
+<li class="circle">ru.nsu.ga.grentseva.checker.service.pipeline.<a href="ru/nsu/ga/grentseva/checker/service/pipeline/TaskChecker.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.service.pipeline">TaskChecker</a></li>
+<li class="circle">ru.nsu.ga.grentseva.checker.service.gradle.<a href="ru/nsu/ga/grentseva/checker/service/gradle/TestChecker.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.service.gradle">TestChecker</a></li>
+<li class="circle">ru.nsu.ga.grentseva.checker.service.parser.<a href="ru/nsu/ga/grentseva/checker/service/parser/TestResultParser.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.service.parser">TestResultParser</a></li>
+<li class="circle">ru.nsu.ga.grentseva.checker.service.pipeline.<a href="ru/nsu/ga/grentseva/checker/service/pipeline/WorkspaceManager.html" class="type-name-link" title="class in ru.nsu.ga.grentseva.checker.service.pipeline">WorkspaceManager</a></li>
 </ul>
 </li>
 </ul>

@@ -1,4 +1,11 @@
 ru.nsu.ga.grentseva.checker
+ru.nsu.ga.grentseva.checker.controller
 ru.nsu.ga.grentseva.checker.dsl
 ru.nsu.ga.grentseva.checker.model
-ru.nsu.ga.grentseva.checker.service
+ru.nsu.ga.grentseva.checker.service.git
+ru.nsu.ga.grentseva.checker.service.gradle
+ru.nsu.ga.grentseva.checker.service.logging
+ru.nsu.ga.grentseva.checker.service.parser
+ru.nsu.ga.grentseva.checker.service.pipeline
+ru.nsu.ga.grentseva.checker.service.report
+ru.nsu.ga.grentseva.checker.service.scoring
