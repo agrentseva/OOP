@@ -127,4 +127,17 @@ class HTMLReportGeneratorTest {
         results.put(submission, result);
         return results;
     }
+
+    @Test
+    void generateWithEmptyResultsStillCreatesHtml() throws Exception {
+        CourseConfig config = createConfig();
+        Path output = tempDir.resolve("empty.html");
+        HTMLReportGenerator generator = new HTMLReportGenerator();
+
+        generator.generate(config, new HashMap<>(), output.toString());
+
+        assertTrue(Files.exists(output));
+        String html = Files.readString(output);
+        assertNotNull(html);
+    }
 }

@@ -68,4 +68,15 @@ class ConfigDslParserTest {
 
         assertThrows(IOException.class, () -> ConfigDslParser.loadFile(file, config));
     }
+
+    @Test
+    void parseInvalidGroovyThrowsException() throws Exception {
+        Path file = tempDir.resolve("broken.groovy");
+        Files.writeString(file, """
+            tasks {
+                task(
+            """);
+
+        assertThrows(Exception.class, () -> ConfigDslParser.parse(file));
+    }
 }
