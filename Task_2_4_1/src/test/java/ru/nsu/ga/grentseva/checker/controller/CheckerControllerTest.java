@@ -22,4 +22,13 @@ class CheckerControllerTest {
         CheckerController controller = new CheckerController();
         assertDoesNotThrow(() -> controller.run(new String[]{}));
     }
+
+    @Test
+    void runWithCustomConfigDoesNotThrow() {
+        CheckerController controller = new CheckerController();
+
+        assertDoesNotThrow(() ->
+                controller.run(new String[]{"check", "config.groovy"})
+        );
+    }
 }

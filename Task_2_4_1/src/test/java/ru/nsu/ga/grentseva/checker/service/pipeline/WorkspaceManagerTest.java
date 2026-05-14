@@ -29,4 +29,15 @@ class WorkspaceManagerTest {
 
         assertEquals(first.getAbsolutePath(), second.getAbsolutePath());
     }
+
+    @Test
+    void workspaceAlreadyExists() throws Exception {
+        WorkspaceManager manager = new WorkspaceManager();
+
+        File first = manager.getWorkspace();
+        File second = manager.getWorkspace();
+
+        assertTrue(first.exists());
+        assertEquals(first.getAbsolutePath(), second.getAbsolutePath());
+    }
 }
