@@ -140,4 +140,21 @@ class ScoreCalculatorTest {
         submission.setBonus(0);
         return submission;
     }
+
+    @Test
+    void hardDeadlineDoesNotAffectScore() {
+        ScoreCalculator calculator = new ScoreCalculator();
+        Task task = createTask();
+
+        task.setHardDeadline(LocalDate.of(2025, 9, 5));
+
+        Submission submission = createSubmission();
+        submission.setSubmitDate(LocalDate.of(2025, 12, 1));
+
+        Settings settings = new Settings();
+
+        double score = calculator.calculate(task, submission, 10, 0, 0, settings);
+
+        assertEquals(10, score);
+    }
 }

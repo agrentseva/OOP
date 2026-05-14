@@ -49,4 +49,30 @@ class TestResultParserTest {
         assertEquals(1, result[1]);
         assertEquals(0, result[2]);
     }
+
+    @Test
+    void parseWithoutResultsDirectoryReturnsZeroes() {
+        TestResultParser parser = new TestResultParser();
+        int[] result = parser.parse(tempDir.toFile());
+
+        assertEquals(0, result[0]);
+        assertEquals(0, result[1]);
+        assertEquals(0, result[2]);
+    }
+
+    @Test
+    void parseInvalidXmlReturnsZeroes() throws Exception {
+        Path resultsDirectory = tempDir.resolve("build/test-results/test");
+        Files.createDirectories(resultsDirectory);
+
+        Path xml = resultsDirectory.resolve("TEST-test.xml");
+        Files.writeString(xml, "invalid xml");
+
+        TestResultParser parser = new TestResultParser();
+        int[] result = parser.parse(tempDir.toFile());
+
+        assertEquals(0, result[0]);
+        assertEquals(0, result[1]);
+        assertEquals(0, result[2]);
+    }
 }
