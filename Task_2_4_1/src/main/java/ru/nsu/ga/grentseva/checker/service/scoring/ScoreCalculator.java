@@ -1,4 +1,4 @@
-package ru.nsu.ga.grentseva.checker.service;
+package ru.nsu.ga.grentseva.checker.service.scoring;
 
 import ru.nsu.ga.grentseva.checker.model.Settings;
 import ru.nsu.ga.grentseva.checker.model.Submission;

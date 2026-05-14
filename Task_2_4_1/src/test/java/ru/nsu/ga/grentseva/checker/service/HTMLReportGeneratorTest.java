@@ -3,6 +3,7 @@ package ru.nsu.ga.grentseva.checker.service;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import ru.nsu.ga.grentseva.checker.model.*;
+import ru.nsu.ga.grentseva.checker.service.report.HTMLReportGenerator;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

@@ -1,11 +1,14 @@
-package ru.nsu.ga.grentseva.checker.service;
+package ru.nsu.ga.grentseva.checker.service.report;
 
 import ru.nsu.ga.grentseva.checker.model.*;
+import ru.nsu.ga.grentseva.checker.service.logging.Logger;
 
 import java.io.FileWriter;
 import java.util.Map;
 
 public class HTMLReportGenerator {
+
+    private final Logger logger = new Logger();
 
     public void generate(CourseConfig config, Map<Submission, SubmissionResult> results, String outputFile) {
         StringBuilder html = new StringBuilder();
@@ -322,7 +325,7 @@ public class HTMLReportGenerator {
         try (FileWriter writer = new FileWriter(outputFile)) {
             writer.write(html.toString());
         } catch (Exception e) {
-            System.out.println("Ошибка генерации HTML");
+            logger.htmlGenerationError();
         }
     }
 

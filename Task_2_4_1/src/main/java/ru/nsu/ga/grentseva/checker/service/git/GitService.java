@@ -1,4 +1,6 @@
-package ru.nsu.ga.grentseva.checker.service;
+package ru.nsu.ga.grentseva.checker.service.git;
+
+import ru.nsu.ga.grentseva.checker.service.logging.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,6 +8,8 @@ import java.time.LocalDate;
 import java.util.concurrent.TimeUnit;
 
 public class GitService {
+
+    private final Logger logger = new Logger();
 
     public void cloneOrUpdate(String repositoryUrl, File repositoryDirectory) throws Exception {
         if (!repositoryDirectory.exists()) {
@@ -24,12 +28,14 @@ public class GitService {
             }
         }
 
-        System.out.println("Клонируем: " + repositoryUrl);
+        logger.cloningRepository(repositoryUrl);
+
         runCommand(parentDirectory, "git", "clone", repositoryUrl, repositoryDirectory.getName());
     }
 
     private void updateRepository(File repositoryDirectory) throws Exception {
-        System.out.println("Обновляем репозиторий: " + repositoryDirectory.getName());
+        logger.updatingRepository(repositoryDirectory.getName());
+
         runCommand(repositoryDirectory, "git", "fetch", "origin");
 
         String branch = branchExists(repositoryDirectory, "main") ? "main" : "master";

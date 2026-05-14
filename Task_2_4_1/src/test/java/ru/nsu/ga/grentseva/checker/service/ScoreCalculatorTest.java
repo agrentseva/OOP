@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import ru.nsu.ga.grentseva.checker.model.Settings;
 import ru.nsu.ga.grentseva.checker.model.Submission;
 import ru.nsu.ga.grentseva.checker.model.Task;
+import ru.nsu.ga.grentseva.checker.service.scoring.ScoreCalculator;
 
 import java.time.LocalDate;
 
