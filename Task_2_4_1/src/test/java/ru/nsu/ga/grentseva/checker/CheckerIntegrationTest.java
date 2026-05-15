@@ -1,4 +1,4 @@
-package ru.nsu.ga.grentseva.checker.integration;
+package ru.nsu.ga.grentseva.checker;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
