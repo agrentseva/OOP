@@ -60,16 +60,24 @@ public class GitService {
         builder.environment().put("GIT_TERMINAL_PROMPT", "0");
 
         Process process = builder.start();
-        boolean finished = process.waitFor(30, TimeUnit.SECONDS);
-        if (!finished) {
-            process.destroyForcibly();
-            throw new RuntimeException("Git команда зависла");
-        }
 
-        int exitCode = process.exitValue();
-        if (exitCode != 0) {
-            String error = new String(process.getErrorStream().readAllBytes());
-            throw new Exception("Ошибка git команды:\n" + String.join(" ", command) + "\n" + error);
+        try {
+            boolean finished = process.waitFor(30, TimeUnit.SECONDS);
+            if (!finished) {
+                process.destroyForcibly();
+                throw new RuntimeException("Git команда зависла");
+            }
+
+            int exitCode = process.exitValue();
+            if (exitCode != 0) {
+                String error = new String(process.getErrorStream().readAllBytes());
+
+                throw new Exception("Ошибка git команды:\n" + String.join(" ", command)
+                        + "\n" + error);
+            }
+
+        } finally {
+            process.destroy();
         }
     }
 
@@ -79,17 +87,25 @@ public class GitService {
         builder.directory(repository);
 
         Process process = builder.start();
-        boolean finished = process.waitFor(15, TimeUnit.SECONDS);
-        if (!finished) {
-            process.destroyForcibly();
-            throw new RuntimeException("git log завис");
-        }
+        try {
+            boolean finished = process.waitFor(15, TimeUnit.SECONDS);
+            if (!finished) {
+                process.destroyForcibly();
+                throw new RuntimeException("git log завис");
+            }
 
-        String output = new String(process.getInputStream().readAllBytes()).trim();
-        if (output.isEmpty()) {
-            throw new RuntimeException("Не удалось получить дату commit");
-        }
+            String output =
+                    new String(process.getInputStream().readAllBytes()).trim();
+            if (output.isEmpty()) {
+                throw new RuntimeException(
+                        "Не удалось получить дату commit"
+                );
+            }
 
-        return LocalDate.parse(output);
+            return LocalDate.parse(output);
+
+        } finally {
+            process.destroy();
+        }
     }
 }

@@ -21,7 +21,6 @@ public class GradleTaskRunner {
         }
 
         File gradlew = new File(directory, gradlewName);
-
         if (!gradlew.exists()) {
             logger.gradleWrapperNotFound(directory.getAbsolutePath());
             return false;
@@ -38,26 +37,31 @@ public class GradleTaskRunner {
             builder.inheritIO();
 
             Process process = builder.start();
-            boolean finished;
-            if (timeoutSeconds > 0) {
-                finished = process.waitFor(timeoutSeconds, TimeUnit.SECONDS);
-            } else {
-                process.waitFor();
-                finished = true;
-            }
+            try {
+                boolean finished;
 
-            if (!finished) {
-                process.destroyForcibly();
-                logger.taskTimeout(taskName);
-                return false;
-            }
+                if (timeoutSeconds > 0) {
+                    finished = process.waitFor(timeoutSeconds, TimeUnit.SECONDS);
+                } else {
+                    process.waitFor();
+                    finished = true;
+                }
 
-            int exitCode = process.exitValue();
-            if (exitCode != 0) {
-                logger.gradleTaskFailed(taskName, directory.getName());
-            }
+                if (!finished) {
+                    process.destroyForcibly();
+                    logger.taskTimeout(taskName);
+                    return false;
+                }
 
-            return exitCode == 0;
+                int exitCode = process.exitValue();
+                if (exitCode != 0) {
+                    logger.gradleTaskFailed(taskName, directory.getName());
+                }
+                return exitCode == 0;
+
+            } finally {
+                process.destroy();
+            }
 
         } catch (Exception e) {
             logger.error(e.getMessage());
