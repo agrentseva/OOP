@@ -1,96 +1,78 @@
 package ru.nsu.ga.grentseva.checker;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-import ru.nsu.ga.grentseva.checker.dsl.ConfigDslParser;
-import ru.nsu.ga.grentseva.checker.model.CourseConfig;
-import ru.nsu.ga.grentseva.checker.model.Submission;
-import ru.nsu.ga.grentseva.checker.model.SubmissionResult;
-import ru.nsu.ga.grentseva.checker.service.pipeline.PipelineRunner;
-import ru.nsu.ga.grentseva.checker.service.report.HTMLReportGenerator;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CheckerIntegrationTest {
 
-    @TempDir
-    Path tempDir;
+    private final File reportFile = new File("report.html");
+
+    @AfterEach
+    void cleanUp() throws Exception {
+        Files.deleteIfExists(reportFile.toPath());
+        Files.deleteIfExists(Path.of("integration-test.groovy"));
+    }
 
     @Test
-    void fullPipelineCreatesHtmlReport() throws Exception {
-        Path repository = createFakeRepository();
-        Path configFile = createConfigFile(repository);
+    void mainRunsFullPipelineAndCreatesReport() throws Exception {
+        Path config = Path.of("integration-test.groovy");
 
-        CourseConfig config = ConfigDslParser.parse(configFile);
-        PipelineRunner pipelineRunner = new PipelineRunner();
-        Map<Submission, SubmissionResult> results = pipelineRunner.run(config);
-
-        Path report = tempDir.resolve("report.html");
-        HTMLReportGenerator generator = new HTMLReportGenerator();
-
-        generator.generate(config, results, report.toString());
-
-        assertTrue(Files.exists(report));
-        String html = Files.readString(report);
-        assertTrue(html.contains("Integration Student"));
-        assertTrue(html.contains("Integration task"));
-    }
-
-    private Path createFakeRepository() throws Exception {
-        Path repository = tempDir.resolve("fake-repo");
-        Path taskDir = repository.resolve("Task_1_1_1");
-
-        Files.createDirectories(taskDir.resolve("build/test-results/test"));
-
-        Files.writeString(taskDir.resolve("gradlew.bat"), """
-                @echo off
-                exit /B 0
-                """);
-
-        Files.writeString(taskDir.resolve("gradlew"), """
-                #!/bin/sh
-                exit 0
-                """);
-
-        Files.writeString(taskDir.resolve("build/test-results/test/TEST-test.xml"), """
-                <testsuite tests="10" failures="0" skipped="0">
-                </testsuite>
-                """);
-
-        return repository;
-    }
-
-    private Path createConfigFile(Path repository) throws Exception {
-        Path config = tempDir.resolve("config.groovy");
         Files.writeString(config, """
                 tasks {
                     task("1.1.1") {
-                        name = "Integration task"
+                        name = "Пирамидальная сортировка"
                         maxScore = 1
+                        softDeadline = "13/09/2025"
+                        hardDeadline = "13/09/2025"
                     }
                 }
+
                 groups {
                     group("24214") {
-                        student("integration") {
-                            name = "Integration Student"
-                            repositoryUrl = "%s"
+
+                        student("agrentseva") {
+                            name = "Гренцева Алина Олеговна"
+                            repositoryUrl = "https://github.com/agrentseva/OOP.git"
+                        }
+
+                        student("VlanAni") {
+                            name = "Анисимов Владимир Сергеевич"
+                            repositoryUrl = "https://github.com/VlanAni/OOP.git"
                         }
                     }
                 }
+
                 submissions {
-                    submission("integration", "1.1.1") { bonus = 0 }
+                    submission("agrentseva", "1.1.1") {
+                        bonus = 0
+                    }
+
+                    submission("VlanAni", "1.1.1") {
+                        bonus = 0
+                    }
                 }
+
                 settings {
                     softDeadlinePenalty = 0.5
-                    maxBonus = 1
-                    testTimeoutSeconds = 10
+                    maxBonus = 1.0
+                    testTimeoutSeconds = 30
                 }
-                """.formatted(repository.toAbsolutePath().toString().replace("\\", "\\\\")));
+                """);
 
-        return config;
+        assertDoesNotThrow(() -> Main.main(new String[]{"check", config.toString()}));
+
+        assertTrue(reportFile.exists());
+
+        String html = Files.readString(reportFile.toPath());
+        assertTrue(html.contains("Гренцева Алина Олеговна"));
+        assertTrue(html.contains("Анисимов Владимир Сергеевич"));
+        assertTrue(html.contains("Пирамидальная сортировка"));
     }
 }
