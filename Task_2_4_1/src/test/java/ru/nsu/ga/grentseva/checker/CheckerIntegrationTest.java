@@ -22,6 +22,7 @@ class CheckerIntegrationTest {
 
     @Test
     void mainRunsFullPipelineAndCreatesReport() throws Exception {
+        // given
         Path config = Path.of("integration-test.groovy");
 
         Files.writeString(config, """
@@ -66,8 +67,10 @@ class CheckerIntegrationTest {
                 }
                 """);
 
+        // when
         assertDoesNotThrow(() -> Main.main(new String[]{"check", config.toString()}));
 
+        // then
         assertTrue(reportFile.exists());
 
         String html = Files.readString(reportFile.toPath());
