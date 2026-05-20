@@ -5,11 +5,12 @@ build/
 !**/src/test/**/build/
 .kotlin
 checker_workspace/
-build/
 out/
 .gradle/
 reports/
 *.class
+
+lib/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
