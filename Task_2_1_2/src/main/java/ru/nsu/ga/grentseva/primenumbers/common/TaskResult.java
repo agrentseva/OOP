@@ -9,11 +9,7 @@ public class TaskResult implements Serializable {
     private final boolean hasNonPrime;
     private final TaskStatus status;
 
-    public TaskResult(
-            int taskId,
-            boolean hasNonPrime,
-            TaskStatus status) {
-
+    public TaskResult(int taskId, boolean hasNonPrime, TaskStatus status) {
         this.taskId = taskId;
         this.hasNonPrime = hasNonPrime;
         this.status = status;

@@ -19,6 +19,7 @@ public class Main {
         runExampleTest(master);
         runBenchmark(master);
         master.shutdown();
+        System.exit(0);
     }
 
     private static List<WorkerInfo> createWorkers() {
