@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9918d8ee-4886-4cf2-b5d1-d0017387c6c2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Task_2_4_1/report.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Task_2_4_1/src/main/java/ru/nsu/ga/grentseva/checker/service/pipeline/PipelineRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task_2_4_1/src/main/java/ru/nsu/ga/grentseva/checker/service/pipeline/PipelineRunner.java" afterDir="false" />
     </list>
@@ -81,6 +80,7 @@
     "Gradle.Build Task_2_1_2.executor": "Run",
     "Gradle.PrimeUtilsTest.executor": "Run",
     "Gradle.Task_2_1_2 [:ru.nsu.ga.grentseva.primenumbers.Main.main()].executor": "Run",
+    "Gradle.Tests in 'ru.nsu.ga.grentseva.primenumbers'.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
@@ -101,8 +101,9 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
-      <recent name="ru.nsu.ga.grentseva.primenumbers.master" />
+      <recent name="ru.nsu.ga.grentseva.primenumbers.worker" />
       <recent name="ru.nsu.ga.grentseva.primenumbers.common" />
+      <recent name="ru.nsu.ga.grentseva.primenumbers.master" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.Tests in 'ru.nsu.ga.grentseva.primenumbers'">
