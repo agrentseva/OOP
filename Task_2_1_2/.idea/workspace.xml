@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9918d8ee-4886-4cf2-b5d1-d0017387c6c2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/primenumbers/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/primenumbers/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/primenumbers/common/TaskResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/primenumbers/common/TaskResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Task_2_4_1/report.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Task_2_4_1/src/main/java/ru/nsu/ga/grentseva/checker/service/pipeline/PipelineRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task_2_4_1/src/main/java/ru/nsu/ga/grentseva/checker/service/pipeline/PipelineRunner.java" afterDir="false" />
     </list>
@@ -42,6 +41,7 @@
       <list>
         <option value="Enum" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -79,11 +79,14 @@
     "Application.Worker 5001.executor": "Run",
     "Application.Worker 5002.executor": "Run",
     "Gradle.Build Task_2_1_2.executor": "Run",
+    "Gradle.PrimeUtilsTest.executor": "Run",
     "Gradle.Task_2_1_2 [:ru.nsu.ga.grentseva.primenumbers.Main.main()].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "Task__2__1__2",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/emoch/OOP/Task_2_1_2",
@@ -93,7 +96,16 @@
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
 }]]></component>
-  <component name="RunManager" selected="Gradle.PrimeUtilsTest">
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="ru.nsu.ga.grentseva.primenumbers.master" />
+      <recent name="ru.nsu.ga.grentseva.primenumbers.common" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.Tests in 'ru.nsu.ga.grentseva.primenumbers'">
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="openjdk-24" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -160,6 +172,33 @@
       <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
+    <configuration name="Tests in 'ru.nsu.ga.grentseva.primenumbers'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;ru.nsu.ga.grentseva.primenumbers.*&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
         <option name="Make" enabled="true" />
@@ -175,9 +214,11 @@
       <item itemvalue="Application.Worker 5002" />
       <item itemvalue="Application.Main" />
       <item itemvalue="Gradle.PrimeUtilsTest" />
+      <item itemvalue="Gradle.Tests in 'ru.nsu.ga.grentseva.primenumbers'" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Tests in 'ru.nsu.ga.grentseva.primenumbers'" />
         <item itemvalue="Gradle.PrimeUtilsTest" />
       </list>
     </recent_temporary>
