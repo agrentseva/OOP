@@ -13,13 +13,18 @@ public class Main {
     private static final int START_VALUE = 5_000_000;
 
     public static void main(String[] args) {
+        runApplication();
+        System.exit(0);
+    }
+
+    public static void runApplication() {
         List<WorkerInfo> workers = createWorkers();
         MasterServer master = new MasterServer(workers);
 
         runExampleTest(master);
         runBenchmark(master);
+
         master.shutdown();
-        System.exit(0);
     }
 
     private static List<WorkerInfo> createWorkers() {
