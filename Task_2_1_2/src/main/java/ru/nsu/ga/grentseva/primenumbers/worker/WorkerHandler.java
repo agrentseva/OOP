@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class WorkerHandler implements Runnable {
     private static final Map<Integer, Boolean> PRIME_CACHE = new ConcurrentHashMap<>();
-    private static final long HEARTBEAT_INTERVAL = 500;
+    private static long heartbeatInterval = 500;
     private final Socket socket;
 
     public WorkerHandler(Socket socket) {
@@ -56,14 +56,6 @@ public class WorkerHandler implements Runnable {
         long lastHeartbeat = System.currentTimeMillis();
 
         for (int number : numbers) {
-            try {
-                Thread.sleep(1);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                DistributedLogger.error("Task interrupted: " + task.getTaskId());
-                return new TaskResult(task.getTaskId(), false, TaskStatus.FAILED);
-            }
-
             if (Thread.currentThread().isInterrupted()) {
                 DistributedLogger.error("Task interrupted: " + task.getTaskId());
                 return new TaskResult(task.getTaskId(), false, TaskStatus.FAILED);
@@ -71,7 +63,7 @@ public class WorkerHandler implements Runnable {
 
             long currentTime = System.currentTimeMillis();
 
-            if (currentTime - lastHeartbeat >= HEARTBEAT_INTERVAL) {
+            if (currentTime - lastHeartbeat >= heartbeatInterval) {
                 try {
                     outputStream.writeObject(new WorkerMessage(MessageType.HEARTBEAT, null));
                     outputStream.flush();
@@ -101,5 +93,9 @@ public class WorkerHandler implements Runnable {
         } catch (IOException e) {
             DistributedLogger.error("Socket close error: " + e.getMessage());
         }
+    }
+
+    public static void setHeartbeatInterval(long interval) {
+        heartbeatInterval = interval;
     }
 }

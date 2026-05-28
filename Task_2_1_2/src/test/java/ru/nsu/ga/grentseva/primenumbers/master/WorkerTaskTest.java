@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.ga.grentseva.primenumbers.common.Task;
 import ru.nsu.ga.grentseva.primenumbers.common.TaskStatus;
+import ru.nsu.ga.grentseva.primenumbers.worker.WorkerHandler;
 import ru.nsu.ga.grentseva.primenumbers.worker.WorkerNode;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -93,28 +94,31 @@ class WorkerTaskTest {
 
     @Test
     void shouldHandleHeartbeatDuringLongTask() {
-        int[] numbers = new int[2_000_000];
-        for (int i = 0; i < numbers.length; i++) {
-            numbers[i] = Integer.MAX_VALUE;
+        WorkerHandler.setHeartbeatInterval(1);
+
+        try {
+            int[] numbers = new int[200];
+            for (int i = 0; i < numbers.length; i++) {
+                numbers[i] = Integer.MAX_VALUE;
+            }
+
+            Task task = new Task(4, numbers);
+            WorkerInfo workerInfo = new WorkerInfo("localhost", TEST_PORT);
+
+            TaskManager taskManager = new TaskManager();
+            taskManager.addTask(task);
+
+            AtomicBoolean foundComposite = new AtomicBoolean(false);
+            WorkerTask workerTask = new WorkerTask(task, workerInfo, taskManager, foundComposite);
+
+            workerTask.run();
+
+            assertNotNull(workerTask.getResult());
+            assertEquals(TaskStatus.COMPLETED, workerTask.getResult().getStatus());
+            assertFalse(workerTask.getResult().hasNonPrime());
+            assertTrue(workerTask.getHeartbeatCount() > 0, "Heartbeat messages were not received");
+        } finally {
+            WorkerHandler.setHeartbeatInterval(500);
         }
-
-        Task task = new Task(4, numbers);
-        WorkerInfo workerInfo = new WorkerInfo("localhost", TEST_PORT);
-
-        TaskManager taskManager = new TaskManager();
-        taskManager.addTask(task);
-
-        AtomicBoolean foundComposite = new AtomicBoolean(false);
-        WorkerTask workerTask = new WorkerTask(task, workerInfo, taskManager, foundComposite);
-
-        long startTime = System.currentTimeMillis();
-        workerTask.run();
-        long endTime = System.currentTimeMillis();
-
-        assertNotNull(workerTask.getResult());
-        assertEquals(TaskStatus.COMPLETED, workerTask.getResult().getStatus());
-        assertFalse(workerTask.getResult().hasNonPrime());
-        assertFalse(foundComposite.get());
-        assertTrue(endTime - startTime > 1000, "Task finished too quickly, heartbeat probably not tested");
     }
 }
