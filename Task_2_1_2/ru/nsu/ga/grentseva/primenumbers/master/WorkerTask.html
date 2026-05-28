@@ -93,9 +93,10 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.ga.grentseva.primenumbers.common.Task,ru.nsu.ga.grentseva.primenumbers.master.WorkerInfo,ru.nsu.ga.grentseva.primenumbers.master.TaskManager)" class="member-name-link">WorkerTask</a><wbr>(<a href="../common/Task.html" title="class in ru.nsu.ga.grentseva.primenumbers.common">Task</a>&nbsp;task,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.ga.grentseva.primenumbers.common.Task,ru.nsu.ga.grentseva.primenumbers.master.WorkerInfo,ru.nsu.ga.grentseva.primenumbers.master.TaskManager,java.util.concurrent.atomic.AtomicBoolean)" class="member-name-link">WorkerTask</a><wbr>(<a href="../common/Task.html" title="class in ru.nsu.ga.grentseva.primenumbers.common">Task</a>&nbsp;task,
  <a href="WorkerInfo.html" title="class in ru.nsu.ga.grentseva.primenumbers.master">WorkerInfo</a>&nbsp;worker,
- <a href="TaskManager.html" title="class in ru.nsu.ga.grentseva.primenumbers.master">TaskManager</a>&nbsp;taskManager)</code></div>
+ <a href="TaskManager.html" title="class in ru.nsu.ga.grentseva.primenumbers.master">TaskManager</a>&nbsp;taskManager,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/atomic/AtomicBoolean.html" title="class or interface in java.util.concurrent.atomic" class="external-link">AtomicBoolean</a>&nbsp;foundComposite)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
@@ -111,12 +112,15 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../common/TaskResult.html" title="class in ru.nsu.ga.grentseva.primenumbers.common">TaskResult</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getResult()" class="member-name-link">getResult</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getHeartbeatCount()" class="member-name-link">getHeartbeatCount</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#run()" class="member-name-link">run</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../common/TaskResult.html" title="class in ru.nsu.ga.grentseva.primenumbers.common">TaskResult</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getResult()" class="member-name-link">getResult</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#run()" class="member-name-link">run</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -135,11 +139,12 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(ru.nsu.ga.grentseva.primenumbers.common.Task,ru.nsu.ga.grentseva.primenumbers.master.WorkerInfo,ru.nsu.ga.grentseva.primenumbers.master.TaskManager)">
+<section class="detail" id="&lt;init&gt;(ru.nsu.ga.grentseva.primenumbers.common.Task,ru.nsu.ga.grentseva.primenumbers.master.WorkerInfo,ru.nsu.ga.grentseva.primenumbers.master.TaskManager,java.util.concurrent.atomic.AtomicBoolean)">
 <h3>WorkerTask</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">WorkerTask</span><wbr><span class="parameters">(<a href="../common/Task.html" title="class in ru.nsu.ga.grentseva.primenumbers.common">Task</a>&nbsp;task,
  <a href="WorkerInfo.html" title="class in ru.nsu.ga.grentseva.primenumbers.master">WorkerInfo</a>&nbsp;worker,
- <a href="TaskManager.html" title="class in ru.nsu.ga.grentseva.primenumbers.master">TaskManager</a>&nbsp;taskManager)</span></div>
+ <a href="TaskManager.html" title="class in ru.nsu.ga.grentseva.primenumbers.master">TaskManager</a>&nbsp;taskManager,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/atomic/AtomicBoolean.html" title="class or interface in java.util.concurrent.atomic" class="external-link">AtomicBoolean</a>&nbsp;foundComposite)</span></div>
 </section>
 </li>
 </ul>
@@ -164,6 +169,12 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="getResult()">
 <h3>getResult</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../common/TaskResult.html" title="class in ru.nsu.ga.grentseva.primenumbers.common">TaskResult</a></span>&nbsp;<span class="element-name">getResult</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getHeartbeatCount()">
+<h3>getHeartbeatCount</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getHeartbeatCount</span>()</div>
 </section>
 </li>
 </ul>
