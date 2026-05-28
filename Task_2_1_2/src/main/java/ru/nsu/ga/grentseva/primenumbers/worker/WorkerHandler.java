@@ -1,10 +1,12 @@
 package ru.nsu.ga.grentseva.primenumbers.worker;
 
 import ru.nsu.ga.grentseva.primenumbers.common.DistributedLogger;
+import ru.nsu.ga.grentseva.primenumbers.common.MessageType;
 import ru.nsu.ga.grentseva.primenumbers.common.PrimeUtils;
 import ru.nsu.ga.grentseva.primenumbers.common.Task;
 import ru.nsu.ga.grentseva.primenumbers.common.TaskResult;
 import ru.nsu.ga.grentseva.primenumbers.common.TaskStatus;
+import ru.nsu.ga.grentseva.primenumbers.common.WorkerMessage;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -15,6 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class WorkerHandler implements Runnable {
     private static final Map<Integer, Boolean> PRIME_CACHE = new ConcurrentHashMap<>();
+    private static final long HEARTBEAT_INTERVAL = 500;
 
     private final Socket socket;
 
@@ -37,11 +40,12 @@ public class WorkerHandler implements Runnable {
 
             DistributedLogger.info("Task received: " + task.getTaskId());
 
-            TaskResult result = executeTask(task);
-            outputStream.writeObject(result);
+            TaskResult result = executeTask(task, outputStream);
+            outputStream.writeObject(new WorkerMessage(MessageType.RESULT, result));
             outputStream.flush();
 
             DistributedLogger.info("Task completed: " + task.getTaskId());
+
         } catch (IOException | ClassNotFoundException e) {
             DistributedLogger.error("Worker handler error: " + e.getMessage());
         } finally {
@@ -49,13 +53,29 @@ public class WorkerHandler implements Runnable {
         }
     }
 
-    private TaskResult executeTask(Task task) {
+    private TaskResult executeTask(Task task, ObjectOutputStream outputStream) {
         int[] numbers = task.getNumbers();
+        long lastHeartbeat = System.currentTimeMillis();
 
         for (int number : numbers) {
             if (Thread.currentThread().isInterrupted()) {
                 DistributedLogger.error("Task interrupted: " + task.getTaskId());
                 return new TaskResult(task.getTaskId(), false, TaskStatus.FAILED);
+            }
+
+            long currentTime = System.currentTimeMillis();
+
+            if (currentTime - lastHeartbeat >= HEARTBEAT_INTERVAL) {
+                try {
+                    outputStream.writeObject(new WorkerMessage(MessageType.HEARTBEAT, null));
+                    outputStream.flush();
+
+                    DistributedLogger.info("Heartbeat sent for task " + task.getTaskId());
+                    lastHeartbeat = currentTime;
+                } catch (IOException e) {
+                    DistributedLogger.error("Heartbeat send failed: " + e.getMessage());
+                    return new TaskResult(task.getTaskId(), false, TaskStatus.FAILED);
+                }
             }
 
             boolean isPrime = PRIME_CACHE.computeIfAbsent(number, PrimeUtils::isPrime);
@@ -70,7 +90,9 @@ public class WorkerHandler implements Runnable {
 
     private void closeSocket() {
         try {
-            socket.close();
+            if (!socket.isClosed()) {
+                socket.close();
+            }
         } catch (IOException e) {
             DistributedLogger.error("Socket close error: " + e.getMessage());
         }

@@ -21,6 +21,8 @@ public class Main {
         List<WorkerInfo> workers = createWorkers();
         MasterServer master = new MasterServer(workers);
 
+        runHeartbeatDemo(master);
+
         runExampleTest(master);
         runBenchmark(master);
 
@@ -41,6 +43,23 @@ public class Main {
 
         DistributedLogger.info("Input: [6, 8, 7, 13, 5, 9, 4]");
         DistributedLogger.info("Output: " + result);
+    }
+
+    private static void runHeartbeatDemo(MasterServer master) {
+        DistributedLogger.info("===== HEARTBEAT DEMO =====");
+
+        int[] numbers = new int[50_000_000];
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = Integer.MAX_VALUE;
+        }
+
+        long start = System.nanoTime();
+        boolean result = master.hasNonPrime(numbers);
+        long end = System.nanoTime();
+
+        DistributedLogger.info("Result: " + result);
+        DistributedLogger.info("Time: " + (end - start) / 1_000_000_000.0 + " sec");
+        DistributedLogger.info("==========================");
     }
 
     private static void runBenchmark(MasterServer master) {

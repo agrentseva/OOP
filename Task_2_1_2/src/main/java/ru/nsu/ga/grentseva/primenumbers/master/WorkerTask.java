@@ -1,9 +1,11 @@
 package ru.nsu.ga.grentseva.primenumbers.master;
 
 import ru.nsu.ga.grentseva.primenumbers.common.DistributedLogger;
+import ru.nsu.ga.grentseva.primenumbers.common.MessageType;
 import ru.nsu.ga.grentseva.primenumbers.common.Task;
 import ru.nsu.ga.grentseva.primenumbers.common.TaskResult;
 import ru.nsu.ga.grentseva.primenumbers.common.TaskStatus;
+import ru.nsu.ga.grentseva.primenumbers.common.WorkerMessage;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,7 +14,8 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 
 public class WorkerTask implements Runnable {
-    private static final int TIMEOUT = 5000;
+    private static final int SOCKET_TIMEOUT = 1000;
+    private static final long HEARTBEAT_TIMEOUT = 5000;
 
     private final Task task;
     private final WorkerInfo worker;
@@ -39,23 +42,44 @@ public class WorkerTask implements Runnable {
                 ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
                 ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream())
         ) {
-            socket.setSoTimeout(TIMEOUT);
+            socket.setSoTimeout(SOCKET_TIMEOUT);
 
             DistributedLogger.info("Sending task " + task.getTaskId() + " to worker " + worker);
             outputStream.writeObject(task);
             outputStream.flush();
 
-            Object response = inputStream.readObject();
-            if (!(response instanceof TaskResult)) {
-                throw new IOException("Invalid worker response");
+            long lastHeartbeat = System.currentTimeMillis();
+
+            while (true) {
+                if (System.currentTimeMillis() - lastHeartbeat > HEARTBEAT_TIMEOUT) {
+                    DistributedLogger.error("Heartbeat timeout from worker " + worker);
+                    markTaskAsFailed();
+                    return;
+                }
+
+                try {
+                    Object response = inputStream.readObject();
+
+                    if (!(response instanceof WorkerMessage message)) {
+                        DistributedLogger.error("Invalid worker response");
+                        markTaskAsFailed();
+                        return;
+                    }
+
+                    if (message.getType() == MessageType.HEARTBEAT) {
+                        lastHeartbeat = System.currentTimeMillis();
+                        DistributedLogger.info("Heartbeat received from " + worker + " for task " + task.getTaskId());
+                    }
+
+                    if (message.getType() == MessageType.RESULT) {
+                        result = message.getResult();
+                        taskManager.setTaskStatus(task.getTaskId(), result.getStatus());
+                        DistributedLogger.info("Result received for task " + task.getTaskId());
+                        return;
+                    }
+                } catch (SocketTimeoutException e) {
+                }
             }
-
-            result = (TaskResult) response;
-            taskManager.setTaskStatus(task.getTaskId(), TaskStatus.COMPLETED);
-
-        } catch (SocketTimeoutException e) {
-            DistributedLogger.error("Worker timeout: " + worker);
-            markTaskAsFailed();
         } catch (IOException | ClassNotFoundException e) {
             DistributedLogger.error("Worker failed: " + worker + " | " + e.getMessage());
             markTaskAsFailed();
