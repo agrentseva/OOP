@@ -18,7 +18,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class WorkerHandler implements Runnable {
     private static final Map<Integer, Boolean> PRIME_CACHE = new ConcurrentHashMap<>();
     private static final long HEARTBEAT_INTERVAL = 500;
-
     private final Socket socket;
 
     public WorkerHandler(Socket socket) {
@@ -41,6 +40,7 @@ public class WorkerHandler implements Runnable {
             DistributedLogger.info("Task received: " + task.getTaskId());
 
             TaskResult result = executeTask(task, outputStream);
+
             outputStream.writeObject(new WorkerMessage(MessageType.RESULT, result));
             outputStream.flush();
 
@@ -48,8 +48,6 @@ public class WorkerHandler implements Runnable {
 
         } catch (IOException | ClassNotFoundException e) {
             DistributedLogger.error("Worker handler error: " + e.getMessage());
-        } finally {
-            closeSocket();
         }
     }
 
@@ -58,6 +56,14 @@ public class WorkerHandler implements Runnable {
         long lastHeartbeat = System.currentTimeMillis();
 
         for (int number : numbers) {
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                DistributedLogger.error("Task interrupted: " + task.getTaskId());
+                return new TaskResult(task.getTaskId(), false, TaskStatus.FAILED);
+            }
+
             if (Thread.currentThread().isInterrupted()) {
                 DistributedLogger.error("Task interrupted: " + task.getTaskId());
                 return new TaskResult(task.getTaskId(), false, TaskStatus.FAILED);
@@ -69,7 +75,6 @@ public class WorkerHandler implements Runnable {
                 try {
                     outputStream.writeObject(new WorkerMessage(MessageType.HEARTBEAT, null));
                     outputStream.flush();
-
                     DistributedLogger.info("Heartbeat sent for task " + task.getTaskId());
                     lastHeartbeat = currentTime;
                 } catch (IOException e) {

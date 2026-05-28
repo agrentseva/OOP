@@ -12,6 +12,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class WorkerTask implements Runnable {
     private static final int SOCKET_TIMEOUT = 1000;
@@ -20,12 +21,15 @@ public class WorkerTask implements Runnable {
     private final Task task;
     private final WorkerInfo worker;
     private final TaskManager taskManager;
+    private final AtomicBoolean foundComposite;
     private volatile TaskResult result;
+    private volatile int heartbeatCount;
 
-    public WorkerTask(Task task, WorkerInfo worker, TaskManager taskManager) {
+    public WorkerTask(Task task, WorkerInfo worker, TaskManager taskManager, AtomicBoolean foundComposite) {
         this.task = task;
         this.worker = worker;
         this.taskManager = taskManager;
+        this.foundComposite = foundComposite;
     }
 
     @Override
@@ -43,14 +47,26 @@ public class WorkerTask implements Runnable {
                 ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream())
         ) {
             socket.setSoTimeout(SOCKET_TIMEOUT);
-
             DistributedLogger.info("Sending task " + task.getTaskId() + " to worker " + worker);
+
             outputStream.writeObject(task);
             outputStream.flush();
 
             long lastHeartbeat = System.currentTimeMillis();
 
             while (true) {
+                if (Thread.currentThread().isInterrupted()) {
+                    DistributedLogger.info("Task interrupted: " + task.getTaskId());
+                    markTaskAsFailed();
+                    return;
+                }
+
+                if (foundComposite.get()) {
+                    DistributedLogger.info("Task cancelled because composite already found");
+                    markTaskAsFailed();
+                    return;
+                }
+
                 if (System.currentTimeMillis() - lastHeartbeat > HEARTBEAT_TIMEOUT) {
                     DistributedLogger.error("Heartbeat timeout from worker " + worker);
                     markTaskAsFailed();
@@ -67,12 +83,18 @@ public class WorkerTask implements Runnable {
                     }
 
                     if (message.getType() == MessageType.HEARTBEAT) {
+                        heartbeatCount++;
                         lastHeartbeat = System.currentTimeMillis();
                         DistributedLogger.info("Heartbeat received from " + worker + " for task " + task.getTaskId());
                     }
 
                     if (message.getType() == MessageType.RESULT) {
                         result = message.getResult();
+
+                        if (result.hasNonPrime()) {
+                            foundComposite.set(true);
+                        }
+
                         taskManager.setTaskStatus(task.getTaskId(), result.getStatus());
                         DistributedLogger.info("Result received for task " + task.getTaskId());
                         return;
@@ -93,5 +115,9 @@ public class WorkerTask implements Runnable {
 
     public TaskResult getResult() {
         return result;
+    }
+
+    public int getHeartbeatCount() {
+        return heartbeatCount;
     }
 }

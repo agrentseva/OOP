@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MasterServer {
     private static final int THREAD_POOL_SIZE = 10;
@@ -18,6 +19,8 @@ public class MasterServer {
     private final List<WorkerInfo> workers;
     private final TaskManager taskManager;
     private final ExecutorService executorService;
+    private final AtomicBoolean foundComposite;
+
 
     public MasterServer(List<WorkerInfo> workers) {
         if (workers.isEmpty()) {
@@ -26,6 +29,7 @@ public class MasterServer {
         this.workers = workers;
         this.taskManager = new TaskManager();
         this.executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
+        this.foundComposite = new AtomicBoolean(false);
     }
 
     public boolean hasNonPrime(int[] numbers) {
@@ -43,23 +47,48 @@ public class MasterServer {
 
         for (int i = 0; i < tasks.size(); i++) {
             WorkerInfo worker = workers.get(i % workers.size());
-            WorkerTask workerTask = new WorkerTask(tasks.get(i), worker, taskManager);
-
+            WorkerTask workerTask = new WorkerTask(tasks.get(i), worker, taskManager, foundComposite);
             workerTasks.add(workerTask);
+
             Future<?> future = executorService.submit(workerTask);
             futures.add(future);
         }
 
-        waitForTasks(futures);
+        while (true) {
+            if (foundComposite.get()) {
+                DistributedLogger.info("Composite number found. Cancelling remaining tasks");
+                cancelAllTasks(futures);
+                return true;
+            }
+
+            boolean allDone = true;
+            for (Future<?> future : futures) {
+                if (!future.isDone()) {
+                    allDone = false;
+                    break;
+                }
+            }
+
+            if (allDone) {
+                break;
+            }
+
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                cancelAllTasks(futures);
+                DistributedLogger.error("Master thread interrupted");
+                return false;
+            }
+        }
+
         reassignFailedTasks();
         printTaskStatuses();
 
         for (WorkerTask workerTask : workerTasks) {
             TaskResult result = workerTask.getResult();
-
             if (result != null && result.getStatus() == TaskStatus.COMPLETED && result.hasNonPrime()) {
-                DistributedLogger.info("Non-prime number found in task " + result.getTaskId());
-                cancelAllTasks(futures);
                 return true;
             }
         }
@@ -88,7 +117,7 @@ public class MasterServer {
 
         for (Task failedTask : failedTasks) {
             for (WorkerInfo worker : workers) {
-                WorkerTask retryTask = new WorkerTask(failedTask, worker, taskManager);
+                WorkerTask retryTask = new WorkerTask(failedTask, worker, taskManager, foundComposite);
                 Future<?> retryFuture = executorService.submit(retryTask);
 
                 try {
