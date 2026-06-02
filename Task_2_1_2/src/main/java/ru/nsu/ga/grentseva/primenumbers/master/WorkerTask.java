@@ -47,6 +47,7 @@ public class WorkerTask implements Runnable {
                 ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream())
         ) {
             socket.setSoTimeout(SOCKET_TIMEOUT);
+
             DistributedLogger.info("Sending task " + task.getTaskId() + " to worker " + worker);
 
             outputStream.writeObject(task);
@@ -90,7 +91,6 @@ public class WorkerTask implements Runnable {
 
                     if (message.getType() == MessageType.RESULT) {
                         result = message.getResult();
-
                         if (result.hasNonPrime()) {
                             foundComposite.set(true);
                         }

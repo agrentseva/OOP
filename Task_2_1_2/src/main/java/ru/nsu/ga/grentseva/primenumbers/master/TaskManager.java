@@ -28,13 +28,11 @@ public class TaskManager {
 
     public List<Task> getTasksByStatus(TaskStatus status) {
         List<Task> result = new ArrayList<>();
-
         for (Map.Entry<Integer, TaskStatus> entry : taskStatuses.entrySet()) {
             if (entry.getValue() == status) {
                 result.add(tasks.get(entry.getKey()));
             }
         }
-
         return result;
     }
 
