@@ -16,9 +16,9 @@ class PrimeNumbersIntegrationTest {
 
     @BeforeEach
     void startWorkers() {
-        startWorker(5000);
-        startWorker(5001);
-        startWorker(5002);
+        startWorker(5005);
+        startWorker(5006);
+        startWorker(5007);
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {

@@ -4,13 +4,20 @@ import ru.nsu.ga.grentseva.primenumbers.common.DistributedLogger;
 import ru.nsu.ga.grentseva.primenumbers.common.Task;
 import ru.nsu.ga.grentseva.primenumbers.common.TaskResult;
 import ru.nsu.ga.grentseva.primenumbers.common.TaskStatus;
+import ru.nsu.ga.grentseva.primenumbers.common.MessageType;
+import ru.nsu.ga.grentseva.primenumbers.common.WorkerMessage;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MasterServer {
@@ -68,7 +75,6 @@ public class MasterServer {
                     break;
                 }
             }
-
             if (allDone) {
                 break;
             }
@@ -96,17 +102,6 @@ public class MasterServer {
         return false;
     }
 
-    private void waitForTasks(List<Future<?>> futures) {
-        for (Future<?> future : futures) {
-            try {
-                future.get();
-            } catch (Exception e) {
-                future.cancel(true);
-                DistributedLogger.error("Task execution error: " + e.getMessage());
-            }
-        }
-    }
-
     private void reassignFailedTasks() {
         List<Task> failedTasks = taskManager.getTasksByStatus(TaskStatus.FAILED);
         if (failedTasks.isEmpty()) {
@@ -119,7 +114,6 @@ public class MasterServer {
             for (WorkerInfo worker : workers) {
                 WorkerTask retryTask = new WorkerTask(failedTask, worker, taskManager, foundComposite);
                 Future<?> retryFuture = executorService.submit(retryTask);
-
                 try {
                     retryFuture.get();
                 } catch (Exception e) {
@@ -168,12 +162,38 @@ public class MasterServer {
             tasks.add(task);
             start = end;
         }
-
         return tasks;
     }
 
     public void shutdown() {
+        for (WorkerInfo worker : workers) {
+            sendShutdown(worker);
+        }
+
         executorService.shutdownNow();
+        try {
+            if (!executorService.awaitTermination(5, TimeUnit.SECONDS)) {
+                DistributedLogger.error("Master pool did not terminate");
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
         DistributedLogger.info("Master thread pool stopped");
+    }
+
+    private void sendShutdown(WorkerInfo worker) {
+        try (
+                Socket socket = new Socket(worker.getHost(), worker.getPort());
+                ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
+                ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream())
+        ) {
+            outputStream.writeObject(new WorkerMessage(MessageType.SHUTDOWN, null));
+            outputStream.flush();
+
+            DistributedLogger.info("Shutdown sent to worker " + worker);
+        } catch (IOException e) {
+            DistributedLogger.error("Failed to shutdown worker " + worker + ": " + e.getMessage());
+        }
     }
 }

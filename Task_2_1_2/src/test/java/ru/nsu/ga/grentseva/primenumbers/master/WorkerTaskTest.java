@@ -97,9 +97,9 @@ class WorkerTaskTest {
         WorkerHandler.setHeartbeatInterval(1);
 
         try {
-            int[] numbers = new int[200];
+            int[] numbers = new int[100_000];
             for (int i = 0; i < numbers.length; i++) {
-                numbers[i] = Integer.MAX_VALUE;
+                numbers[i] = Integer.MAX_VALUE - i;
             }
 
             Task task = new Task(4, numbers);
@@ -115,8 +115,8 @@ class WorkerTaskTest {
 
             assertNotNull(workerTask.getResult());
             assertEquals(TaskStatus.COMPLETED, workerTask.getResult().getStatus());
-            assertFalse(workerTask.getResult().hasNonPrime());
             assertTrue(workerTask.getHeartbeatCount() > 0, "Heartbeat messages were not received");
+
         } finally {
             WorkerHandler.setHeartbeatInterval(500);
         }

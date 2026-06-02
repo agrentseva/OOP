@@ -4,8 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9918d8ee-4886-4cf2-b5d1-d0017387c6c2" name="Changes" comment="">
+    <list default="true" id="9918d8ee-4886-4cf2-b5d1-d0017387c6c2" name="Changes" comment="some fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/primenumbers/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/primenumbers/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/primenumbers/common/MessageType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/primenumbers/common/MessageType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/primenumbers/master/MasterServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/primenumbers/master/MasterServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/primenumbers/master/TaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/primenumbers/master/TaskManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/primenumbers/master/WorkerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/primenumbers/master/WorkerTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/primenumbers/worker/WorkerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/primenumbers/worker/WorkerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/primenumbers/worker/WorkerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/primenumbers/worker/WorkerMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/primenumbers/worker/WorkerNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ga/grentseva/primenumbers/worker/WorkerNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ga/grentseva/primenumbers/PrimeNumbersIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/ga/grentseva/primenumbers/PrimeNumbersIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ga/grentseva/primenumbers/worker/WorkerHandlerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/ga/grentseva/primenumbers/worker/WorkerHandlerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Task_2_4_1/report.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Task_2_4_1/src/main/java/ru/nsu/ga/grentseva/checker/service/pipeline/PipelineRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task_2_4_1/src/main/java/ru/nsu/ga/grentseva/checker/service/pipeline/PipelineRunner.java" afterDir="false" />
     </list>
@@ -22,6 +32,9 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
@@ -39,8 +52,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="JUnit5 Test Class" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -79,20 +92,25 @@
     "Application.Worker 5001.executor": "Run",
     "Application.Worker 5002.executor": "Run",
     "Gradle.Build Task_2_1_2.executor": "Run",
+    "Gradle.HeartbeatIntegrationTest.executor": "Run",
     "Gradle.PrimeNumbersIntegrationTest.executor": "Run",
     "Gradle.PrimeUtilsTest.executor": "Run",
     "Gradle.Task_2_1_2 [:ru.nsu.ga.grentseva.primenumbers.Main.main()].executor": "Run",
+    "Gradle.Tests in 'Task_2_1_2.test'.executor": "Run",
     "Gradle.Tests in 'ru.nsu.ga.grentseva.primenumbers'.executor": "Run",
+    "Gradle.WorkerHandlerTest.executor": "Run",
+    "Gradle.WorkerTaskTest.executor": "Run",
+    "Gradle.WorkerTaskTest.shouldHandleHeartbeatDuringLongTask.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "Task__2__1__2",
+    "git-widget-placeholder": "#15 on Task__2__1__2",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/emoch/OOP/Task_2_1_2",
-    "project.structure.last.edited": "SDKs",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
@@ -108,7 +126,7 @@
       <recent name="ru.nsu.ga.grentseva.primenumbers.master" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.PrimeNumbersIntegrationTest">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="openjdk-24" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -175,7 +193,7 @@
       <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
-    <configuration name="PrimeUtilsTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Tests in 'Task_2_1_2.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -187,8 +205,6 @@
         <option name="taskNames">
           <list>
             <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;ru.nsu.ga.grentseva.primenumbers.common.PrimeUtilsTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -229,6 +245,60 @@
       <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
+    <configuration name="WorkerTaskTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;ru.nsu.ga.grentseva.primenumbers.master.WorkerTaskTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="WorkerTaskTest.shouldHandleHeartbeatDuringLongTask" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;ru.nsu.ga.grentseva.primenumbers.master.WorkerTaskTest.shouldHandleHeartbeatDuringLongTask&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
         <option name="Make" enabled="true" />
@@ -243,15 +313,19 @@
       <item itemvalue="Application.Worker 5001" />
       <item itemvalue="Application.Worker 5002" />
       <item itemvalue="Application.Main" />
+      <item itemvalue="Gradle.Tests in 'Task_2_1_2.test'" />
       <item itemvalue="Gradle.PrimeNumbersIntegrationTest" />
-      <item itemvalue="Gradle.PrimeUtilsTest" />
+      <item itemvalue="Gradle.WorkerTaskTest" />
+      <item itemvalue="Gradle.WorkerTaskTest.shouldHandleHeartbeatDuringLongTask" />
       <item itemvalue="Gradle.Tests in 'ru.nsu.ga.grentseva.primenumbers'" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Tests in 'Task_2_1_2.test'" />
         <item itemvalue="Gradle.PrimeNumbersIntegrationTest" />
         <item itemvalue="Gradle.Tests in 'ru.nsu.ga.grentseva.primenumbers'" />
-        <item itemvalue="Gradle.PrimeUtilsTest" />
+        <item itemvalue="Gradle.WorkerTaskTest" />
+        <item itemvalue="Gradle.WorkerTaskTest.shouldHandleHeartbeatDuringLongTask" />
       </list>
     </recent_temporary>
   </component>
@@ -270,6 +344,45 @@
       <option name="presentableId" value="Default" />
       <updated>1779308129440</updated>
     </task>
+    <task id="LOCAL-00001" summary="heartbeat worker">
+      <option name="closed" value="true" />
+      <created>1779993603318</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1779993603318</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fix test">
+      <option name="closed" value="true" />
+      <created>1779993958957</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1779993958957</updated>
+    </task>
+    <task id="LOCAL-00003" summary="some fix">
+      <option name="closed" value="true" />
+      <created>1780000787097</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1780000787097</updated>
+    </task>
+    <task id="LOCAL-00004" summary="some fix">
+      <option name="closed" value="true" />
+      <created>1780001419444</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1780001419444</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="heartbeat worker" />
+    <MESSAGE value="fix test" />
+    <MESSAGE value="some fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="some fix" />
   </component>
 </project>

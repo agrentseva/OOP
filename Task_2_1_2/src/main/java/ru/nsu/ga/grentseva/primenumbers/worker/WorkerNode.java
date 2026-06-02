@@ -8,15 +8,16 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class WorkerNode {
     private static final int THREAD_POOL_SIZE = 10;
 
     private final int port;
     private final ExecutorService executorService;
+    private ServerSocket serverSocket;
 
     private volatile boolean running;
-    private ServerSocket serverSocket;
 
     public WorkerNode(int port) {
         this.port = port;
@@ -33,7 +34,7 @@ public class WorkerNode {
                 try {
                     Socket socket = serverSocket.accept();
                     DistributedLogger.info("Master connected: " + socket.getInetAddress());
-                    executorService.submit(new WorkerHandler(socket));
+                    executorService.submit(new WorkerHandler(socket, this));
                 } catch (SocketException e) {
                     if (running) {
                         DistributedLogger.error("Socket error: " + e.getMessage());
@@ -43,7 +44,19 @@ public class WorkerNode {
         } catch (IOException e) {
             DistributedLogger.error("Worker server error: " + e.getMessage());
         } finally {
-            shutdown();
+            stopExecutor();
+            DistributedLogger.info("Worker stopped");
+        }
+    }
+
+    private void stopExecutor() {
+        executorService.shutdownNow();
+        try {
+            if (!executorService.awaitTermination(5, TimeUnit.SECONDS)) {
+                DistributedLogger.error("Worker pool did not terminate");
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 
@@ -51,7 +64,6 @@ public class WorkerNode {
         if (!running) {
             return;
         }
-
         running = false;
 
         try {
@@ -61,8 +73,5 @@ public class WorkerNode {
         } catch (IOException e) {
             DistributedLogger.error("Server socket close error: " + e.getMessage());
         }
-
-        executorService.shutdownNow();
-        DistributedLogger.info("Worker stopped");
     }
 }

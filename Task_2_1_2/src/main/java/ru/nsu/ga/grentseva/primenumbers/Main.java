@@ -23,9 +23,6 @@ public class Main {
 
         runHeartbeatDemo(master);
 
-        runExampleTest(master);
-        runBenchmark(master);
-
         master.shutdown();
     }
 
@@ -35,14 +32,6 @@ public class Main {
         workers.add(new WorkerInfo("localhost", 5001));
         workers.add(new WorkerInfo("localhost", 5002));
         return workers;
-    }
-
-    private static void runExampleTest(MasterServer master) {
-        int[] numbers = {6, 8, 7, 13, 5, 9, 4};
-        boolean result = master.hasNonPrime(numbers);
-
-        DistributedLogger.info("Input: [6, 8, 7, 13, 5, 9, 4]");
-        DistributedLogger.info("Output: " + result);
     }
 
     private static void runHeartbeatDemo(MasterServer master) {
@@ -62,33 +51,4 @@ public class Main {
         DistributedLogger.info("==========================");
     }
 
-    private static void runBenchmark(MasterServer master) {
-        DistributedLogger.info("Generating large prime array...");
-        int[] numbers = generatePrimeArray(ARRAY_SIZE, START_VALUE);
-        DistributedLogger.info("Array generated");
-
-        long startTime = System.nanoTime();
-        boolean result = master.hasNonPrime(numbers);
-        long endTime = System.nanoTime();
-
-        double executionTime = (endTime - startTime) / 1_000_000_000.0;
-
-        DistributedLogger.info("Has non-prime: " + result);
-        DistributedLogger.info(String.format("Execution time: %.3f seconds", executionTime));
-    }
-
-    private static int[] generatePrimeArray(int size, int startValue) {
-        int[] result = new int[size];
-        int count = 0;
-        int number = startValue;
-
-        while (count < size) {
-            if (PrimeUtils.isPrime(number)) {
-                result[count] = number;
-                count++;
-            }
-            number++;
-        }
-        return result;
-    }
 }

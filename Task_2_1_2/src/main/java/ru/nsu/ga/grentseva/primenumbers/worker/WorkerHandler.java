@@ -18,20 +18,28 @@ import java.util.concurrent.ConcurrentHashMap;
 public class WorkerHandler implements Runnable {
     private static final Map<Integer, Boolean> PRIME_CACHE = new ConcurrentHashMap<>();
     private static long heartbeatInterval = 500;
-    private final Socket socket;
 
-    public WorkerHandler(Socket socket) {
+    private final Socket socket;
+    private final WorkerNode workerNode;
+
+    public WorkerHandler(Socket socket, WorkerNode workerNode) {
         this.socket = socket;
+        this.workerNode = workerNode;
     }
 
     @Override
     public void run() {
         try (
+                socket;
                 ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
                 ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream())
         ) {
             Object request = inputStream.readObject();
-
+            if (request instanceof WorkerMessage message && message.getType() == MessageType.SHUTDOWN) {
+                DistributedLogger.info("Shutdown command received");
+                new Thread(workerNode::shutdown).start();
+                return;
+            }
             if (!(request instanceof Task task)) {
                 DistributedLogger.error("Unknown request received");
                 return;
@@ -62,7 +70,6 @@ public class WorkerHandler implements Runnable {
             }
 
             long currentTime = System.currentTimeMillis();
-
             if (currentTime - lastHeartbeat >= heartbeatInterval) {
                 try {
                     outputStream.writeObject(new WorkerMessage(MessageType.HEARTBEAT, null));
@@ -76,23 +83,11 @@ public class WorkerHandler implements Runnable {
             }
 
             boolean isPrime = PRIME_CACHE.computeIfAbsent(number, PrimeUtils::isPrime);
-
             if (!isPrime) {
                 return new TaskResult(task.getTaskId(), true, TaskStatus.COMPLETED);
             }
         }
-
         return new TaskResult(task.getTaskId(), false, TaskStatus.COMPLETED);
-    }
-
-    private void closeSocket() {
-        try {
-            if (!socket.isClosed()) {
-                socket.close();
-            }
-        } catch (IOException e) {
-            DistributedLogger.error("Socket close error: " + e.getMessage());
-        }
     }
 
     public static void setHeartbeatInterval(long interval) {
