@@ -1,0 +1,73 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'application'
+}
+
+group = 'ru.nsu.ga.grentseva.checker'
+version = '1.0-SNAPSHOT'
+
+application {
+    mainClass = 'ru.nsu.ga.grentseva.checker.Main'
+}
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(JavaExec) {
+    jvmArgs = ['-Dfile.encoding=UTF-8', '-Dconsole.encoding=UTF-8']
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.groovy:groovy:4.0.21'
+    implementation 'com.puppycrawl.tools:checkstyle:10.12.4'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.withType(Jar) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    manifest {
+        attributes('Main-Class': application.mainClass)
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    '**/Main.class',
+                    '**/GitService.class',
+                    '**/PipelineRunner.class',
+
+                    '**/BuildChecker.class',
+                    '**/TestChecker.class',
+                    '**/StyleChecker.class',
+                    '**/JavadocChecker.class',
+                    '**/GradleTaskRunner.class'
+            ])
+        }))
+    }
+}
